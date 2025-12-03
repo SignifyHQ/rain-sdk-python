@@ -226,6 +226,7 @@ pip install 'rain_hello_world[aiohttp] @ git+ssh://git@github.com/stainless-sdks
 Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
 
 ```python
+import os
 import asyncio
 from rain_hello_world import DefaultAioHttpClient
 from datetime import date
@@ -234,7 +235,9 @@ from rain_hello_world import AsyncRainHelloWorld
 
 async def main() -> None:
     async with AsyncRainHelloWorld(
-        api_key="My API Key",
+        api_key=os.environ.get(
+            "RAIN_HELLO_WORLD_API_KEY"
+        ),  # This is the default and can be omitted
         http_client=DefaultAioHttpClient(),
     ) as client:
         issuing_company = await client.applications.company.create(
