@@ -17,6 +17,8 @@ class PinUpdateParams(TypedDict, total=False):
 
 
 class EncryptedPin(TypedDict, total=False):
+    """The encrypted pin"""
+
     data: Required[str]
     """The encrypted PIN data"""
 

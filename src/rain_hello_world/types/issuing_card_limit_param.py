@@ -8,6 +8,8 @@ __all__ = ["IssuingCardLimitParam"]
 
 
 class IssuingCardLimitParam(TypedDict, total=False):
+    """Represents the spending limit and frequency for a card."""
+
     amount: Required[int]
     """The maximum spending amount in cents"""
 

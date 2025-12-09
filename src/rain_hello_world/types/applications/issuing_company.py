@@ -11,11 +11,15 @@ __all__ = ["IssuingCompany", "IssuingCompanyUltimateBeneficialOwner"]
 
 
 class IssuingCompanyUltimateBeneficialOwner(IssuingApplication):
+    """The details of an issuing application."""
+
     id: str
     """The UBO's unique identifier"""
 
 
 class IssuingCompany(IssuingApplication):
+    """The details of an issuing application."""
+
     id: str
     """The company's unique identifier"""
 

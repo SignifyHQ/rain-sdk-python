@@ -27,5 +27,7 @@ class CardUpdateParams(TypedDict, total=False):
 
 
 class Configuration(TypedDict, total=False):
+    """Configuration for the card, such as virtual card art"""
+
     virtual_card_art: Annotated[str, PropertyInfo(alias="virtualCardArt")]
     """The virtual card art ID used to customize the card's appearance, if applicable"""

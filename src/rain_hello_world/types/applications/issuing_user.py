@@ -11,6 +11,8 @@ __all__ = ["IssuingUser"]
 
 
 class IssuingUser(IssuingApplication):
+    """The details of an issuing application."""
+
     id: str
     """The user's unique identifier"""
 

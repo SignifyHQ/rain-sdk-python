@@ -10,6 +10,10 @@ __all__ = ["PhysicalAddressParam"]
 
 
 class PhysicalAddressParam(TypedDict, total=False):
+    """
+    Represents a physical address with components like street, city, region, postal code, and country.
+    """
+
     city: Required[str]
     """The city of the address"""
 

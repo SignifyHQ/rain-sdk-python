@@ -22,6 +22,8 @@ class ApplicationCompletionLinkParams(BaseModel):
 
 
 class ApplicationCompletionLink(BaseModel):
+    """The link to the application completion page"""
+
     url: str
     """The URL for the completion page"""
 
@@ -34,6 +36,8 @@ class ApplicationExternalVerificationLinkParams(BaseModel):
 
 
 class ApplicationExternalVerificationLink(BaseModel):
+    """The link to the external verification page for the application"""
+
     url: str
     """The URL for the external verification page"""
 
@@ -41,6 +45,8 @@ class ApplicationExternalVerificationLink(BaseModel):
 
 
 class IssuingApplication(BaseModel):
+    """The details of an issuing application."""
+
     application_status: Literal[
         "approved", "pending", "needsInformation", "needsVerification", "manualReview", "denied", "locked", "canceled"
     ] = FieldInfo(alias="applicationStatus")

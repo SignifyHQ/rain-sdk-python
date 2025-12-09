@@ -12,6 +12,10 @@ __all__ = ["IssuingSignature", "IfSignatureIsPending", "IfSignatureIsReady", "If
 
 
 class IfSignatureIsPending(BaseModel):
+    """
+    Indicates the signature is pending and provides the time after which a retry is possible.
+    """
+
     retry_after: int = FieldInfo(alias="retryAfter")
     """The number of seconds after which the signature can be retried"""
 
@@ -28,6 +32,10 @@ class IfSignatureIsReadySignature(BaseModel):
 
 
 class IfSignatureIsReady(BaseModel):
+    """
+    Indicates that the signature is ready and includes the signature data and expiration time.
+    """
+
     signature: IfSignatureIsReadySignature
 
     status: Literal["ready"]
