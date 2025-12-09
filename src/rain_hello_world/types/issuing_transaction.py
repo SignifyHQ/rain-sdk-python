@@ -22,6 +22,10 @@ __all__ = [
 
 
 class UnionMember0Spend(BaseModel):
+    """
+    Details specific to a spend transaction, including merchant, amount, and user information.
+    """
+
     amount: int
     """The amount of the transaction, in cents"""
 
@@ -99,6 +103,11 @@ class UnionMember0Spend(BaseModel):
 
 
 class UnionMember0(BaseModel):
+    """Represents a transaction of type 'spend'.
+
+    This includes details such as the transaction amount, merchant, and the associated user.
+    """
+
     id: str
     """The unique identifier of the transaction"""
 
@@ -113,6 +122,10 @@ class UnionMember0(BaseModel):
 
 
 class UnionMember1Collateral(BaseModel):
+    """
+    Details of the collateral transaction, including amount, currency, and transaction details.
+    """
+
     amount: float
     """The amount of the collateral transaction, in cents"""
 
@@ -142,6 +155,10 @@ class UnionMember1Collateral(BaseModel):
 
 
 class UnionMember1(BaseModel):
+    """
+    Represents a collateral transaction, where a user provides collateral for a transaction.
+    """
+
     id: str
     """The unique identifier of the transaction"""
 
@@ -156,6 +173,8 @@ class UnionMember1(BaseModel):
 
 
 class UnionMember2Payment(BaseModel):
+    """Details of the payment transaction, including amount, currency, and status."""
+
     amount: int
     """The amount of the transaction, in cents"""
 
@@ -188,6 +207,10 @@ class UnionMember2Payment(BaseModel):
 
 
 class UnionMember2(BaseModel):
+    """
+    Represents a payment transaction, where a payment is made for a particular service or product.
+    """
+
     id: str
     """The unique identifier of the payment transaction"""
 
@@ -199,6 +222,8 @@ class UnionMember2(BaseModel):
 
 
 class UnionMember3Fee(BaseModel):
+    """Details of the fee transaction, including amount, description, and status."""
+
     amount: int
     """The amount of the fee, in cents"""
 
@@ -216,6 +241,8 @@ class UnionMember3Fee(BaseModel):
 
 
 class UnionMember3(BaseModel):
+    """Represents a fee transaction, where a fee is charged for a service or product."""
+
     id: str
     """The identifier of the fee transaction"""
 

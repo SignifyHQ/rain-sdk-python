@@ -8,6 +8,8 @@ __all__ = ["CardRetrieveSecretsResponse", "EncryptedCvc", "EncryptedPan"]
 
 
 class EncryptedCvc(BaseModel):
+    """The encrypted CVC"""
+
     data: str
     """The encrypted data"""
 
@@ -16,6 +18,8 @@ class EncryptedCvc(BaseModel):
 
 
 class EncryptedPan(BaseModel):
+    """The encrypted PAN"""
+
     data: str
     """The encrypted data"""
 
@@ -24,6 +28,8 @@ class EncryptedPan(BaseModel):
 
 
 class CardRetrieveSecretsResponse(BaseModel):
+    """The encrypted data for the card"""
+
     encrypted_cvc: EncryptedCvc = FieldInfo(alias="encryptedCvc")
     """The encrypted CVC"""
 

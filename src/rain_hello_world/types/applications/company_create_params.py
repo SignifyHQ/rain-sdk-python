@@ -54,6 +54,8 @@ class CompanyCreateParams(TypedDict, total=False):
 
 
 class Entity(TypedDict, total=False):
+    """The company's legal entity details."""
+
     name: Required[str]
     """The legal entity's name"""
 
@@ -77,6 +79,11 @@ class Entity(TypedDict, total=False):
 
 
 class InitialUser(IssuingApplicationPersonParam, total=False):
+    """The initial user of the company.
+
+    This user must have a wallet address, and their wallet address will be associated as an owner on the company's Rain smart contract.
+    """
+
     ip_address: Required[Annotated[str, PropertyInfo(alias="ipAddress")]]
     """This user's IP address"""
 

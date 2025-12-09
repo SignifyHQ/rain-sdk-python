@@ -10,6 +10,10 @@ __all__ = ["KeyCreateResponse"]
 
 
 class KeyCreateResponse(BaseModel):
+    """
+    Represents a unique key used for issuing, typically used for authentication or encryption purposes.
+    """
+
     id: str
     """The key's unique identifier"""
 

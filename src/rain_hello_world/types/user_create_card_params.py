@@ -38,6 +38,10 @@ class UserCreateCardParams(TypedDict, total=False):
 
 
 class Configuration(TypedDict, total=False):
+    """
+    Configuration details for the card, including display name, product ID, and virtual card art
+    """
+
     display_name: Annotated[str, PropertyInfo(alias="displayName")]
     """The name to display on the card.
 
@@ -66,6 +70,8 @@ class Configuration(TypedDict, total=False):
 
 
 class Shipping(PhysicalAddressParam, total=False):
+    """The address to ship the card, if it is a physical card"""
+
     phone_number: Required[Annotated[str, PropertyInfo(alias="phoneNumber")]]
     """The phone number to use for shipping, if it is a physical card"""
 

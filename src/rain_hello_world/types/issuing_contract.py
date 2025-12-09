@@ -24,6 +24,10 @@ class Token(BaseModel):
 
 
 class IssuingContract(BaseModel):
+    """
+    Represents an issuing contract with details about its deployment and token handling.
+    """
+
     id: str
     """The contract's unique identifier"""
 

@@ -11,6 +11,10 @@ __all__ = ["IssuingChargeCreateResponse"]
 
 
 class IssuingChargeCreateResponse(BaseModel):
+    """
+    Represents the response body returned after a charge is created, including the charge ID, creation timestamp, and charge details.
+    """
+
     id: str
     """The identifier of the charge"""
 

@@ -40,6 +40,8 @@ class CompanyReapplyParams(TypedDict, total=False):
 
 
 class Entity(TypedDict, total=False):
+    """The company's legal entity details."""
+
     website: Required[str]
     """The legal entity's website"""
 
@@ -54,6 +56,11 @@ class Entity(TypedDict, total=False):
 
 
 class InitialUser(TypedDict, total=False):
+    """The initial user of the company who will be the owner on the Rain smart contract.
+
+    This user must provide various personal details.
+    """
+
     address: Required[PhysicalAddressParam]
     """The user's address"""
 

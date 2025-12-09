@@ -10,6 +10,10 @@ __all__ = ["PhysicalAddress"]
 
 
 class PhysicalAddress(BaseModel):
+    """
+    Represents a physical address with components like street, city, region, postal code, and country.
+    """
+
     city: str
     """The city of the address"""
 

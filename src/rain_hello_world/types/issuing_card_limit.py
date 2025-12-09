@@ -8,6 +8,8 @@ __all__ = ["IssuingCardLimit"]
 
 
 class IssuingCardLimit(BaseModel):
+    """Represents the spending limit and frequency for a card."""
+
     amount: int
     """The maximum spending amount in cents"""
 

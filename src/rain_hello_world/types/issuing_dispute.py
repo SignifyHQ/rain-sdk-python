@@ -12,6 +12,8 @@ __all__ = ["IssuingDispute"]
 
 
 class IssuingDispute(BaseModel):
+    """Represents a dispute related to an issuing transaction."""
+
     id: str
     """The dispute's unique identifier"""
 

@@ -22,6 +22,8 @@ class CompanyUpdateParams(TypedDict, total=False):
 
 
 class Entity(TypedDict, total=False):
+    """The company's legal entity details."""
+
     description: str
     """A brief description of the legal entity and its activities"""
 

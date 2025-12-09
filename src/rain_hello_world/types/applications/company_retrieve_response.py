@@ -10,6 +10,8 @@ __all__ = ["CompanyRetrieveResponse", "CompanyRetrieveResponseUltimateBeneficial
 
 
 class CompanyRetrieveResponseUltimateBeneficialOwner(IssuingApplication):
+    """The details of an issuing application."""
+
     id: str
     """The UBO's unique identifier"""
 
@@ -24,6 +26,8 @@ class CompanyRetrieveResponseUltimateBeneficialOwner(IssuingApplication):
 
 
 class CompanyRetrieveResponse(IssuingApplication):
+    """The details of an issuing application."""
+
     id: str
     """The identifier of the company application"""
 

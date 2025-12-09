@@ -8,6 +8,8 @@ __all__ = ["PinRetrieveResponse", "EncryptedPin"]
 
 
 class EncryptedPin(BaseModel):
+    """The encrypted pin"""
+
     data: str
     """The encrypted pin in base64"""
 
@@ -16,5 +18,7 @@ class EncryptedPin(BaseModel):
 
 
 class PinRetrieveResponse(BaseModel):
+    """The encrypted pin"""
+
     encrypted_pin: EncryptedPin = FieldInfo(alias="encryptedPin")
     """The encrypted pin"""

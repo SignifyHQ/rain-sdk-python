@@ -6,5 +6,7 @@ __all__ = ["UserRetrieveResponse"]
 
 
 class UserRetrieveResponse(IssuingApplication):
+    """The details of an issuing application."""
+
     id: str
     """The identifier of the user's application"""
