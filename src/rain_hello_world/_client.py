@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import os
-from typing import Any, Dict, Mapping, cast
+from typing import TYPE_CHECKING, Any, Dict, Mapping, cast
 from typing_extensions import Self, Literal, override
 
 import httpx
@@ -20,8 +20,8 @@ from ._types import (
     not_given,
 )
 from ._utils import is_given, get_async_library
+from ._compat import cached_property
 from ._version import __version__
-from .resources import keys, balances, payments, contracts, signatures
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import APIStatusError, RainHelloWorldError
 from ._base_client import (
@@ -29,12 +29,32 @@ from ._base_client import (
     SyncAPIClient,
     AsyncAPIClient,
 )
-from .resources.cards import cards
-from .resources.users import users
-from .resources.disputes import disputes
-from .resources.companies import companies
-from .resources.applications import applications
-from .resources.transactions import transactions
+
+if TYPE_CHECKING:
+    from .resources import (
+        keys,
+        cards,
+        users,
+        balances,
+        disputes,
+        payments,
+        companies,
+        contracts,
+        signatures,
+        applications,
+        transactions,
+    )
+    from .resources.keys import KeysResource, AsyncKeysResource
+    from .resources.balances import BalancesResource, AsyncBalancesResource
+    from .resources.payments import PaymentsResource, AsyncPaymentsResource
+    from .resources.contracts import ContractsResource, AsyncContractsResource
+    from .resources.signatures import SignaturesResource, AsyncSignaturesResource
+    from .resources.cards.cards import CardsResource, AsyncCardsResource
+    from .resources.users.users import UsersResource, AsyncUsersResource
+    from .resources.disputes.disputes import DisputesResource, AsyncDisputesResource
+    from .resources.companies.companies import CompaniesResource, AsyncCompaniesResource
+    from .resources.applications.applications import ApplicationsResource, AsyncApplicationsResource
+    from .resources.transactions.transactions import TransactionsResource, AsyncTransactionsResource
 
 __all__ = [
     "ENVIRONMENTS",
@@ -55,20 +75,6 @@ ENVIRONMENTS: Dict[str, str] = {
 
 
 class RainHelloWorld(SyncAPIClient):
-    applications: applications.ApplicationsResource
-    balances: balances.BalancesResource
-    cards: cards.CardsResource
-    companies: companies.CompaniesResource
-    contracts: contracts.ContractsResource
-    disputes: disputes.DisputesResource
-    keys: keys.KeysResource
-    payments: payments.PaymentsResource
-    signatures: signatures.SignaturesResource
-    transactions: transactions.TransactionsResource
-    users: users.UsersResource
-    with_raw_response: RainHelloWorldWithRawResponse
-    with_streaming_response: RainHelloWorldWithStreamedResponse
-
     # client options
     api_key: str
 
@@ -147,19 +153,79 @@ class RainHelloWorld(SyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.applications = applications.ApplicationsResource(self)
-        self.balances = balances.BalancesResource(self)
-        self.cards = cards.CardsResource(self)
-        self.companies = companies.CompaniesResource(self)
-        self.contracts = contracts.ContractsResource(self)
-        self.disputes = disputes.DisputesResource(self)
-        self.keys = keys.KeysResource(self)
-        self.payments = payments.PaymentsResource(self)
-        self.signatures = signatures.SignaturesResource(self)
-        self.transactions = transactions.TransactionsResource(self)
-        self.users = users.UsersResource(self)
-        self.with_raw_response = RainHelloWorldWithRawResponse(self)
-        self.with_streaming_response = RainHelloWorldWithStreamedResponse(self)
+    @cached_property
+    def applications(self) -> ApplicationsResource:
+        from .resources.applications import ApplicationsResource
+
+        return ApplicationsResource(self)
+
+    @cached_property
+    def balances(self) -> BalancesResource:
+        from .resources.balances import BalancesResource
+
+        return BalancesResource(self)
+
+    @cached_property
+    def cards(self) -> CardsResource:
+        from .resources.cards import CardsResource
+
+        return CardsResource(self)
+
+    @cached_property
+    def companies(self) -> CompaniesResource:
+        from .resources.companies import CompaniesResource
+
+        return CompaniesResource(self)
+
+    @cached_property
+    def contracts(self) -> ContractsResource:
+        from .resources.contracts import ContractsResource
+
+        return ContractsResource(self)
+
+    @cached_property
+    def disputes(self) -> DisputesResource:
+        from .resources.disputes import DisputesResource
+
+        return DisputesResource(self)
+
+    @cached_property
+    def keys(self) -> KeysResource:
+        from .resources.keys import KeysResource
+
+        return KeysResource(self)
+
+    @cached_property
+    def payments(self) -> PaymentsResource:
+        from .resources.payments import PaymentsResource
+
+        return PaymentsResource(self)
+
+    @cached_property
+    def signatures(self) -> SignaturesResource:
+        from .resources.signatures import SignaturesResource
+
+        return SignaturesResource(self)
+
+    @cached_property
+    def transactions(self) -> TransactionsResource:
+        from .resources.transactions import TransactionsResource
+
+        return TransactionsResource(self)
+
+    @cached_property
+    def users(self) -> UsersResource:
+        from .resources.users import UsersResource
+
+        return UsersResource(self)
+
+    @cached_property
+    def with_raw_response(self) -> RainHelloWorldWithRawResponse:
+        return RainHelloWorldWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> RainHelloWorldWithStreamedResponse:
+        return RainHelloWorldWithStreamedResponse(self)
 
     @property
     @override
@@ -269,20 +335,6 @@ class RainHelloWorld(SyncAPIClient):
 
 
 class AsyncRainHelloWorld(AsyncAPIClient):
-    applications: applications.AsyncApplicationsResource
-    balances: balances.AsyncBalancesResource
-    cards: cards.AsyncCardsResource
-    companies: companies.AsyncCompaniesResource
-    contracts: contracts.AsyncContractsResource
-    disputes: disputes.AsyncDisputesResource
-    keys: keys.AsyncKeysResource
-    payments: payments.AsyncPaymentsResource
-    signatures: signatures.AsyncSignaturesResource
-    transactions: transactions.AsyncTransactionsResource
-    users: users.AsyncUsersResource
-    with_raw_response: AsyncRainHelloWorldWithRawResponse
-    with_streaming_response: AsyncRainHelloWorldWithStreamedResponse
-
     # client options
     api_key: str
 
@@ -361,19 +413,79 @@ class AsyncRainHelloWorld(AsyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.applications = applications.AsyncApplicationsResource(self)
-        self.balances = balances.AsyncBalancesResource(self)
-        self.cards = cards.AsyncCardsResource(self)
-        self.companies = companies.AsyncCompaniesResource(self)
-        self.contracts = contracts.AsyncContractsResource(self)
-        self.disputes = disputes.AsyncDisputesResource(self)
-        self.keys = keys.AsyncKeysResource(self)
-        self.payments = payments.AsyncPaymentsResource(self)
-        self.signatures = signatures.AsyncSignaturesResource(self)
-        self.transactions = transactions.AsyncTransactionsResource(self)
-        self.users = users.AsyncUsersResource(self)
-        self.with_raw_response = AsyncRainHelloWorldWithRawResponse(self)
-        self.with_streaming_response = AsyncRainHelloWorldWithStreamedResponse(self)
+    @cached_property
+    def applications(self) -> AsyncApplicationsResource:
+        from .resources.applications import AsyncApplicationsResource
+
+        return AsyncApplicationsResource(self)
+
+    @cached_property
+    def balances(self) -> AsyncBalancesResource:
+        from .resources.balances import AsyncBalancesResource
+
+        return AsyncBalancesResource(self)
+
+    @cached_property
+    def cards(self) -> AsyncCardsResource:
+        from .resources.cards import AsyncCardsResource
+
+        return AsyncCardsResource(self)
+
+    @cached_property
+    def companies(self) -> AsyncCompaniesResource:
+        from .resources.companies import AsyncCompaniesResource
+
+        return AsyncCompaniesResource(self)
+
+    @cached_property
+    def contracts(self) -> AsyncContractsResource:
+        from .resources.contracts import AsyncContractsResource
+
+        return AsyncContractsResource(self)
+
+    @cached_property
+    def disputes(self) -> AsyncDisputesResource:
+        from .resources.disputes import AsyncDisputesResource
+
+        return AsyncDisputesResource(self)
+
+    @cached_property
+    def keys(self) -> AsyncKeysResource:
+        from .resources.keys import AsyncKeysResource
+
+        return AsyncKeysResource(self)
+
+    @cached_property
+    def payments(self) -> AsyncPaymentsResource:
+        from .resources.payments import AsyncPaymentsResource
+
+        return AsyncPaymentsResource(self)
+
+    @cached_property
+    def signatures(self) -> AsyncSignaturesResource:
+        from .resources.signatures import AsyncSignaturesResource
+
+        return AsyncSignaturesResource(self)
+
+    @cached_property
+    def transactions(self) -> AsyncTransactionsResource:
+        from .resources.transactions import AsyncTransactionsResource
+
+        return AsyncTransactionsResource(self)
+
+    @cached_property
+    def users(self) -> AsyncUsersResource:
+        from .resources.users import AsyncUsersResource
+
+        return AsyncUsersResource(self)
+
+    @cached_property
+    def with_raw_response(self) -> AsyncRainHelloWorldWithRawResponse:
+        return AsyncRainHelloWorldWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> AsyncRainHelloWorldWithStreamedResponse:
+        return AsyncRainHelloWorldWithStreamedResponse(self)
 
     @property
     @override
@@ -483,63 +595,295 @@ class AsyncRainHelloWorld(AsyncAPIClient):
 
 
 class RainHelloWorldWithRawResponse:
+    _client: RainHelloWorld
+
     def __init__(self, client: RainHelloWorld) -> None:
-        self.applications = applications.ApplicationsResourceWithRawResponse(client.applications)
-        self.balances = balances.BalancesResourceWithRawResponse(client.balances)
-        self.cards = cards.CardsResourceWithRawResponse(client.cards)
-        self.companies = companies.CompaniesResourceWithRawResponse(client.companies)
-        self.contracts = contracts.ContractsResourceWithRawResponse(client.contracts)
-        self.disputes = disputes.DisputesResourceWithRawResponse(client.disputes)
-        self.keys = keys.KeysResourceWithRawResponse(client.keys)
-        self.payments = payments.PaymentsResourceWithRawResponse(client.payments)
-        self.signatures = signatures.SignaturesResourceWithRawResponse(client.signatures)
-        self.transactions = transactions.TransactionsResourceWithRawResponse(client.transactions)
-        self.users = users.UsersResourceWithRawResponse(client.users)
+        self._client = client
+
+    @cached_property
+    def applications(self) -> applications.ApplicationsResourceWithRawResponse:
+        from .resources.applications import ApplicationsResourceWithRawResponse
+
+        return ApplicationsResourceWithRawResponse(self._client.applications)
+
+    @cached_property
+    def balances(self) -> balances.BalancesResourceWithRawResponse:
+        from .resources.balances import BalancesResourceWithRawResponse
+
+        return BalancesResourceWithRawResponse(self._client.balances)
+
+    @cached_property
+    def cards(self) -> cards.CardsResourceWithRawResponse:
+        from .resources.cards import CardsResourceWithRawResponse
+
+        return CardsResourceWithRawResponse(self._client.cards)
+
+    @cached_property
+    def companies(self) -> companies.CompaniesResourceWithRawResponse:
+        from .resources.companies import CompaniesResourceWithRawResponse
+
+        return CompaniesResourceWithRawResponse(self._client.companies)
+
+    @cached_property
+    def contracts(self) -> contracts.ContractsResourceWithRawResponse:
+        from .resources.contracts import ContractsResourceWithRawResponse
+
+        return ContractsResourceWithRawResponse(self._client.contracts)
+
+    @cached_property
+    def disputes(self) -> disputes.DisputesResourceWithRawResponse:
+        from .resources.disputes import DisputesResourceWithRawResponse
+
+        return DisputesResourceWithRawResponse(self._client.disputes)
+
+    @cached_property
+    def keys(self) -> keys.KeysResourceWithRawResponse:
+        from .resources.keys import KeysResourceWithRawResponse
+
+        return KeysResourceWithRawResponse(self._client.keys)
+
+    @cached_property
+    def payments(self) -> payments.PaymentsResourceWithRawResponse:
+        from .resources.payments import PaymentsResourceWithRawResponse
+
+        return PaymentsResourceWithRawResponse(self._client.payments)
+
+    @cached_property
+    def signatures(self) -> signatures.SignaturesResourceWithRawResponse:
+        from .resources.signatures import SignaturesResourceWithRawResponse
+
+        return SignaturesResourceWithRawResponse(self._client.signatures)
+
+    @cached_property
+    def transactions(self) -> transactions.TransactionsResourceWithRawResponse:
+        from .resources.transactions import TransactionsResourceWithRawResponse
+
+        return TransactionsResourceWithRawResponse(self._client.transactions)
+
+    @cached_property
+    def users(self) -> users.UsersResourceWithRawResponse:
+        from .resources.users import UsersResourceWithRawResponse
+
+        return UsersResourceWithRawResponse(self._client.users)
 
 
 class AsyncRainHelloWorldWithRawResponse:
+    _client: AsyncRainHelloWorld
+
     def __init__(self, client: AsyncRainHelloWorld) -> None:
-        self.applications = applications.AsyncApplicationsResourceWithRawResponse(client.applications)
-        self.balances = balances.AsyncBalancesResourceWithRawResponse(client.balances)
-        self.cards = cards.AsyncCardsResourceWithRawResponse(client.cards)
-        self.companies = companies.AsyncCompaniesResourceWithRawResponse(client.companies)
-        self.contracts = contracts.AsyncContractsResourceWithRawResponse(client.contracts)
-        self.disputes = disputes.AsyncDisputesResourceWithRawResponse(client.disputes)
-        self.keys = keys.AsyncKeysResourceWithRawResponse(client.keys)
-        self.payments = payments.AsyncPaymentsResourceWithRawResponse(client.payments)
-        self.signatures = signatures.AsyncSignaturesResourceWithRawResponse(client.signatures)
-        self.transactions = transactions.AsyncTransactionsResourceWithRawResponse(client.transactions)
-        self.users = users.AsyncUsersResourceWithRawResponse(client.users)
+        self._client = client
+
+    @cached_property
+    def applications(self) -> applications.AsyncApplicationsResourceWithRawResponse:
+        from .resources.applications import AsyncApplicationsResourceWithRawResponse
+
+        return AsyncApplicationsResourceWithRawResponse(self._client.applications)
+
+    @cached_property
+    def balances(self) -> balances.AsyncBalancesResourceWithRawResponse:
+        from .resources.balances import AsyncBalancesResourceWithRawResponse
+
+        return AsyncBalancesResourceWithRawResponse(self._client.balances)
+
+    @cached_property
+    def cards(self) -> cards.AsyncCardsResourceWithRawResponse:
+        from .resources.cards import AsyncCardsResourceWithRawResponse
+
+        return AsyncCardsResourceWithRawResponse(self._client.cards)
+
+    @cached_property
+    def companies(self) -> companies.AsyncCompaniesResourceWithRawResponse:
+        from .resources.companies import AsyncCompaniesResourceWithRawResponse
+
+        return AsyncCompaniesResourceWithRawResponse(self._client.companies)
+
+    @cached_property
+    def contracts(self) -> contracts.AsyncContractsResourceWithRawResponse:
+        from .resources.contracts import AsyncContractsResourceWithRawResponse
+
+        return AsyncContractsResourceWithRawResponse(self._client.contracts)
+
+    @cached_property
+    def disputes(self) -> disputes.AsyncDisputesResourceWithRawResponse:
+        from .resources.disputes import AsyncDisputesResourceWithRawResponse
+
+        return AsyncDisputesResourceWithRawResponse(self._client.disputes)
+
+    @cached_property
+    def keys(self) -> keys.AsyncKeysResourceWithRawResponse:
+        from .resources.keys import AsyncKeysResourceWithRawResponse
+
+        return AsyncKeysResourceWithRawResponse(self._client.keys)
+
+    @cached_property
+    def payments(self) -> payments.AsyncPaymentsResourceWithRawResponse:
+        from .resources.payments import AsyncPaymentsResourceWithRawResponse
+
+        return AsyncPaymentsResourceWithRawResponse(self._client.payments)
+
+    @cached_property
+    def signatures(self) -> signatures.AsyncSignaturesResourceWithRawResponse:
+        from .resources.signatures import AsyncSignaturesResourceWithRawResponse
+
+        return AsyncSignaturesResourceWithRawResponse(self._client.signatures)
+
+    @cached_property
+    def transactions(self) -> transactions.AsyncTransactionsResourceWithRawResponse:
+        from .resources.transactions import AsyncTransactionsResourceWithRawResponse
+
+        return AsyncTransactionsResourceWithRawResponse(self._client.transactions)
+
+    @cached_property
+    def users(self) -> users.AsyncUsersResourceWithRawResponse:
+        from .resources.users import AsyncUsersResourceWithRawResponse
+
+        return AsyncUsersResourceWithRawResponse(self._client.users)
 
 
 class RainHelloWorldWithStreamedResponse:
+    _client: RainHelloWorld
+
     def __init__(self, client: RainHelloWorld) -> None:
-        self.applications = applications.ApplicationsResourceWithStreamingResponse(client.applications)
-        self.balances = balances.BalancesResourceWithStreamingResponse(client.balances)
-        self.cards = cards.CardsResourceWithStreamingResponse(client.cards)
-        self.companies = companies.CompaniesResourceWithStreamingResponse(client.companies)
-        self.contracts = contracts.ContractsResourceWithStreamingResponse(client.contracts)
-        self.disputes = disputes.DisputesResourceWithStreamingResponse(client.disputes)
-        self.keys = keys.KeysResourceWithStreamingResponse(client.keys)
-        self.payments = payments.PaymentsResourceWithStreamingResponse(client.payments)
-        self.signatures = signatures.SignaturesResourceWithStreamingResponse(client.signatures)
-        self.transactions = transactions.TransactionsResourceWithStreamingResponse(client.transactions)
-        self.users = users.UsersResourceWithStreamingResponse(client.users)
+        self._client = client
+
+    @cached_property
+    def applications(self) -> applications.ApplicationsResourceWithStreamingResponse:
+        from .resources.applications import ApplicationsResourceWithStreamingResponse
+
+        return ApplicationsResourceWithStreamingResponse(self._client.applications)
+
+    @cached_property
+    def balances(self) -> balances.BalancesResourceWithStreamingResponse:
+        from .resources.balances import BalancesResourceWithStreamingResponse
+
+        return BalancesResourceWithStreamingResponse(self._client.balances)
+
+    @cached_property
+    def cards(self) -> cards.CardsResourceWithStreamingResponse:
+        from .resources.cards import CardsResourceWithStreamingResponse
+
+        return CardsResourceWithStreamingResponse(self._client.cards)
+
+    @cached_property
+    def companies(self) -> companies.CompaniesResourceWithStreamingResponse:
+        from .resources.companies import CompaniesResourceWithStreamingResponse
+
+        return CompaniesResourceWithStreamingResponse(self._client.companies)
+
+    @cached_property
+    def contracts(self) -> contracts.ContractsResourceWithStreamingResponse:
+        from .resources.contracts import ContractsResourceWithStreamingResponse
+
+        return ContractsResourceWithStreamingResponse(self._client.contracts)
+
+    @cached_property
+    def disputes(self) -> disputes.DisputesResourceWithStreamingResponse:
+        from .resources.disputes import DisputesResourceWithStreamingResponse
+
+        return DisputesResourceWithStreamingResponse(self._client.disputes)
+
+    @cached_property
+    def keys(self) -> keys.KeysResourceWithStreamingResponse:
+        from .resources.keys import KeysResourceWithStreamingResponse
+
+        return KeysResourceWithStreamingResponse(self._client.keys)
+
+    @cached_property
+    def payments(self) -> payments.PaymentsResourceWithStreamingResponse:
+        from .resources.payments import PaymentsResourceWithStreamingResponse
+
+        return PaymentsResourceWithStreamingResponse(self._client.payments)
+
+    @cached_property
+    def signatures(self) -> signatures.SignaturesResourceWithStreamingResponse:
+        from .resources.signatures import SignaturesResourceWithStreamingResponse
+
+        return SignaturesResourceWithStreamingResponse(self._client.signatures)
+
+    @cached_property
+    def transactions(self) -> transactions.TransactionsResourceWithStreamingResponse:
+        from .resources.transactions import TransactionsResourceWithStreamingResponse
+
+        return TransactionsResourceWithStreamingResponse(self._client.transactions)
+
+    @cached_property
+    def users(self) -> users.UsersResourceWithStreamingResponse:
+        from .resources.users import UsersResourceWithStreamingResponse
+
+        return UsersResourceWithStreamingResponse(self._client.users)
 
 
 class AsyncRainHelloWorldWithStreamedResponse:
+    _client: AsyncRainHelloWorld
+
     def __init__(self, client: AsyncRainHelloWorld) -> None:
-        self.applications = applications.AsyncApplicationsResourceWithStreamingResponse(client.applications)
-        self.balances = balances.AsyncBalancesResourceWithStreamingResponse(client.balances)
-        self.cards = cards.AsyncCardsResourceWithStreamingResponse(client.cards)
-        self.companies = companies.AsyncCompaniesResourceWithStreamingResponse(client.companies)
-        self.contracts = contracts.AsyncContractsResourceWithStreamingResponse(client.contracts)
-        self.disputes = disputes.AsyncDisputesResourceWithStreamingResponse(client.disputes)
-        self.keys = keys.AsyncKeysResourceWithStreamingResponse(client.keys)
-        self.payments = payments.AsyncPaymentsResourceWithStreamingResponse(client.payments)
-        self.signatures = signatures.AsyncSignaturesResourceWithStreamingResponse(client.signatures)
-        self.transactions = transactions.AsyncTransactionsResourceWithStreamingResponse(client.transactions)
-        self.users = users.AsyncUsersResourceWithStreamingResponse(client.users)
+        self._client = client
+
+    @cached_property
+    def applications(self) -> applications.AsyncApplicationsResourceWithStreamingResponse:
+        from .resources.applications import AsyncApplicationsResourceWithStreamingResponse
+
+        return AsyncApplicationsResourceWithStreamingResponse(self._client.applications)
+
+    @cached_property
+    def balances(self) -> balances.AsyncBalancesResourceWithStreamingResponse:
+        from .resources.balances import AsyncBalancesResourceWithStreamingResponse
+
+        return AsyncBalancesResourceWithStreamingResponse(self._client.balances)
+
+    @cached_property
+    def cards(self) -> cards.AsyncCardsResourceWithStreamingResponse:
+        from .resources.cards import AsyncCardsResourceWithStreamingResponse
+
+        return AsyncCardsResourceWithStreamingResponse(self._client.cards)
+
+    @cached_property
+    def companies(self) -> companies.AsyncCompaniesResourceWithStreamingResponse:
+        from .resources.companies import AsyncCompaniesResourceWithStreamingResponse
+
+        return AsyncCompaniesResourceWithStreamingResponse(self._client.companies)
+
+    @cached_property
+    def contracts(self) -> contracts.AsyncContractsResourceWithStreamingResponse:
+        from .resources.contracts import AsyncContractsResourceWithStreamingResponse
+
+        return AsyncContractsResourceWithStreamingResponse(self._client.contracts)
+
+    @cached_property
+    def disputes(self) -> disputes.AsyncDisputesResourceWithStreamingResponse:
+        from .resources.disputes import AsyncDisputesResourceWithStreamingResponse
+
+        return AsyncDisputesResourceWithStreamingResponse(self._client.disputes)
+
+    @cached_property
+    def keys(self) -> keys.AsyncKeysResourceWithStreamingResponse:
+        from .resources.keys import AsyncKeysResourceWithStreamingResponse
+
+        return AsyncKeysResourceWithStreamingResponse(self._client.keys)
+
+    @cached_property
+    def payments(self) -> payments.AsyncPaymentsResourceWithStreamingResponse:
+        from .resources.payments import AsyncPaymentsResourceWithStreamingResponse
+
+        return AsyncPaymentsResourceWithStreamingResponse(self._client.payments)
+
+    @cached_property
+    def signatures(self) -> signatures.AsyncSignaturesResourceWithStreamingResponse:
+        from .resources.signatures import AsyncSignaturesResourceWithStreamingResponse
+
+        return AsyncSignaturesResourceWithStreamingResponse(self._client.signatures)
+
+    @cached_property
+    def transactions(self) -> transactions.AsyncTransactionsResourceWithStreamingResponse:
+        from .resources.transactions import AsyncTransactionsResourceWithStreamingResponse
+
+        return AsyncTransactionsResourceWithStreamingResponse(self._client.transactions)
+
+    @cached_property
+    def users(self) -> users.AsyncUsersResourceWithStreamingResponse:
+        from .resources.users import AsyncUsersResourceWithStreamingResponse
+
+        return AsyncUsersResourceWithStreamingResponse(self._client.users)
 
 
 Client = RainHelloWorld
