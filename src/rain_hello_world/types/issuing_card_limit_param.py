@@ -16,4 +16,3 @@ class IssuingCardLimitParam(TypedDict, total=False):
     frequency: Required[
         Literal["per24HourPeriod", "per7DayPeriod", "per30DayPeriod", "perYearPeriod", "allTime", "perAuthorization"]
     ]
-    """The frequency at which the spending limit resets"""
