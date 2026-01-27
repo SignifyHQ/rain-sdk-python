@@ -11,18 +11,18 @@ from .._models import BaseModel
 
 __all__ = [
     "IssuingTransaction",
-    "UnionMember0",
-    "UnionMember0Spend",
-    "UnionMember1",
-    "UnionMember1Collateral",
-    "UnionMember2",
-    "UnionMember2Payment",
-    "UnionMember3",
-    "UnionMember3Fee",
+    "SpendTransaction",
+    "SpendTransactionSpend",
+    "CollateralTransaction",
+    "CollateralTransactionCollateral",
+    "PaymentTransaction",
+    "PaymentTransactionPayment",
+    "FeeTransaction",
+    "FeeTransactionFee",
 ]
 
 
-class UnionMember0Spend(BaseModel):
+class SpendTransactionSpend(BaseModel):
     """
     Details specific to a spend transaction, including merchant, amount, and user information.
     """
@@ -103,7 +103,7 @@ class UnionMember0Spend(BaseModel):
     """The time at which the transaction was posted"""
 
 
-class UnionMember0(BaseModel):
+class SpendTransaction(BaseModel):
     """Represents a transaction of type 'spend'.
 
     This includes details such as the transaction amount, merchant, and the associated user.
@@ -112,7 +112,7 @@ class UnionMember0(BaseModel):
     id: str
     """The unique identifier of the transaction"""
 
-    spend: UnionMember0Spend
+    spend: SpendTransactionSpend
     """
     Details specific to a spend transaction, including merchant, amount, and user
     information.
@@ -122,7 +122,7 @@ class UnionMember0(BaseModel):
     """The type of transaction"""
 
 
-class UnionMember1Collateral(BaseModel):
+class CollateralTransactionCollateral(BaseModel):
     """
     Details of the collateral transaction, including amount, currency, and transaction details.
     """
@@ -155,7 +155,7 @@ class UnionMember1Collateral(BaseModel):
     """The identifier of the user who provided the collateral"""
 
 
-class UnionMember1(BaseModel):
+class CollateralTransaction(BaseModel):
     """
     Represents a collateral transaction, where a user provides collateral for a transaction.
     """
@@ -163,7 +163,7 @@ class UnionMember1(BaseModel):
     id: str
     """The unique identifier of the transaction"""
 
-    collateral: UnionMember1Collateral
+    collateral: CollateralTransactionCollateral
     """
     Details of the collateral transaction, including amount, currency, and
     transaction details.
@@ -173,7 +173,7 @@ class UnionMember1(BaseModel):
     """The type of transaction, in this case, a collateral transaction"""
 
 
-class UnionMember2Payment(BaseModel):
+class PaymentTransactionPayment(BaseModel):
     """Details of the payment transaction, including amount, currency, and status."""
 
     amount: int
@@ -207,7 +207,7 @@ class UnionMember2Payment(BaseModel):
     """The wallet address from which the payment was made"""
 
 
-class UnionMember2(BaseModel):
+class PaymentTransaction(BaseModel):
     """
     Represents a payment transaction, where a payment is made for a particular service or product.
     """
@@ -215,14 +215,14 @@ class UnionMember2(BaseModel):
     id: str
     """The unique identifier of the payment transaction"""
 
-    payment: UnionMember2Payment
+    payment: PaymentTransactionPayment
     """Details of the payment transaction, including amount, currency, and status."""
 
     type: Literal["payment"]
     """The type of transaction"""
 
 
-class UnionMember3Fee(BaseModel):
+class FeeTransactionFee(BaseModel):
     """Details of the fee transaction, including amount, description, and status."""
 
     amount: int
@@ -241,13 +241,13 @@ class UnionMember3Fee(BaseModel):
     """The identifier of the user to whom the fee was charged"""
 
 
-class UnionMember3(BaseModel):
+class FeeTransaction(BaseModel):
     """Represents a fee transaction, where a fee is charged for a service or product."""
 
     id: str
     """The identifier of the fee transaction"""
 
-    fee: UnionMember3Fee
+    fee: FeeTransactionFee
     """Details of the fee transaction, including amount, description, and status."""
 
     type: Literal["fee"]
@@ -255,5 +255,6 @@ class UnionMember3(BaseModel):
 
 
 IssuingTransaction: TypeAlias = Annotated[
-    Union[UnionMember0, UnionMember1, UnionMember2, UnionMember3], PropertyInfo(discriminator="type")
+    Union[SpendTransaction, CollateralTransaction, PaymentTransaction, FeeTransaction],
+    PropertyInfo(discriminator="type"),
 ]
