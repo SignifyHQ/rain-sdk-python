@@ -29,86 +29,20 @@ The full API of this library can be found in [api.md](api.md).
 
 ```python
 import os
-from datetime import date
 from rain_hello_world import RainHelloWorld
 
 client = RainHelloWorld(
     api_key=os.environ.get("RAIN_HELLO_WORLD_API_KEY"),  # This is the default and can be omitted
-    # defaults to "production".
-    environment="environment_1",
+    # defaults to "dev".
+    environment="production",
 )
 
-issuing_company = client.applications.company.create(
-    address={
-        "city": "city",
-        "country": "country",
-        "country_code": "xx",
-        "line1": "line1",
-        "postal_code": "postalCode",
-        "region": "region",
-    },
-    entity={
-        "name": "name",
-        "registration_number": "registrationNumber",
-        "tax_id": "taxId",
-        "website": "website",
-    },
-    initial_user={
-        "address": {
-            "city": "city",
-            "country": "country",
-            "country_code": "xx",
-            "line1": "line1",
-            "postal_code": "postalCode",
-            "region": "region",
-        },
-        "birth_date": date.fromisoformat("2000-01-01"),
-        "country_of_issue": "xx",
-        "email": "email",
-        "first_name": "firstName",
-        "last_name": "lastName",
-        "national_id": "nationalId",
-        "ip_address": "ipAddress",
-        "is_terms_of_service_accepted": True,
-    },
-    name="REPLACE_ME",
-    representatives=[
-        {
-            "address": {
-                "city": "city",
-                "country": "country",
-                "country_code": "xx",
-                "line1": "line1",
-                "postal_code": "postalCode",
-                "region": "region",
-            },
-            "birth_date": date.fromisoformat("2000-01-01"),
-            "country_of_issue": "xx",
-            "email": "email",
-            "first_name": "firstName",
-            "last_name": "lastName",
-            "national_id": "nationalId",
-        }
-    ],
-    ultimate_beneficial_owners=[
-        {
-            "address": {
-                "city": "city",
-                "country": "country",
-                "country_code": "xx",
-                "line1": "line1",
-                "postal_code": "postalCode",
-                "region": "region",
-            },
-            "birth_date": date.fromisoformat("2000-01-01"),
-            "country_of_issue": "xx",
-            "email": "email",
-            "first_name": "firstName",
-            "last_name": "lastName",
-            "national_id": "nationalId",
-        }
-    ],
+issuing_charge_create_response = client.companies.charge(
+    company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+    amount=123,
+    description="Custom fee charge",
 )
+print(issuing_charge_create_response.id)
 ```
 
 While you can provide an `api_key` keyword argument,
@@ -122,89 +56,23 @@ Simply import `AsyncRainHelloWorld` instead of `RainHelloWorld` and use `await` 
 
 ```python
 import os
-from datetime import date
 import asyncio
 from rain_hello_world import AsyncRainHelloWorld
 
 client = AsyncRainHelloWorld(
     api_key=os.environ.get("RAIN_HELLO_WORLD_API_KEY"),  # This is the default and can be omitted
-    # defaults to "production".
-    environment="environment_1",
+    # defaults to "dev".
+    environment="production",
 )
 
 
 async def main() -> None:
-    issuing_company = await client.applications.company.create(
-        address={
-            "city": "city",
-            "country": "country",
-            "country_code": "xx",
-            "line1": "line1",
-            "postal_code": "postalCode",
-            "region": "region",
-        },
-        entity={
-            "name": "name",
-            "registration_number": "registrationNumber",
-            "tax_id": "taxId",
-            "website": "website",
-        },
-        initial_user={
-            "address": {
-                "city": "city",
-                "country": "country",
-                "country_code": "xx",
-                "line1": "line1",
-                "postal_code": "postalCode",
-                "region": "region",
-            },
-            "birth_date": date.fromisoformat("2000-01-01"),
-            "country_of_issue": "xx",
-            "email": "email",
-            "first_name": "firstName",
-            "last_name": "lastName",
-            "national_id": "nationalId",
-            "ip_address": "ipAddress",
-            "is_terms_of_service_accepted": True,
-        },
-        name="REPLACE_ME",
-        representatives=[
-            {
-                "address": {
-                    "city": "city",
-                    "country": "country",
-                    "country_code": "xx",
-                    "line1": "line1",
-                    "postal_code": "postalCode",
-                    "region": "region",
-                },
-                "birth_date": date.fromisoformat("2000-01-01"),
-                "country_of_issue": "xx",
-                "email": "email",
-                "first_name": "firstName",
-                "last_name": "lastName",
-                "national_id": "nationalId",
-            }
-        ],
-        ultimate_beneficial_owners=[
-            {
-                "address": {
-                    "city": "city",
-                    "country": "country",
-                    "country_code": "xx",
-                    "line1": "line1",
-                    "postal_code": "postalCode",
-                    "region": "region",
-                },
-                "birth_date": date.fromisoformat("2000-01-01"),
-                "country_of_issue": "xx",
-                "email": "email",
-                "first_name": "firstName",
-                "last_name": "lastName",
-                "national_id": "nationalId",
-            }
-        ],
+    issuing_charge_create_response = await client.companies.charge(
+        company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        amount=123,
+        description="Custom fee charge",
     )
+    print(issuing_charge_create_response.id)
 
 
 asyncio.run(main())
@@ -229,7 +97,6 @@ Then you can enable it by instantiating the client with `http_client=DefaultAioH
 import os
 import asyncio
 from rain_hello_world import DefaultAioHttpClient
-from datetime import date
 from rain_hello_world import AsyncRainHelloWorld
 
 
@@ -240,77 +107,12 @@ async def main() -> None:
         ),  # This is the default and can be omitted
         http_client=DefaultAioHttpClient(),
     ) as client:
-        issuing_company = await client.applications.company.create(
-            address={
-                "city": "city",
-                "country": "country",
-                "country_code": "xx",
-                "line1": "line1",
-                "postal_code": "postalCode",
-                "region": "region",
-            },
-            entity={
-                "name": "name",
-                "registration_number": "registrationNumber",
-                "tax_id": "taxId",
-                "website": "website",
-            },
-            initial_user={
-                "address": {
-                    "city": "city",
-                    "country": "country",
-                    "country_code": "xx",
-                    "line1": "line1",
-                    "postal_code": "postalCode",
-                    "region": "region",
-                },
-                "birth_date": date.fromisoformat("2000-01-01"),
-                "country_of_issue": "xx",
-                "email": "email",
-                "first_name": "firstName",
-                "last_name": "lastName",
-                "national_id": "nationalId",
-                "ip_address": "ipAddress",
-                "is_terms_of_service_accepted": True,
-            },
-            name="REPLACE_ME",
-            representatives=[
-                {
-                    "address": {
-                        "city": "city",
-                        "country": "country",
-                        "country_code": "xx",
-                        "line1": "line1",
-                        "postal_code": "postalCode",
-                        "region": "region",
-                    },
-                    "birth_date": date.fromisoformat("2000-01-01"),
-                    "country_of_issue": "xx",
-                    "email": "email",
-                    "first_name": "firstName",
-                    "last_name": "lastName",
-                    "national_id": "nationalId",
-                }
-            ],
-            ultimate_beneficial_owners=[
-                {
-                    "address": {
-                        "city": "city",
-                        "country": "country",
-                        "country_code": "xx",
-                        "line1": "line1",
-                        "postal_code": "postalCode",
-                        "region": "region",
-                    },
-                    "birth_date": date.fromisoformat("2000-01-01"),
-                    "country_of_issue": "xx",
-                    "email": "email",
-                    "first_name": "firstName",
-                    "last_name": "lastName",
-                    "national_id": "nationalId",
-                }
-            ],
+        issuing_charge_create_response = await client.companies.charge(
+            company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            amount=123,
+            description="Custom fee charge",
         )
+        print(issuing_charge_create_response.id)
 
 
 asyncio.run(main())
@@ -438,84 +240,16 @@ response), a subclass of `rain_hello_world.APIStatusError` is raised, containing
 All errors inherit from `rain_hello_world.APIError`.
 
 ```python
-from datetime import date
-
 import rain_hello_world
 from rain_hello_world import RainHelloWorld
 
 client = RainHelloWorld()
 
 try:
-    client.applications.company.create(
-        address={
-            "city": "city",
-            "country": "country",
-            "country_code": "xx",
-            "line1": "line1",
-            "postal_code": "postalCode",
-            "region": "region",
-        },
-        entity={
-            "name": "name",
-            "registration_number": "registrationNumber",
-            "tax_id": "taxId",
-            "website": "website",
-        },
-        initial_user={
-            "address": {
-                "city": "city",
-                "country": "country",
-                "country_code": "xx",
-                "line1": "line1",
-                "postal_code": "postalCode",
-                "region": "region",
-            },
-            "birth_date": date.fromisoformat("2000-01-01"),
-            "country_of_issue": "xx",
-            "email": "email",
-            "first_name": "firstName",
-            "last_name": "lastName",
-            "national_id": "nationalId",
-            "ip_address": "ipAddress",
-            "is_terms_of_service_accepted": True,
-        },
-        name="REPLACE_ME",
-        representatives=[
-            {
-                "address": {
-                    "city": "city",
-                    "country": "country",
-                    "country_code": "xx",
-                    "line1": "line1",
-                    "postal_code": "postalCode",
-                    "region": "region",
-                },
-                "birth_date": date.fromisoformat("2000-01-01"),
-                "country_of_issue": "xx",
-                "email": "email",
-                "first_name": "firstName",
-                "last_name": "lastName",
-                "national_id": "nationalId",
-            }
-        ],
-        ultimate_beneficial_owners=[
-            {
-                "address": {
-                    "city": "city",
-                    "country": "country",
-                    "country_code": "xx",
-                    "line1": "line1",
-                    "postal_code": "postalCode",
-                    "region": "region",
-                },
-                "birth_date": date.fromisoformat("2000-01-01"),
-                "country_of_issue": "xx",
-                "email": "email",
-                "first_name": "firstName",
-                "last_name": "lastName",
-                "national_id": "nationalId",
-            }
-        ],
+    client.companies.charge(
+        company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        amount=123,
+        description="Custom fee charge",
     )
 except rain_hello_world.APIConnectionError as e:
     print("The server could not be reached")
@@ -550,8 +284,6 @@ Connection errors (for example, due to a network connectivity problem), 408 Requ
 You can use the `max_retries` option to configure or disable retry settings:
 
 ```python
-from datetime import date
-
 from rain_hello_world import RainHelloWorld
 
 # Configure the default for all requests:
@@ -561,76 +293,10 @@ client = RainHelloWorld(
 )
 
 # Or, configure per-request:
-client.with_options(max_retries=5).applications.company.create(
-    address={
-        "city": "city",
-        "country": "country",
-        "country_code": "xx",
-        "line1": "line1",
-        "postal_code": "postalCode",
-        "region": "region",
-    },
-    entity={
-        "name": "name",
-        "registration_number": "registrationNumber",
-        "tax_id": "taxId",
-        "website": "website",
-    },
-    initial_user={
-        "address": {
-            "city": "city",
-            "country": "country",
-            "country_code": "xx",
-            "line1": "line1",
-            "postal_code": "postalCode",
-            "region": "region",
-        },
-        "birth_date": date.fromisoformat("2000-01-01"),
-        "country_of_issue": "xx",
-        "email": "email",
-        "first_name": "firstName",
-        "last_name": "lastName",
-        "national_id": "nationalId",
-        "ip_address": "ipAddress",
-        "is_terms_of_service_accepted": True,
-    },
-    name="REPLACE_ME",
-    representatives=[
-        {
-            "address": {
-                "city": "city",
-                "country": "country",
-                "country_code": "xx",
-                "line1": "line1",
-                "postal_code": "postalCode",
-                "region": "region",
-            },
-            "birth_date": date.fromisoformat("2000-01-01"),
-            "country_of_issue": "xx",
-            "email": "email",
-            "first_name": "firstName",
-            "last_name": "lastName",
-            "national_id": "nationalId",
-        }
-    ],
-    ultimate_beneficial_owners=[
-        {
-            "address": {
-                "city": "city",
-                "country": "country",
-                "country_code": "xx",
-                "line1": "line1",
-                "postal_code": "postalCode",
-                "region": "region",
-            },
-            "birth_date": date.fromisoformat("2000-01-01"),
-            "country_of_issue": "xx",
-            "email": "email",
-            "first_name": "firstName",
-            "last_name": "lastName",
-            "national_id": "nationalId",
-        }
-    ],
+client.with_options(max_retries=5).companies.charge(
+    company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+    amount=123,
+    description="Custom fee charge",
 )
 ```
 
@@ -640,8 +306,6 @@ By default requests time out after 1 minute. You can configure this with a `time
 which accepts a float or an [`httpx.Timeout`](https://www.python-httpx.org/advanced/timeouts/#fine-tuning-the-configuration) object:
 
 ```python
-from datetime import date
-
 from rain_hello_world import RainHelloWorld
 
 # Configure the default for all requests:
@@ -656,76 +320,10 @@ client = RainHelloWorld(
 )
 
 # Override per-request:
-client.with_options(timeout=5.0).applications.company.create(
-    address={
-        "city": "city",
-        "country": "country",
-        "country_code": "xx",
-        "line1": "line1",
-        "postal_code": "postalCode",
-        "region": "region",
-    },
-    entity={
-        "name": "name",
-        "registration_number": "registrationNumber",
-        "tax_id": "taxId",
-        "website": "website",
-    },
-    initial_user={
-        "address": {
-            "city": "city",
-            "country": "country",
-            "country_code": "xx",
-            "line1": "line1",
-            "postal_code": "postalCode",
-            "region": "region",
-        },
-        "birth_date": date.fromisoformat("2000-01-01"),
-        "country_of_issue": "xx",
-        "email": "email",
-        "first_name": "firstName",
-        "last_name": "lastName",
-        "national_id": "nationalId",
-        "ip_address": "ipAddress",
-        "is_terms_of_service_accepted": True,
-    },
-    name="REPLACE_ME",
-    representatives=[
-        {
-            "address": {
-                "city": "city",
-                "country": "country",
-                "country_code": "xx",
-                "line1": "line1",
-                "postal_code": "postalCode",
-                "region": "region",
-            },
-            "birth_date": date.fromisoformat("2000-01-01"),
-            "country_of_issue": "xx",
-            "email": "email",
-            "first_name": "firstName",
-            "last_name": "lastName",
-            "national_id": "nationalId",
-        }
-    ],
-    ultimate_beneficial_owners=[
-        {
-            "address": {
-                "city": "city",
-                "country": "country",
-                "country_code": "xx",
-                "line1": "line1",
-                "postal_code": "postalCode",
-                "region": "region",
-            },
-            "birth_date": date.fromisoformat("2000-01-01"),
-            "country_of_issue": "xx",
-            "email": "email",
-            "first_name": "firstName",
-            "last_name": "lastName",
-            "national_id": "nationalId",
-        }
-    ],
+client.with_options(timeout=5.0).companies.charge(
+    company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+    amount=123,
+    description="Custom fee charge",
 )
 ```
 
@@ -764,85 +362,19 @@ if response.my_field is None:
 The "raw" Response object can be accessed by prefixing `.with_raw_response.` to any HTTP method call, e.g.,
 
 ```py
-from datetime import date
-
 from rain_hello_world import RainHelloWorld
 
 client = RainHelloWorld()
-response = client.applications.company.with_raw_response.create(
-    address={
-        "city": "city",
-        "country": "country",
-        "country_code": "xx",
-        "line1": "line1",
-        "postal_code": "postalCode",
-        "region": "region",
-    },
-    entity={
-        "name": "name",
-        "registration_number": "registrationNumber",
-        "tax_id": "taxId",
-        "website": "website",
-    },
-    initial_user={
-        "address": {
-            "city": "city",
-            "country": "country",
-            "country_code": "xx",
-            "line1": "line1",
-            "postal_code": "postalCode",
-            "region": "region",
-        },
-        "birth_date": date.fromisoformat("2000-01-01"),
-        "country_of_issue": "xx",
-        "email": "email",
-        "first_name": "firstName",
-        "last_name": "lastName",
-        "national_id": "nationalId",
-        "ip_address": "ipAddress",
-        "is_terms_of_service_accepted": True,
-    },
-    name="REPLACE_ME",
-    representatives=[{
-        "address": {
-            "city": "city",
-            "country": "country",
-            "country_code": "xx",
-            "line1": "line1",
-            "postal_code": "postalCode",
-            "region": "region",
-        },
-        "birth_date": date.fromisoformat("2000-01-01"),
-        "country_of_issue": "xx",
-        "email": "email",
-        "first_name": "firstName",
-        "last_name": "lastName",
-        "national_id": "nationalId",
-    }],
-    ultimate_beneficial_owners=[{
-        "address": {
-            "city": "city",
-            "country": "country",
-            "country_code": "xx",
-            "line1": "line1",
-            "postal_code": "postalCode",
-            "region": "region",
-        },
-        "birth_date": date.fromisoformat("2000-01-01"),
-        "country_of_issue": "xx",
-        "email": "email",
-        "first_name": "firstName",
-        "last_name": "lastName",
-        "national_id": "nationalId",
-    }],
+response = client.companies.with_raw_response.charge(
+    company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+    amount=123,
+    description="Custom fee charge",
 )
 print(response.headers.get('X-My-Header'))
 
-company = response.parse()  # get the object that `applications.company.create()` would have returned
-print(company)
+company = response.parse()  # get the object that `companies.charge()` would have returned
+print(company.id)
 ```
-
-from datetime import date
 
 These methods return an [`APIResponse`](https://github.com/stainless-sdks/rain-hello-world-python/tree/main/src/rain_hello_world/_response.py) object.
 
@@ -855,76 +387,10 @@ The above interface eagerly reads the full response body when you make the reque
 To stream the response body, use `.with_streaming_response` instead, which requires a context manager and only reads the response body once you call `.read()`, `.text()`, `.json()`, `.iter_bytes()`, `.iter_text()`, `.iter_lines()` or `.parse()`. In the async client, these are async methods.
 
 ```python
-with client.applications.company.with_streaming_response.create(
-    address={
-        "city": "city",
-        "country": "country",
-        "country_code": "xx",
-        "line1": "line1",
-        "postal_code": "postalCode",
-        "region": "region",
-    },
-    entity={
-        "name": "name",
-        "registration_number": "registrationNumber",
-        "tax_id": "taxId",
-        "website": "website",
-    },
-    initial_user={
-        "address": {
-            "city": "city",
-            "country": "country",
-            "country_code": "xx",
-            "line1": "line1",
-            "postal_code": "postalCode",
-            "region": "region",
-        },
-        "birth_date": date.fromisoformat("2000-01-01"),
-        "country_of_issue": "xx",
-        "email": "email",
-        "first_name": "firstName",
-        "last_name": "lastName",
-        "national_id": "nationalId",
-        "ip_address": "ipAddress",
-        "is_terms_of_service_accepted": True,
-    },
-    name="REPLACE_ME",
-    representatives=[
-        {
-            "address": {
-                "city": "city",
-                "country": "country",
-                "country_code": "xx",
-                "line1": "line1",
-                "postal_code": "postalCode",
-                "region": "region",
-            },
-            "birth_date": date.fromisoformat("2000-01-01"),
-            "country_of_issue": "xx",
-            "email": "email",
-            "first_name": "firstName",
-            "last_name": "lastName",
-            "national_id": "nationalId",
-        }
-    ],
-    ultimate_beneficial_owners=[
-        {
-            "address": {
-                "city": "city",
-                "country": "country",
-                "country_code": "xx",
-                "line1": "line1",
-                "postal_code": "postalCode",
-                "region": "region",
-            },
-            "birth_date": date.fromisoformat("2000-01-01"),
-            "country_of_issue": "xx",
-            "email": "email",
-            "first_name": "firstName",
-            "last_name": "lastName",
-            "national_id": "nationalId",
-        }
-    ],
+with client.companies.with_streaming_response.charge(
+    company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+    amount=123,
+    description="Custom fee charge",
 ) as response:
     print(response.headers.get("X-My-Header"))
 
