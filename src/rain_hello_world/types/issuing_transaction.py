@@ -2,10 +2,11 @@
 
 from typing import Union, Optional
 from datetime import datetime
-from typing_extensions import Literal, TypeAlias
+from typing_extensions import Literal, Annotated, TypeAlias
 
 from pydantic import Field as FieldInfo
 
+from .._utils import PropertyInfo
 from .._models import BaseModel
 
 __all__ = [
@@ -253,4 +254,6 @@ class UnionMember3(BaseModel):
     """The type of transaction, in this case, a fee transaction"""
 
 
-IssuingTransaction: TypeAlias = Union[UnionMember0, UnionMember1, UnionMember2, UnionMember3]
+IssuingTransaction: TypeAlias = Annotated[
+    Union[UnionMember0, UnionMember1, UnionMember2, UnionMember3], PropertyInfo(discriminator="type")
+]
