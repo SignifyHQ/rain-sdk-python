@@ -69,8 +69,8 @@ __all__ = [
 ]
 
 ENVIRONMENTS: Dict[str, str] = {
-    "production": "https://api-dev.raincards.xyz/v1/issuing",
-    "environment_1": "https://api.raincards.xyz/v1/issuing",
+    "dev": "https://api-dev.raincards.xyz/v1/issuing",
+    "production": "https://api.raincards.xyz/v1/issuing",
 }
 
 
@@ -78,13 +78,13 @@ class RainHelloWorld(SyncAPIClient):
     # client options
     api_key: str
 
-    _environment: Literal["production", "environment_1"] | NotGiven
+    _environment: Literal["dev", "production"] | NotGiven
 
     def __init__(
         self,
         *,
         api_key: str | None = None,
-        environment: Literal["production", "environment_1"] | NotGiven = not_given,
+        environment: Literal["dev", "production"] | NotGiven = not_given,
         base_url: str | httpx.URL | None | NotGiven = not_given,
         timeout: float | Timeout | None | NotGiven = not_given,
         max_retries: int = DEFAULT_MAX_RETRIES,
@@ -135,7 +135,7 @@ class RainHelloWorld(SyncAPIClient):
         elif base_url_env is not None:
             base_url = base_url_env
         else:
-            self._environment = environment = "production"
+            self._environment = environment = "dev"
 
             try:
                 base_url = ENVIRONMENTS[environment]
@@ -251,7 +251,7 @@ class RainHelloWorld(SyncAPIClient):
         self,
         *,
         api_key: str | None = None,
-        environment: Literal["production", "environment_1"] | None = None,
+        environment: Literal["dev", "production"] | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = not_given,
         http_client: httpx.Client | None = None,
@@ -338,13 +338,13 @@ class AsyncRainHelloWorld(AsyncAPIClient):
     # client options
     api_key: str
 
-    _environment: Literal["production", "environment_1"] | NotGiven
+    _environment: Literal["dev", "production"] | NotGiven
 
     def __init__(
         self,
         *,
         api_key: str | None = None,
-        environment: Literal["production", "environment_1"] | NotGiven = not_given,
+        environment: Literal["dev", "production"] | NotGiven = not_given,
         base_url: str | httpx.URL | None | NotGiven = not_given,
         timeout: float | Timeout | None | NotGiven = not_given,
         max_retries: int = DEFAULT_MAX_RETRIES,
@@ -395,7 +395,7 @@ class AsyncRainHelloWorld(AsyncAPIClient):
         elif base_url_env is not None:
             base_url = base_url_env
         else:
-            self._environment = environment = "production"
+            self._environment = environment = "dev"
 
             try:
                 base_url = ENVIRONMENTS[environment]
@@ -511,7 +511,7 @@ class AsyncRainHelloWorld(AsyncAPIClient):
         self,
         *,
         api_key: str | None = None,
-        environment: Literal["production", "environment_1"] | None = None,
+        environment: Literal["dev", "production"] | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = not_given,
         http_client: httpx.AsyncClient | None = None,

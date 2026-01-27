@@ -21,7 +21,7 @@ from pydantic import ValidationError
 
 from rain_hello_world import RainHelloWorld, AsyncRainHelloWorld, APIResponseValidationError
 from rain_hello_world._types import Omit
-from rain_hello_world._utils import asyncify, parse_date
+from rain_hello_world._utils import asyncify
 from rain_hello_world._models import BaseModel, FinalRequestOptions
 from rain_hello_world._exceptions import (
     APIStatusError,
@@ -705,11 +705,9 @@ class TestRainHelloWorld:
         # explicit environment arg requires explicitness
         with update_env(RAIN_HELLO_WORLD_BASE_URL="http://localhost:5000/from/env"):
             with pytest.raises(ValueError, match=r"you must pass base_url=None"):
-                RainHelloWorld(api_key=api_key, _strict_response_validation=True, environment="production")
+                RainHelloWorld(api_key=api_key, _strict_response_validation=True, environment="dev")
 
-            client = RainHelloWorld(
-                base_url=None, api_key=api_key, _strict_response_validation=True, environment="production"
-            )
+            client = RainHelloWorld(base_url=None, api_key=api_key, _strict_response_validation=True, environment="dev")
             assert str(client.base_url).startswith("https://api-dev.raincards.xyz/v1/issuing")
 
             client.close()
@@ -882,79 +880,13 @@ class TestRainHelloWorld:
     @mock.patch("rain_hello_world._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter, client: RainHelloWorld) -> None:
-        respx_mock.post("/applications/company").mock(side_effect=httpx.TimeoutException("Test timeout error"))
+        respx_mock.post("/companies/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/charges").mock(
+            side_effect=httpx.TimeoutException("Test timeout error")
+        )
 
         with pytest.raises(APITimeoutError):
-            client.applications.company.with_streaming_response.create(
-                address={
-                    "city": "city",
-                    "country": "country",
-                    "country_code": "xx",
-                    "line1": "line1",
-                    "postal_code": "postalCode",
-                    "region": "region",
-                },
-                entity={
-                    "name": "name",
-                    "registration_number": "registrationNumber",
-                    "tax_id": "taxId",
-                    "website": "website",
-                },
-                initial_user={
-                    "address": {
-                        "city": "city",
-                        "country": "country",
-                        "country_code": "xx",
-                        "line1": "line1",
-                        "postal_code": "postalCode",
-                        "region": "region",
-                    },
-                    "birth_date": parse_date("2000-01-01"),
-                    "country_of_issue": "xx",
-                    "email": "email",
-                    "first_name": "firstName",
-                    "last_name": "lastName",
-                    "national_id": "nationalId",
-                    "ip_address": "ipAddress",
-                    "is_terms_of_service_accepted": True,
-                },
-                name="name",
-                representatives=[
-                    {
-                        "address": {
-                            "city": "city",
-                            "country": "country",
-                            "country_code": "xx",
-                            "line1": "line1",
-                            "postal_code": "postalCode",
-                            "region": "region",
-                        },
-                        "birth_date": parse_date("2000-01-01"),
-                        "country_of_issue": "xx",
-                        "email": "email",
-                        "first_name": "firstName",
-                        "last_name": "lastName",
-                        "national_id": "nationalId",
-                    }
-                ],
-                ultimate_beneficial_owners=[
-                    {
-                        "address": {
-                            "city": "city",
-                            "country": "country",
-                            "country_code": "xx",
-                            "line1": "line1",
-                            "postal_code": "postalCode",
-                            "region": "region",
-                        },
-                        "birth_date": parse_date("2000-01-01"),
-                        "country_of_issue": "xx",
-                        "email": "email",
-                        "first_name": "firstName",
-                        "last_name": "lastName",
-                        "national_id": "nationalId",
-                    }
-                ],
+            client.companies.with_streaming_response.charge(
+                company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e", amount=1, description="description"
             ).__enter__()
 
         assert _get_open_connections(client) == 0
@@ -962,79 +894,13 @@ class TestRainHelloWorld:
     @mock.patch("rain_hello_world._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter, client: RainHelloWorld) -> None:
-        respx_mock.post("/applications/company").mock(return_value=httpx.Response(500))
+        respx_mock.post("/companies/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/charges").mock(
+            return_value=httpx.Response(500)
+        )
 
         with pytest.raises(APIStatusError):
-            client.applications.company.with_streaming_response.create(
-                address={
-                    "city": "city",
-                    "country": "country",
-                    "country_code": "xx",
-                    "line1": "line1",
-                    "postal_code": "postalCode",
-                    "region": "region",
-                },
-                entity={
-                    "name": "name",
-                    "registration_number": "registrationNumber",
-                    "tax_id": "taxId",
-                    "website": "website",
-                },
-                initial_user={
-                    "address": {
-                        "city": "city",
-                        "country": "country",
-                        "country_code": "xx",
-                        "line1": "line1",
-                        "postal_code": "postalCode",
-                        "region": "region",
-                    },
-                    "birth_date": parse_date("2000-01-01"),
-                    "country_of_issue": "xx",
-                    "email": "email",
-                    "first_name": "firstName",
-                    "last_name": "lastName",
-                    "national_id": "nationalId",
-                    "ip_address": "ipAddress",
-                    "is_terms_of_service_accepted": True,
-                },
-                name="name",
-                representatives=[
-                    {
-                        "address": {
-                            "city": "city",
-                            "country": "country",
-                            "country_code": "xx",
-                            "line1": "line1",
-                            "postal_code": "postalCode",
-                            "region": "region",
-                        },
-                        "birth_date": parse_date("2000-01-01"),
-                        "country_of_issue": "xx",
-                        "email": "email",
-                        "first_name": "firstName",
-                        "last_name": "lastName",
-                        "national_id": "nationalId",
-                    }
-                ],
-                ultimate_beneficial_owners=[
-                    {
-                        "address": {
-                            "city": "city",
-                            "country": "country",
-                            "country_code": "xx",
-                            "line1": "line1",
-                            "postal_code": "postalCode",
-                            "region": "region",
-                        },
-                        "birth_date": parse_date("2000-01-01"),
-                        "country_of_issue": "xx",
-                        "email": "email",
-                        "first_name": "firstName",
-                        "last_name": "lastName",
-                        "national_id": "nationalId",
-                    }
-                ],
+            client.companies.with_streaming_response.charge(
+                company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e", amount=1, description="description"
             ).__enter__()
         assert _get_open_connections(client) == 0
 
@@ -1062,78 +928,10 @@ class TestRainHelloWorld:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/applications/company").mock(side_effect=retry_handler)
+        respx_mock.post("/companies/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/charges").mock(side_effect=retry_handler)
 
-        response = client.applications.company.with_raw_response.create(
-            address={
-                "city": "city",
-                "country": "country",
-                "country_code": "xx",
-                "line1": "line1",
-                "postal_code": "postalCode",
-                "region": "region",
-            },
-            entity={
-                "name": "name",
-                "registration_number": "registrationNumber",
-                "tax_id": "taxId",
-                "website": "website",
-            },
-            initial_user={
-                "address": {
-                    "city": "city",
-                    "country": "country",
-                    "country_code": "xx",
-                    "line1": "line1",
-                    "postal_code": "postalCode",
-                    "region": "region",
-                },
-                "birth_date": parse_date("2000-01-01"),
-                "country_of_issue": "xx",
-                "email": "email",
-                "first_name": "firstName",
-                "last_name": "lastName",
-                "national_id": "nationalId",
-                "ip_address": "ipAddress",
-                "is_terms_of_service_accepted": True,
-            },
-            name="name",
-            representatives=[
-                {
-                    "address": {
-                        "city": "city",
-                        "country": "country",
-                        "country_code": "xx",
-                        "line1": "line1",
-                        "postal_code": "postalCode",
-                        "region": "region",
-                    },
-                    "birth_date": parse_date("2000-01-01"),
-                    "country_of_issue": "xx",
-                    "email": "email",
-                    "first_name": "firstName",
-                    "last_name": "lastName",
-                    "national_id": "nationalId",
-                }
-            ],
-            ultimate_beneficial_owners=[
-                {
-                    "address": {
-                        "city": "city",
-                        "country": "country",
-                        "country_code": "xx",
-                        "line1": "line1",
-                        "postal_code": "postalCode",
-                        "region": "region",
-                    },
-                    "birth_date": parse_date("2000-01-01"),
-                    "country_of_issue": "xx",
-                    "email": "email",
-                    "first_name": "firstName",
-                    "last_name": "lastName",
-                    "national_id": "nationalId",
-                }
-            ],
+        response = client.companies.with_raw_response.charge(
+            company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e", amount=1, description="description"
         )
 
         assert response.retries_taken == failures_before_success
@@ -1156,78 +954,12 @@ class TestRainHelloWorld:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/applications/company").mock(side_effect=retry_handler)
+        respx_mock.post("/companies/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/charges").mock(side_effect=retry_handler)
 
-        response = client.applications.company.with_raw_response.create(
-            address={
-                "city": "city",
-                "country": "country",
-                "country_code": "xx",
-                "line1": "line1",
-                "postal_code": "postalCode",
-                "region": "region",
-            },
-            entity={
-                "name": "name",
-                "registration_number": "registrationNumber",
-                "tax_id": "taxId",
-                "website": "website",
-            },
-            initial_user={
-                "address": {
-                    "city": "city",
-                    "country": "country",
-                    "country_code": "xx",
-                    "line1": "line1",
-                    "postal_code": "postalCode",
-                    "region": "region",
-                },
-                "birth_date": parse_date("2000-01-01"),
-                "country_of_issue": "xx",
-                "email": "email",
-                "first_name": "firstName",
-                "last_name": "lastName",
-                "national_id": "nationalId",
-                "ip_address": "ipAddress",
-                "is_terms_of_service_accepted": True,
-            },
-            name="name",
-            representatives=[
-                {
-                    "address": {
-                        "city": "city",
-                        "country": "country",
-                        "country_code": "xx",
-                        "line1": "line1",
-                        "postal_code": "postalCode",
-                        "region": "region",
-                    },
-                    "birth_date": parse_date("2000-01-01"),
-                    "country_of_issue": "xx",
-                    "email": "email",
-                    "first_name": "firstName",
-                    "last_name": "lastName",
-                    "national_id": "nationalId",
-                }
-            ],
-            ultimate_beneficial_owners=[
-                {
-                    "address": {
-                        "city": "city",
-                        "country": "country",
-                        "country_code": "xx",
-                        "line1": "line1",
-                        "postal_code": "postalCode",
-                        "region": "region",
-                    },
-                    "birth_date": parse_date("2000-01-01"),
-                    "country_of_issue": "xx",
-                    "email": "email",
-                    "first_name": "firstName",
-                    "last_name": "lastName",
-                    "national_id": "nationalId",
-                }
-            ],
+        response = client.companies.with_raw_response.charge(
+            company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            amount=1,
+            description="description",
             extra_headers={"x-stainless-retry-count": Omit()},
         )
 
@@ -1250,78 +982,12 @@ class TestRainHelloWorld:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/applications/company").mock(side_effect=retry_handler)
+        respx_mock.post("/companies/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/charges").mock(side_effect=retry_handler)
 
-        response = client.applications.company.with_raw_response.create(
-            address={
-                "city": "city",
-                "country": "country",
-                "country_code": "xx",
-                "line1": "line1",
-                "postal_code": "postalCode",
-                "region": "region",
-            },
-            entity={
-                "name": "name",
-                "registration_number": "registrationNumber",
-                "tax_id": "taxId",
-                "website": "website",
-            },
-            initial_user={
-                "address": {
-                    "city": "city",
-                    "country": "country",
-                    "country_code": "xx",
-                    "line1": "line1",
-                    "postal_code": "postalCode",
-                    "region": "region",
-                },
-                "birth_date": parse_date("2000-01-01"),
-                "country_of_issue": "xx",
-                "email": "email",
-                "first_name": "firstName",
-                "last_name": "lastName",
-                "national_id": "nationalId",
-                "ip_address": "ipAddress",
-                "is_terms_of_service_accepted": True,
-            },
-            name="name",
-            representatives=[
-                {
-                    "address": {
-                        "city": "city",
-                        "country": "country",
-                        "country_code": "xx",
-                        "line1": "line1",
-                        "postal_code": "postalCode",
-                        "region": "region",
-                    },
-                    "birth_date": parse_date("2000-01-01"),
-                    "country_of_issue": "xx",
-                    "email": "email",
-                    "first_name": "firstName",
-                    "last_name": "lastName",
-                    "national_id": "nationalId",
-                }
-            ],
-            ultimate_beneficial_owners=[
-                {
-                    "address": {
-                        "city": "city",
-                        "country": "country",
-                        "country_code": "xx",
-                        "line1": "line1",
-                        "postal_code": "postalCode",
-                        "region": "region",
-                    },
-                    "birth_date": parse_date("2000-01-01"),
-                    "country_of_issue": "xx",
-                    "email": "email",
-                    "first_name": "firstName",
-                    "last_name": "lastName",
-                    "national_id": "nationalId",
-                }
-            ],
+        response = client.companies.with_raw_response.charge(
+            company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            amount=1,
+            description="description",
             extra_headers={"x-stainless-retry-count": "42"},
         )
 
@@ -1968,10 +1634,10 @@ class TestAsyncRainHelloWorld:
         # explicit environment arg requires explicitness
         with update_env(RAIN_HELLO_WORLD_BASE_URL="http://localhost:5000/from/env"):
             with pytest.raises(ValueError, match=r"you must pass base_url=None"):
-                AsyncRainHelloWorld(api_key=api_key, _strict_response_validation=True, environment="production")
+                AsyncRainHelloWorld(api_key=api_key, _strict_response_validation=True, environment="dev")
 
             client = AsyncRainHelloWorld(
-                base_url=None, api_key=api_key, _strict_response_validation=True, environment="production"
+                base_url=None, api_key=api_key, _strict_response_validation=True, environment="dev"
             )
             assert str(client.base_url).startswith("https://api-dev.raincards.xyz/v1/issuing")
 
@@ -2150,79 +1816,13 @@ class TestAsyncRainHelloWorld:
     async def test_retrying_timeout_errors_doesnt_leak(
         self, respx_mock: MockRouter, async_client: AsyncRainHelloWorld
     ) -> None:
-        respx_mock.post("/applications/company").mock(side_effect=httpx.TimeoutException("Test timeout error"))
+        respx_mock.post("/companies/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/charges").mock(
+            side_effect=httpx.TimeoutException("Test timeout error")
+        )
 
         with pytest.raises(APITimeoutError):
-            await async_client.applications.company.with_streaming_response.create(
-                address={
-                    "city": "city",
-                    "country": "country",
-                    "country_code": "xx",
-                    "line1": "line1",
-                    "postal_code": "postalCode",
-                    "region": "region",
-                },
-                entity={
-                    "name": "name",
-                    "registration_number": "registrationNumber",
-                    "tax_id": "taxId",
-                    "website": "website",
-                },
-                initial_user={
-                    "address": {
-                        "city": "city",
-                        "country": "country",
-                        "country_code": "xx",
-                        "line1": "line1",
-                        "postal_code": "postalCode",
-                        "region": "region",
-                    },
-                    "birth_date": parse_date("2000-01-01"),
-                    "country_of_issue": "xx",
-                    "email": "email",
-                    "first_name": "firstName",
-                    "last_name": "lastName",
-                    "national_id": "nationalId",
-                    "ip_address": "ipAddress",
-                    "is_terms_of_service_accepted": True,
-                },
-                name="name",
-                representatives=[
-                    {
-                        "address": {
-                            "city": "city",
-                            "country": "country",
-                            "country_code": "xx",
-                            "line1": "line1",
-                            "postal_code": "postalCode",
-                            "region": "region",
-                        },
-                        "birth_date": parse_date("2000-01-01"),
-                        "country_of_issue": "xx",
-                        "email": "email",
-                        "first_name": "firstName",
-                        "last_name": "lastName",
-                        "national_id": "nationalId",
-                    }
-                ],
-                ultimate_beneficial_owners=[
-                    {
-                        "address": {
-                            "city": "city",
-                            "country": "country",
-                            "country_code": "xx",
-                            "line1": "line1",
-                            "postal_code": "postalCode",
-                            "region": "region",
-                        },
-                        "birth_date": parse_date("2000-01-01"),
-                        "country_of_issue": "xx",
-                        "email": "email",
-                        "first_name": "firstName",
-                        "last_name": "lastName",
-                        "national_id": "nationalId",
-                    }
-                ],
+            await async_client.companies.with_streaming_response.charge(
+                company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e", amount=1, description="description"
             ).__aenter__()
 
         assert _get_open_connections(async_client) == 0
@@ -2232,79 +1832,13 @@ class TestAsyncRainHelloWorld:
     async def test_retrying_status_errors_doesnt_leak(
         self, respx_mock: MockRouter, async_client: AsyncRainHelloWorld
     ) -> None:
-        respx_mock.post("/applications/company").mock(return_value=httpx.Response(500))
+        respx_mock.post("/companies/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/charges").mock(
+            return_value=httpx.Response(500)
+        )
 
         with pytest.raises(APIStatusError):
-            await async_client.applications.company.with_streaming_response.create(
-                address={
-                    "city": "city",
-                    "country": "country",
-                    "country_code": "xx",
-                    "line1": "line1",
-                    "postal_code": "postalCode",
-                    "region": "region",
-                },
-                entity={
-                    "name": "name",
-                    "registration_number": "registrationNumber",
-                    "tax_id": "taxId",
-                    "website": "website",
-                },
-                initial_user={
-                    "address": {
-                        "city": "city",
-                        "country": "country",
-                        "country_code": "xx",
-                        "line1": "line1",
-                        "postal_code": "postalCode",
-                        "region": "region",
-                    },
-                    "birth_date": parse_date("2000-01-01"),
-                    "country_of_issue": "xx",
-                    "email": "email",
-                    "first_name": "firstName",
-                    "last_name": "lastName",
-                    "national_id": "nationalId",
-                    "ip_address": "ipAddress",
-                    "is_terms_of_service_accepted": True,
-                },
-                name="name",
-                representatives=[
-                    {
-                        "address": {
-                            "city": "city",
-                            "country": "country",
-                            "country_code": "xx",
-                            "line1": "line1",
-                            "postal_code": "postalCode",
-                            "region": "region",
-                        },
-                        "birth_date": parse_date("2000-01-01"),
-                        "country_of_issue": "xx",
-                        "email": "email",
-                        "first_name": "firstName",
-                        "last_name": "lastName",
-                        "national_id": "nationalId",
-                    }
-                ],
-                ultimate_beneficial_owners=[
-                    {
-                        "address": {
-                            "city": "city",
-                            "country": "country",
-                            "country_code": "xx",
-                            "line1": "line1",
-                            "postal_code": "postalCode",
-                            "region": "region",
-                        },
-                        "birth_date": parse_date("2000-01-01"),
-                        "country_of_issue": "xx",
-                        "email": "email",
-                        "first_name": "firstName",
-                        "last_name": "lastName",
-                        "national_id": "nationalId",
-                    }
-                ],
+            await async_client.companies.with_streaming_response.charge(
+                company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e", amount=1, description="description"
             ).__aenter__()
         assert _get_open_connections(async_client) == 0
 
@@ -2332,78 +1866,10 @@ class TestAsyncRainHelloWorld:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/applications/company").mock(side_effect=retry_handler)
+        respx_mock.post("/companies/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/charges").mock(side_effect=retry_handler)
 
-        response = await client.applications.company.with_raw_response.create(
-            address={
-                "city": "city",
-                "country": "country",
-                "country_code": "xx",
-                "line1": "line1",
-                "postal_code": "postalCode",
-                "region": "region",
-            },
-            entity={
-                "name": "name",
-                "registration_number": "registrationNumber",
-                "tax_id": "taxId",
-                "website": "website",
-            },
-            initial_user={
-                "address": {
-                    "city": "city",
-                    "country": "country",
-                    "country_code": "xx",
-                    "line1": "line1",
-                    "postal_code": "postalCode",
-                    "region": "region",
-                },
-                "birth_date": parse_date("2000-01-01"),
-                "country_of_issue": "xx",
-                "email": "email",
-                "first_name": "firstName",
-                "last_name": "lastName",
-                "national_id": "nationalId",
-                "ip_address": "ipAddress",
-                "is_terms_of_service_accepted": True,
-            },
-            name="name",
-            representatives=[
-                {
-                    "address": {
-                        "city": "city",
-                        "country": "country",
-                        "country_code": "xx",
-                        "line1": "line1",
-                        "postal_code": "postalCode",
-                        "region": "region",
-                    },
-                    "birth_date": parse_date("2000-01-01"),
-                    "country_of_issue": "xx",
-                    "email": "email",
-                    "first_name": "firstName",
-                    "last_name": "lastName",
-                    "national_id": "nationalId",
-                }
-            ],
-            ultimate_beneficial_owners=[
-                {
-                    "address": {
-                        "city": "city",
-                        "country": "country",
-                        "country_code": "xx",
-                        "line1": "line1",
-                        "postal_code": "postalCode",
-                        "region": "region",
-                    },
-                    "birth_date": parse_date("2000-01-01"),
-                    "country_of_issue": "xx",
-                    "email": "email",
-                    "first_name": "firstName",
-                    "last_name": "lastName",
-                    "national_id": "nationalId",
-                }
-            ],
+        response = await client.companies.with_raw_response.charge(
+            company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e", amount=1, description="description"
         )
 
         assert response.retries_taken == failures_before_success
@@ -2426,78 +1892,12 @@ class TestAsyncRainHelloWorld:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/applications/company").mock(side_effect=retry_handler)
+        respx_mock.post("/companies/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/charges").mock(side_effect=retry_handler)
 
-        response = await client.applications.company.with_raw_response.create(
-            address={
-                "city": "city",
-                "country": "country",
-                "country_code": "xx",
-                "line1": "line1",
-                "postal_code": "postalCode",
-                "region": "region",
-            },
-            entity={
-                "name": "name",
-                "registration_number": "registrationNumber",
-                "tax_id": "taxId",
-                "website": "website",
-            },
-            initial_user={
-                "address": {
-                    "city": "city",
-                    "country": "country",
-                    "country_code": "xx",
-                    "line1": "line1",
-                    "postal_code": "postalCode",
-                    "region": "region",
-                },
-                "birth_date": parse_date("2000-01-01"),
-                "country_of_issue": "xx",
-                "email": "email",
-                "first_name": "firstName",
-                "last_name": "lastName",
-                "national_id": "nationalId",
-                "ip_address": "ipAddress",
-                "is_terms_of_service_accepted": True,
-            },
-            name="name",
-            representatives=[
-                {
-                    "address": {
-                        "city": "city",
-                        "country": "country",
-                        "country_code": "xx",
-                        "line1": "line1",
-                        "postal_code": "postalCode",
-                        "region": "region",
-                    },
-                    "birth_date": parse_date("2000-01-01"),
-                    "country_of_issue": "xx",
-                    "email": "email",
-                    "first_name": "firstName",
-                    "last_name": "lastName",
-                    "national_id": "nationalId",
-                }
-            ],
-            ultimate_beneficial_owners=[
-                {
-                    "address": {
-                        "city": "city",
-                        "country": "country",
-                        "country_code": "xx",
-                        "line1": "line1",
-                        "postal_code": "postalCode",
-                        "region": "region",
-                    },
-                    "birth_date": parse_date("2000-01-01"),
-                    "country_of_issue": "xx",
-                    "email": "email",
-                    "first_name": "firstName",
-                    "last_name": "lastName",
-                    "national_id": "nationalId",
-                }
-            ],
+        response = await client.companies.with_raw_response.charge(
+            company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            amount=1,
+            description="description",
             extra_headers={"x-stainless-retry-count": Omit()},
         )
 
@@ -2520,78 +1920,12 @@ class TestAsyncRainHelloWorld:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/applications/company").mock(side_effect=retry_handler)
+        respx_mock.post("/companies/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/charges").mock(side_effect=retry_handler)
 
-        response = await client.applications.company.with_raw_response.create(
-            address={
-                "city": "city",
-                "country": "country",
-                "country_code": "xx",
-                "line1": "line1",
-                "postal_code": "postalCode",
-                "region": "region",
-            },
-            entity={
-                "name": "name",
-                "registration_number": "registrationNumber",
-                "tax_id": "taxId",
-                "website": "website",
-            },
-            initial_user={
-                "address": {
-                    "city": "city",
-                    "country": "country",
-                    "country_code": "xx",
-                    "line1": "line1",
-                    "postal_code": "postalCode",
-                    "region": "region",
-                },
-                "birth_date": parse_date("2000-01-01"),
-                "country_of_issue": "xx",
-                "email": "email",
-                "first_name": "firstName",
-                "last_name": "lastName",
-                "national_id": "nationalId",
-                "ip_address": "ipAddress",
-                "is_terms_of_service_accepted": True,
-            },
-            name="name",
-            representatives=[
-                {
-                    "address": {
-                        "city": "city",
-                        "country": "country",
-                        "country_code": "xx",
-                        "line1": "line1",
-                        "postal_code": "postalCode",
-                        "region": "region",
-                    },
-                    "birth_date": parse_date("2000-01-01"),
-                    "country_of_issue": "xx",
-                    "email": "email",
-                    "first_name": "firstName",
-                    "last_name": "lastName",
-                    "national_id": "nationalId",
-                }
-            ],
-            ultimate_beneficial_owners=[
-                {
-                    "address": {
-                        "city": "city",
-                        "country": "country",
-                        "country_code": "xx",
-                        "line1": "line1",
-                        "postal_code": "postalCode",
-                        "region": "region",
-                    },
-                    "birth_date": parse_date("2000-01-01"),
-                    "country_of_issue": "xx",
-                    "email": "email",
-                    "first_name": "firstName",
-                    "last_name": "lastName",
-                    "national_id": "nationalId",
-                }
-            ],
+        response = await client.companies.with_raw_response.charge(
+            company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            amount=1,
+            description="description",
             extra_headers={"x-stainless-retry-count": "42"},
         )
 
