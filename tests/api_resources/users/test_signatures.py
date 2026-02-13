@@ -7,9 +7,9 @@ from typing import Any, cast
 
 import pytest
 
+from rain_sdk import Rain, AsyncRain
 from tests.utils import assert_matches_type
-from rain_hello_world import RainHelloWorld, AsyncRainHelloWorld
-from rain_hello_world.types.companies import IssuingSignature
+from rain_sdk.types.companies import IssuingSignature
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -19,7 +19,7 @@ class TestSignatures:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_retrieve_payment_signature(self, client: RainHelloWorld) -> None:
+    def test_method_retrieve_payment_signature(self, client: Rain) -> None:
         signature = client.users.signatures.retrieve_payment_signature(
             user_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             token="token",
@@ -30,7 +30,7 @@ class TestSignatures:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_retrieve_payment_signature_with_all_params(self, client: RainHelloWorld) -> None:
+    def test_method_retrieve_payment_signature_with_all_params(self, client: Rain) -> None:
         signature = client.users.signatures.retrieve_payment_signature(
             user_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             token="token",
@@ -42,7 +42,7 @@ class TestSignatures:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_retrieve_payment_signature(self, client: RainHelloWorld) -> None:
+    def test_raw_response_retrieve_payment_signature(self, client: Rain) -> None:
         response = client.users.signatures.with_raw_response.retrieve_payment_signature(
             user_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             token="token",
@@ -57,7 +57,7 @@ class TestSignatures:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_retrieve_payment_signature(self, client: RainHelloWorld) -> None:
+    def test_streaming_response_retrieve_payment_signature(self, client: Rain) -> None:
         with client.users.signatures.with_streaming_response.retrieve_payment_signature(
             user_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             token="token",
@@ -74,7 +74,7 @@ class TestSignatures:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_path_params_retrieve_payment_signature(self, client: RainHelloWorld) -> None:
+    def test_path_params_retrieve_payment_signature(self, client: Rain) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `user_id` but received ''"):
             client.users.signatures.with_raw_response.retrieve_payment_signature(
                 user_id="",
@@ -85,7 +85,7 @@ class TestSignatures:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_retrieve_withdrawal_signature(self, client: RainHelloWorld) -> None:
+    def test_method_retrieve_withdrawal_signature(self, client: Rain) -> None:
         signature = client.users.signatures.retrieve_withdrawal_signature(
             user_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             token="token",
@@ -97,7 +97,7 @@ class TestSignatures:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_retrieve_withdrawal_signature_with_all_params(self, client: RainHelloWorld) -> None:
+    def test_method_retrieve_withdrawal_signature_with_all_params(self, client: Rain) -> None:
         signature = client.users.signatures.retrieve_withdrawal_signature(
             user_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             token="token",
@@ -110,7 +110,7 @@ class TestSignatures:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_retrieve_withdrawal_signature(self, client: RainHelloWorld) -> None:
+    def test_raw_response_retrieve_withdrawal_signature(self, client: Rain) -> None:
         response = client.users.signatures.with_raw_response.retrieve_withdrawal_signature(
             user_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             token="token",
@@ -126,7 +126,7 @@ class TestSignatures:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_retrieve_withdrawal_signature(self, client: RainHelloWorld) -> None:
+    def test_streaming_response_retrieve_withdrawal_signature(self, client: Rain) -> None:
         with client.users.signatures.with_streaming_response.retrieve_withdrawal_signature(
             user_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             token="token",
@@ -144,7 +144,7 @@ class TestSignatures:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_path_params_retrieve_withdrawal_signature(self, client: RainHelloWorld) -> None:
+    def test_path_params_retrieve_withdrawal_signature(self, client: Rain) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `user_id` but received ''"):
             client.users.signatures.with_raw_response.retrieve_withdrawal_signature(
                 user_id="",
@@ -162,7 +162,7 @@ class TestAsyncSignatures:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_retrieve_payment_signature(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_method_retrieve_payment_signature(self, async_client: AsyncRain) -> None:
         signature = await async_client.users.signatures.retrieve_payment_signature(
             user_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             token="token",
@@ -173,7 +173,7 @@ class TestAsyncSignatures:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_retrieve_payment_signature_with_all_params(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_method_retrieve_payment_signature_with_all_params(self, async_client: AsyncRain) -> None:
         signature = await async_client.users.signatures.retrieve_payment_signature(
             user_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             token="token",
@@ -185,7 +185,7 @@ class TestAsyncSignatures:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_retrieve_payment_signature(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_raw_response_retrieve_payment_signature(self, async_client: AsyncRain) -> None:
         response = await async_client.users.signatures.with_raw_response.retrieve_payment_signature(
             user_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             token="token",
@@ -200,7 +200,7 @@ class TestAsyncSignatures:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_retrieve_payment_signature(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_streaming_response_retrieve_payment_signature(self, async_client: AsyncRain) -> None:
         async with async_client.users.signatures.with_streaming_response.retrieve_payment_signature(
             user_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             token="token",
@@ -217,7 +217,7 @@ class TestAsyncSignatures:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_path_params_retrieve_payment_signature(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_path_params_retrieve_payment_signature(self, async_client: AsyncRain) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `user_id` but received ''"):
             await async_client.users.signatures.with_raw_response.retrieve_payment_signature(
                 user_id="",
@@ -228,7 +228,7 @@ class TestAsyncSignatures:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_retrieve_withdrawal_signature(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_method_retrieve_withdrawal_signature(self, async_client: AsyncRain) -> None:
         signature = await async_client.users.signatures.retrieve_withdrawal_signature(
             user_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             token="token",
@@ -240,9 +240,7 @@ class TestAsyncSignatures:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_retrieve_withdrawal_signature_with_all_params(
-        self, async_client: AsyncRainHelloWorld
-    ) -> None:
+    async def test_method_retrieve_withdrawal_signature_with_all_params(self, async_client: AsyncRain) -> None:
         signature = await async_client.users.signatures.retrieve_withdrawal_signature(
             user_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             token="token",
@@ -255,7 +253,7 @@ class TestAsyncSignatures:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_retrieve_withdrawal_signature(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_raw_response_retrieve_withdrawal_signature(self, async_client: AsyncRain) -> None:
         response = await async_client.users.signatures.with_raw_response.retrieve_withdrawal_signature(
             user_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             token="token",
@@ -271,7 +269,7 @@ class TestAsyncSignatures:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_retrieve_withdrawal_signature(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_streaming_response_retrieve_withdrawal_signature(self, async_client: AsyncRain) -> None:
         async with async_client.users.signatures.with_streaming_response.retrieve_withdrawal_signature(
             user_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             token="token",
@@ -289,7 +287,7 @@ class TestAsyncSignatures:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_path_params_retrieve_withdrawal_signature(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_path_params_retrieve_withdrawal_signature(self, async_client: AsyncRain) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `user_id` but received ''"):
             await async_client.users.signatures.with_raw_response.retrieve_withdrawal_signature(
                 user_id="",

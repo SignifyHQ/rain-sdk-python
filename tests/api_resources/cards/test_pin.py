@@ -7,9 +7,9 @@ from typing import Any, cast
 
 import pytest
 
+from rain_sdk import Rain, AsyncRain
 from tests.utils import assert_matches_type
-from rain_hello_world import RainHelloWorld, AsyncRainHelloWorld
-from rain_hello_world.types.cards import PinRetrieveResponse
+from rain_sdk.types.cards import PinRetrieveResponse
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -19,7 +19,7 @@ class TestPin:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_retrieve(self, client: RainHelloWorld) -> None:
+    def test_method_retrieve(self, client: Rain) -> None:
         pin = client.cards.pin.retrieve(
             card_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             session_id="x",
@@ -28,7 +28,7 @@ class TestPin:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_retrieve(self, client: RainHelloWorld) -> None:
+    def test_raw_response_retrieve(self, client: Rain) -> None:
         response = client.cards.pin.with_raw_response.retrieve(
             card_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             session_id="x",
@@ -41,7 +41,7 @@ class TestPin:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_retrieve(self, client: RainHelloWorld) -> None:
+    def test_streaming_response_retrieve(self, client: Rain) -> None:
         with client.cards.pin.with_streaming_response.retrieve(
             card_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             session_id="x",
@@ -56,7 +56,7 @@ class TestPin:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_path_params_retrieve(self, client: RainHelloWorld) -> None:
+    def test_path_params_retrieve(self, client: Rain) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `card_id` but received ''"):
             client.cards.pin.with_raw_response.retrieve(
                 card_id="",
@@ -65,7 +65,7 @@ class TestPin:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_update(self, client: RainHelloWorld) -> None:
+    def test_method_update(self, client: Rain) -> None:
         pin = client.cards.pin.update(
             card_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             encrypted_pin={
@@ -78,7 +78,7 @@ class TestPin:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_update(self, client: RainHelloWorld) -> None:
+    def test_raw_response_update(self, client: Rain) -> None:
         response = client.cards.pin.with_raw_response.update(
             card_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             encrypted_pin={
@@ -95,7 +95,7 @@ class TestPin:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_update(self, client: RainHelloWorld) -> None:
+    def test_streaming_response_update(self, client: Rain) -> None:
         with client.cards.pin.with_streaming_response.update(
             card_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             encrypted_pin={
@@ -114,7 +114,7 @@ class TestPin:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_path_params_update(self, client: RainHelloWorld) -> None:
+    def test_path_params_update(self, client: Rain) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `card_id` but received ''"):
             client.cards.pin.with_raw_response.update(
                 card_id="",
@@ -133,7 +133,7 @@ class TestAsyncPin:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_retrieve(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_method_retrieve(self, async_client: AsyncRain) -> None:
         pin = await async_client.cards.pin.retrieve(
             card_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             session_id="x",
@@ -142,7 +142,7 @@ class TestAsyncPin:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_retrieve(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_raw_response_retrieve(self, async_client: AsyncRain) -> None:
         response = await async_client.cards.pin.with_raw_response.retrieve(
             card_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             session_id="x",
@@ -155,7 +155,7 @@ class TestAsyncPin:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_retrieve(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_streaming_response_retrieve(self, async_client: AsyncRain) -> None:
         async with async_client.cards.pin.with_streaming_response.retrieve(
             card_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             session_id="x",
@@ -170,7 +170,7 @@ class TestAsyncPin:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_path_params_retrieve(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_path_params_retrieve(self, async_client: AsyncRain) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `card_id` but received ''"):
             await async_client.cards.pin.with_raw_response.retrieve(
                 card_id="",
@@ -179,7 +179,7 @@ class TestAsyncPin:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_update(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_method_update(self, async_client: AsyncRain) -> None:
         pin = await async_client.cards.pin.update(
             card_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             encrypted_pin={
@@ -192,7 +192,7 @@ class TestAsyncPin:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_update(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_raw_response_update(self, async_client: AsyncRain) -> None:
         response = await async_client.cards.pin.with_raw_response.update(
             card_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             encrypted_pin={
@@ -209,7 +209,7 @@ class TestAsyncPin:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_update(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_streaming_response_update(self, async_client: AsyncRain) -> None:
         async with async_client.cards.pin.with_streaming_response.update(
             card_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             encrypted_pin={
@@ -228,7 +228,7 @@ class TestAsyncPin:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_path_params_update(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_path_params_update(self, async_client: AsyncRain) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `card_id` but received ''"):
             await async_client.cards.pin.with_raw_response.update(
                 card_id="",

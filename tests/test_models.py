@@ -7,9 +7,9 @@ import pytest
 import pydantic
 from pydantic import Field
 
-from rain_hello_world._utils import PropertyInfo
-from rain_hello_world._compat import PYDANTIC_V1, parse_obj, model_dump, model_json
-from rain_hello_world._models import DISCRIMINATOR_CACHE, BaseModel, construct_type
+from rain_sdk._utils import PropertyInfo
+from rain_sdk._compat import PYDANTIC_V1, parse_obj, model_dump, model_json
+from rain_sdk._models import DISCRIMINATOR_CACHE, BaseModel, construct_type
 
 
 class BasicModel(BaseModel):

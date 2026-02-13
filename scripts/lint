@@ -19,4 +19,4 @@ echo "==> Running mypy"
 uv run mypy .
 
 echo "==> Making sure it imports"
-uv run python -c 'import rain_hello_world'
+uv run python -c 'import rain_sdk'

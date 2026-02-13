@@ -8,15 +8,15 @@ from typing_extensions import Required, Annotated, TypedDict
 
 import pytest
 
-from rain_hello_world._types import Base64FileInput, omit, not_given
-from rain_hello_world._utils import (
+from rain_sdk._types import Base64FileInput, omit, not_given
+from rain_sdk._utils import (
     PropertyInfo,
     transform as _transform,
     parse_datetime,
     async_transform as _async_transform,
 )
-from rain_hello_world._compat import PYDANTIC_V1
-from rain_hello_world._models import BaseModel
+from rain_sdk._compat import PYDANTIC_V1
+from rain_sdk._models import BaseModel
 
 _T = TypeVar("_T")
 

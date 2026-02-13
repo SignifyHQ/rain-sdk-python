@@ -7,9 +7,9 @@ from typing import Any, cast
 
 import pytest
 
+from rain_sdk import Rain, AsyncRain
 from tests.utils import assert_matches_type
-from rain_hello_world import RainHelloWorld, AsyncRainHelloWorld
-from rain_hello_world.types import PaymentInitiateResponse
+from rain_sdk.types import PaymentInitiateResponse
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -19,7 +19,7 @@ class TestPayments:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_initiate(self, client: RainHelloWorld) -> None:
+    def test_method_initiate(self, client: Rain) -> None:
         payment = client.payments.initiate(
             amount=0,
             wallet_address="0xE1CB97d8EBbDbaAae6d9B1ca0D1cFaADcCcbdaDa",
@@ -28,7 +28,7 @@ class TestPayments:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_initiate_with_all_params(self, client: RainHelloWorld) -> None:
+    def test_method_initiate_with_all_params(self, client: Rain) -> None:
         payment = client.payments.initiate(
             amount=0,
             wallet_address="0xE1CB97d8EBbDbaAae6d9B1ca0D1cFaADcCcbdaDa",
@@ -38,7 +38,7 @@ class TestPayments:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_initiate(self, client: RainHelloWorld) -> None:
+    def test_raw_response_initiate(self, client: Rain) -> None:
         response = client.payments.with_raw_response.initiate(
             amount=0,
             wallet_address="0xE1CB97d8EBbDbaAae6d9B1ca0D1cFaADcCcbdaDa",
@@ -51,7 +51,7 @@ class TestPayments:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_initiate(self, client: RainHelloWorld) -> None:
+    def test_streaming_response_initiate(self, client: Rain) -> None:
         with client.payments.with_streaming_response.initiate(
             amount=0,
             wallet_address="0xE1CB97d8EBbDbaAae6d9B1ca0D1cFaADcCcbdaDa",
@@ -72,7 +72,7 @@ class TestAsyncPayments:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_initiate(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_method_initiate(self, async_client: AsyncRain) -> None:
         payment = await async_client.payments.initiate(
             amount=0,
             wallet_address="0xE1CB97d8EBbDbaAae6d9B1ca0D1cFaADcCcbdaDa",
@@ -81,7 +81,7 @@ class TestAsyncPayments:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_initiate_with_all_params(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_method_initiate_with_all_params(self, async_client: AsyncRain) -> None:
         payment = await async_client.payments.initiate(
             amount=0,
             wallet_address="0xE1CB97d8EBbDbaAae6d9B1ca0D1cFaADcCcbdaDa",
@@ -91,7 +91,7 @@ class TestAsyncPayments:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_initiate(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_raw_response_initiate(self, async_client: AsyncRain) -> None:
         response = await async_client.payments.with_raw_response.initiate(
             amount=0,
             wallet_address="0xE1CB97d8EBbDbaAae6d9B1ca0D1cFaADcCcbdaDa",
@@ -104,7 +104,7 @@ class TestAsyncPayments:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_initiate(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_streaming_response_initiate(self, async_client: AsyncRain) -> None:
         async with async_client.payments.with_streaming_response.initiate(
             amount=0,
             wallet_address="0xE1CB97d8EBbDbaAae6d9B1ca0D1cFaADcCcbdaDa",

@@ -4,8 +4,8 @@ from typing import Sequence
 
 import pytest
 
-from rain_hello_world._types import FileTypes
-from rain_hello_world._utils import extract_files
+from rain_sdk._types import FileTypes
+from rain_sdk._utils import extract_files
 
 
 def test_removes_files_from_input() -> None:

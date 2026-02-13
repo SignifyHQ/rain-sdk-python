@@ -9,8 +9,8 @@ import httpx
 import pytest
 from respx import MockRouter
 
-from rain_hello_world import RainHelloWorld, AsyncRainHelloWorld
-from rain_hello_world._response import (
+from rain_sdk import Rain, AsyncRain
+from rain_sdk._response import (
     BinaryAPIResponse,
     AsyncBinaryAPIResponse,
     StreamedBinaryAPIResponse,
@@ -25,7 +25,7 @@ class TestReceipt:
 
     @parametrize
     @pytest.mark.respx(base_url=base_url)
-    def test_method_retrieve(self, client: RainHelloWorld, respx_mock: MockRouter) -> None:
+    def test_method_retrieve(self, client: Rain, respx_mock: MockRouter) -> None:
         respx_mock.get("/transactions/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/receipt").mock(
             return_value=httpx.Response(200, json={"foo": "bar"})
         )
@@ -39,7 +39,7 @@ class TestReceipt:
 
     @parametrize
     @pytest.mark.respx(base_url=base_url)
-    def test_raw_response_retrieve(self, client: RainHelloWorld, respx_mock: MockRouter) -> None:
+    def test_raw_response_retrieve(self, client: Rain, respx_mock: MockRouter) -> None:
         respx_mock.get("/transactions/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/receipt").mock(
             return_value=httpx.Response(200, json={"foo": "bar"})
         )
@@ -55,7 +55,7 @@ class TestReceipt:
 
     @parametrize
     @pytest.mark.respx(base_url=base_url)
-    def test_streaming_response_retrieve(self, client: RainHelloWorld, respx_mock: MockRouter) -> None:
+    def test_streaming_response_retrieve(self, client: Rain, respx_mock: MockRouter) -> None:
         respx_mock.get("/transactions/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/receipt").mock(
             return_value=httpx.Response(200, json={"foo": "bar"})
         )
@@ -73,7 +73,7 @@ class TestReceipt:
 
     @parametrize
     @pytest.mark.respx(base_url=base_url)
-    def test_path_params_retrieve(self, client: RainHelloWorld) -> None:
+    def test_path_params_retrieve(self, client: Rain) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `transaction_id` but received ''"):
             client.transactions.receipt.with_raw_response.retrieve(
                 "",
@@ -81,7 +81,7 @@ class TestReceipt:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_upload(self, client: RainHelloWorld) -> None:
+    def test_method_upload(self, client: Rain) -> None:
         receipt = client.transactions.receipt.upload(
             transaction_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             receipt=b"raw file contents",
@@ -90,7 +90,7 @@ class TestReceipt:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_upload(self, client: RainHelloWorld) -> None:
+    def test_raw_response_upload(self, client: Rain) -> None:
         response = client.transactions.receipt.with_raw_response.upload(
             transaction_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             receipt=b"raw file contents",
@@ -103,7 +103,7 @@ class TestReceipt:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_upload(self, client: RainHelloWorld) -> None:
+    def test_streaming_response_upload(self, client: Rain) -> None:
         with client.transactions.receipt.with_streaming_response.upload(
             transaction_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             receipt=b"raw file contents",
@@ -118,7 +118,7 @@ class TestReceipt:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_path_params_upload(self, client: RainHelloWorld) -> None:
+    def test_path_params_upload(self, client: Rain) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `transaction_id` but received ''"):
             client.transactions.receipt.with_raw_response.upload(
                 transaction_id="",
@@ -133,7 +133,7 @@ class TestAsyncReceipt:
 
     @parametrize
     @pytest.mark.respx(base_url=base_url)
-    async def test_method_retrieve(self, async_client: AsyncRainHelloWorld, respx_mock: MockRouter) -> None:
+    async def test_method_retrieve(self, async_client: AsyncRain, respx_mock: MockRouter) -> None:
         respx_mock.get("/transactions/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/receipt").mock(
             return_value=httpx.Response(200, json={"foo": "bar"})
         )
@@ -147,7 +147,7 @@ class TestAsyncReceipt:
 
     @parametrize
     @pytest.mark.respx(base_url=base_url)
-    async def test_raw_response_retrieve(self, async_client: AsyncRainHelloWorld, respx_mock: MockRouter) -> None:
+    async def test_raw_response_retrieve(self, async_client: AsyncRain, respx_mock: MockRouter) -> None:
         respx_mock.get("/transactions/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/receipt").mock(
             return_value=httpx.Response(200, json={"foo": "bar"})
         )
@@ -163,7 +163,7 @@ class TestAsyncReceipt:
 
     @parametrize
     @pytest.mark.respx(base_url=base_url)
-    async def test_streaming_response_retrieve(self, async_client: AsyncRainHelloWorld, respx_mock: MockRouter) -> None:
+    async def test_streaming_response_retrieve(self, async_client: AsyncRain, respx_mock: MockRouter) -> None:
         respx_mock.get("/transactions/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/receipt").mock(
             return_value=httpx.Response(200, json={"foo": "bar"})
         )
@@ -181,7 +181,7 @@ class TestAsyncReceipt:
 
     @parametrize
     @pytest.mark.respx(base_url=base_url)
-    async def test_path_params_retrieve(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_path_params_retrieve(self, async_client: AsyncRain) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `transaction_id` but received ''"):
             await async_client.transactions.receipt.with_raw_response.retrieve(
                 "",
@@ -189,7 +189,7 @@ class TestAsyncReceipt:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_upload(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_method_upload(self, async_client: AsyncRain) -> None:
         receipt = await async_client.transactions.receipt.upload(
             transaction_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             receipt=b"raw file contents",
@@ -198,7 +198,7 @@ class TestAsyncReceipt:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_upload(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_raw_response_upload(self, async_client: AsyncRain) -> None:
         response = await async_client.transactions.receipt.with_raw_response.upload(
             transaction_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             receipt=b"raw file contents",
@@ -211,7 +211,7 @@ class TestAsyncReceipt:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_upload(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_streaming_response_upload(self, async_client: AsyncRain) -> None:
         async with async_client.transactions.receipt.with_streaming_response.upload(
             transaction_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             receipt=b"raw file contents",
@@ -226,7 +226,7 @@ class TestAsyncReceipt:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_path_params_upload(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_path_params_upload(self, async_client: AsyncRain) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `transaction_id` but received ''"):
             await async_client.transactions.receipt.with_raw_response.upload(
                 transaction_id="",
