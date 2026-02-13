@@ -5,8 +5,8 @@ from typing import Union
 
 import pydantic
 
-from rain_hello_world import _compat
-from rain_hello_world._utils._json import openapi_dumps
+from rain_sdk import _compat
+from rain_sdk._utils._json import openapi_dumps
 
 
 class TestOpenapiDumps:

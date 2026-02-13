@@ -7,17 +7,17 @@ from typing import Any, cast
 
 import pytest
 
+from rain_sdk import Rain, AsyncRain
 from tests.utils import assert_matches_type
-from rain_hello_world import RainHelloWorld, AsyncRainHelloWorld
-from rain_hello_world.types import (
+from rain_sdk.types import (
     CompanyListResponse,
     IssuingChargeCreateResponse,
     CompanyInitiatePaymentResponse,
     CompanyRetrieveBalancesResponse,
     CompanyRetrieveContractsResponse,
 )
-from rain_hello_world._utils import parse_date
-from rain_hello_world.types.applications import IssuingUser, IssuingCompany
+from rain_sdk._utils import parse_date
+from rain_sdk.types.applications import IssuingUser, IssuingCompany
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -27,7 +27,7 @@ class TestCompanies:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_retrieve(self, client: RainHelloWorld) -> None:
+    def test_method_retrieve(self, client: Rain) -> None:
         company = client.companies.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
@@ -35,7 +35,7 @@ class TestCompanies:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_retrieve(self, client: RainHelloWorld) -> None:
+    def test_raw_response_retrieve(self, client: Rain) -> None:
         response = client.companies.with_raw_response.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
@@ -47,7 +47,7 @@ class TestCompanies:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_retrieve(self, client: RainHelloWorld) -> None:
+    def test_streaming_response_retrieve(self, client: Rain) -> None:
         with client.companies.with_streaming_response.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
@@ -61,7 +61,7 @@ class TestCompanies:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_path_params_retrieve(self, client: RainHelloWorld) -> None:
+    def test_path_params_retrieve(self, client: Rain) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `company_id` but received ''"):
             client.companies.with_raw_response.retrieve(
                 "",
@@ -69,7 +69,7 @@ class TestCompanies:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_update(self, client: RainHelloWorld) -> None:
+    def test_method_update(self, client: Rain) -> None:
         company = client.companies.update(
             company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
@@ -77,7 +77,7 @@ class TestCompanies:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_update_with_all_params(self, client: RainHelloWorld) -> None:
+    def test_method_update_with_all_params(self, client: Rain) -> None:
         company = client.companies.update(
             company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             address={
@@ -95,7 +95,7 @@ class TestCompanies:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_update(self, client: RainHelloWorld) -> None:
+    def test_raw_response_update(self, client: Rain) -> None:
         response = client.companies.with_raw_response.update(
             company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
@@ -107,7 +107,7 @@ class TestCompanies:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_update(self, client: RainHelloWorld) -> None:
+    def test_streaming_response_update(self, client: Rain) -> None:
         with client.companies.with_streaming_response.update(
             company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
@@ -121,7 +121,7 @@ class TestCompanies:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_path_params_update(self, client: RainHelloWorld) -> None:
+    def test_path_params_update(self, client: Rain) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `company_id` but received ''"):
             client.companies.with_raw_response.update(
                 company_id="",
@@ -129,13 +129,13 @@ class TestCompanies:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_list(self, client: RainHelloWorld) -> None:
+    def test_method_list(self, client: Rain) -> None:
         company = client.companies.list()
         assert_matches_type(CompanyListResponse, company, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_list_with_all_params(self, client: RainHelloWorld) -> None:
+    def test_method_list_with_all_params(self, client: Rain) -> None:
         company = client.companies.list(
             cursor="cursor",
             limit=1,
@@ -144,7 +144,7 @@ class TestCompanies:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_list(self, client: RainHelloWorld) -> None:
+    def test_raw_response_list(self, client: Rain) -> None:
         response = client.companies.with_raw_response.list()
 
         assert response.is_closed is True
@@ -154,7 +154,7 @@ class TestCompanies:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_list(self, client: RainHelloWorld) -> None:
+    def test_streaming_response_list(self, client: Rain) -> None:
         with client.companies.with_streaming_response.list() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -166,7 +166,7 @@ class TestCompanies:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_charge(self, client: RainHelloWorld) -> None:
+    def test_method_charge(self, client: Rain) -> None:
         company = client.companies.charge(
             company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             amount=1,
@@ -176,7 +176,7 @@ class TestCompanies:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_charge(self, client: RainHelloWorld) -> None:
+    def test_raw_response_charge(self, client: Rain) -> None:
         response = client.companies.with_raw_response.charge(
             company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             amount=1,
@@ -190,7 +190,7 @@ class TestCompanies:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_charge(self, client: RainHelloWorld) -> None:
+    def test_streaming_response_charge(self, client: Rain) -> None:
         with client.companies.with_streaming_response.charge(
             company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             amount=1,
@@ -206,7 +206,7 @@ class TestCompanies:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_path_params_charge(self, client: RainHelloWorld) -> None:
+    def test_path_params_charge(self, client: Rain) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `company_id` but received ''"):
             client.companies.with_raw_response.charge(
                 company_id="",
@@ -216,7 +216,7 @@ class TestCompanies:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_create_user(self, client: RainHelloWorld) -> None:
+    def test_method_create_user(self, client: Rain) -> None:
         company = client.companies.create_user(
             company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             email="email",
@@ -228,7 +228,7 @@ class TestCompanies:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_create_user_with_all_params(self, client: RainHelloWorld) -> None:
+    def test_method_create_user_with_all_params(self, client: Rain) -> None:
         company = client.companies.create_user(
             company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             email="email",
@@ -253,7 +253,7 @@ class TestCompanies:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_create_user(self, client: RainHelloWorld) -> None:
+    def test_raw_response_create_user(self, client: Rain) -> None:
         response = client.companies.with_raw_response.create_user(
             company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             email="email",
@@ -269,7 +269,7 @@ class TestCompanies:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_create_user(self, client: RainHelloWorld) -> None:
+    def test_streaming_response_create_user(self, client: Rain) -> None:
         with client.companies.with_streaming_response.create_user(
             company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             email="email",
@@ -287,7 +287,7 @@ class TestCompanies:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_path_params_create_user(self, client: RainHelloWorld) -> None:
+    def test_path_params_create_user(self, client: Rain) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `company_id` but received ''"):
             client.companies.with_raw_response.create_user(
                 company_id="",
@@ -299,7 +299,7 @@ class TestCompanies:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_initiate_payment(self, client: RainHelloWorld) -> None:
+    def test_method_initiate_payment(self, client: Rain) -> None:
         company = client.companies.initiate_payment(
             company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             amount=0,
@@ -309,7 +309,7 @@ class TestCompanies:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_initiate_payment_with_all_params(self, client: RainHelloWorld) -> None:
+    def test_method_initiate_payment_with_all_params(self, client: Rain) -> None:
         company = client.companies.initiate_payment(
             company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             amount=0,
@@ -320,7 +320,7 @@ class TestCompanies:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_initiate_payment(self, client: RainHelloWorld) -> None:
+    def test_raw_response_initiate_payment(self, client: Rain) -> None:
         response = client.companies.with_raw_response.initiate_payment(
             company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             amount=0,
@@ -334,7 +334,7 @@ class TestCompanies:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_initiate_payment(self, client: RainHelloWorld) -> None:
+    def test_streaming_response_initiate_payment(self, client: Rain) -> None:
         with client.companies.with_streaming_response.initiate_payment(
             company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             amount=0,
@@ -350,7 +350,7 @@ class TestCompanies:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_path_params_initiate_payment(self, client: RainHelloWorld) -> None:
+    def test_path_params_initiate_payment(self, client: Rain) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `company_id` but received ''"):
             client.companies.with_raw_response.initiate_payment(
                 company_id="",
@@ -360,7 +360,7 @@ class TestCompanies:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_retrieve_balances(self, client: RainHelloWorld) -> None:
+    def test_method_retrieve_balances(self, client: Rain) -> None:
         company = client.companies.retrieve_balances(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
@@ -368,7 +368,7 @@ class TestCompanies:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_retrieve_balances(self, client: RainHelloWorld) -> None:
+    def test_raw_response_retrieve_balances(self, client: Rain) -> None:
         response = client.companies.with_raw_response.retrieve_balances(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
@@ -380,7 +380,7 @@ class TestCompanies:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_retrieve_balances(self, client: RainHelloWorld) -> None:
+    def test_streaming_response_retrieve_balances(self, client: Rain) -> None:
         with client.companies.with_streaming_response.retrieve_balances(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
@@ -394,7 +394,7 @@ class TestCompanies:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_path_params_retrieve_balances(self, client: RainHelloWorld) -> None:
+    def test_path_params_retrieve_balances(self, client: Rain) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `company_id` but received ''"):
             client.companies.with_raw_response.retrieve_balances(
                 "",
@@ -402,7 +402,7 @@ class TestCompanies:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_retrieve_contracts(self, client: RainHelloWorld) -> None:
+    def test_method_retrieve_contracts(self, client: Rain) -> None:
         company = client.companies.retrieve_contracts(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
@@ -410,7 +410,7 @@ class TestCompanies:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_retrieve_contracts(self, client: RainHelloWorld) -> None:
+    def test_raw_response_retrieve_contracts(self, client: Rain) -> None:
         response = client.companies.with_raw_response.retrieve_contracts(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
@@ -422,7 +422,7 @@ class TestCompanies:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_retrieve_contracts(self, client: RainHelloWorld) -> None:
+    def test_streaming_response_retrieve_contracts(self, client: Rain) -> None:
         with client.companies.with_streaming_response.retrieve_contracts(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
@@ -436,7 +436,7 @@ class TestCompanies:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_path_params_retrieve_contracts(self, client: RainHelloWorld) -> None:
+    def test_path_params_retrieve_contracts(self, client: Rain) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `company_id` but received ''"):
             client.companies.with_raw_response.retrieve_contracts(
                 "",
@@ -450,7 +450,7 @@ class TestAsyncCompanies:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_retrieve(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_method_retrieve(self, async_client: AsyncRain) -> None:
         company = await async_client.companies.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
@@ -458,7 +458,7 @@ class TestAsyncCompanies:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_retrieve(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_raw_response_retrieve(self, async_client: AsyncRain) -> None:
         response = await async_client.companies.with_raw_response.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
@@ -470,7 +470,7 @@ class TestAsyncCompanies:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_retrieve(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_streaming_response_retrieve(self, async_client: AsyncRain) -> None:
         async with async_client.companies.with_streaming_response.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
@@ -484,7 +484,7 @@ class TestAsyncCompanies:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_path_params_retrieve(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_path_params_retrieve(self, async_client: AsyncRain) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `company_id` but received ''"):
             await async_client.companies.with_raw_response.retrieve(
                 "",
@@ -492,7 +492,7 @@ class TestAsyncCompanies:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_update(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_method_update(self, async_client: AsyncRain) -> None:
         company = await async_client.companies.update(
             company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
@@ -500,7 +500,7 @@ class TestAsyncCompanies:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_update_with_all_params(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_method_update_with_all_params(self, async_client: AsyncRain) -> None:
         company = await async_client.companies.update(
             company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             address={
@@ -518,7 +518,7 @@ class TestAsyncCompanies:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_update(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_raw_response_update(self, async_client: AsyncRain) -> None:
         response = await async_client.companies.with_raw_response.update(
             company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
@@ -530,7 +530,7 @@ class TestAsyncCompanies:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_update(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_streaming_response_update(self, async_client: AsyncRain) -> None:
         async with async_client.companies.with_streaming_response.update(
             company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
@@ -544,7 +544,7 @@ class TestAsyncCompanies:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_path_params_update(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_path_params_update(self, async_client: AsyncRain) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `company_id` but received ''"):
             await async_client.companies.with_raw_response.update(
                 company_id="",
@@ -552,13 +552,13 @@ class TestAsyncCompanies:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_list(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_method_list(self, async_client: AsyncRain) -> None:
         company = await async_client.companies.list()
         assert_matches_type(CompanyListResponse, company, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_list_with_all_params(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_method_list_with_all_params(self, async_client: AsyncRain) -> None:
         company = await async_client.companies.list(
             cursor="cursor",
             limit=1,
@@ -567,7 +567,7 @@ class TestAsyncCompanies:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_list(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_raw_response_list(self, async_client: AsyncRain) -> None:
         response = await async_client.companies.with_raw_response.list()
 
         assert response.is_closed is True
@@ -577,7 +577,7 @@ class TestAsyncCompanies:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_list(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_streaming_response_list(self, async_client: AsyncRain) -> None:
         async with async_client.companies.with_streaming_response.list() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -589,7 +589,7 @@ class TestAsyncCompanies:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_charge(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_method_charge(self, async_client: AsyncRain) -> None:
         company = await async_client.companies.charge(
             company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             amount=1,
@@ -599,7 +599,7 @@ class TestAsyncCompanies:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_charge(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_raw_response_charge(self, async_client: AsyncRain) -> None:
         response = await async_client.companies.with_raw_response.charge(
             company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             amount=1,
@@ -613,7 +613,7 @@ class TestAsyncCompanies:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_charge(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_streaming_response_charge(self, async_client: AsyncRain) -> None:
         async with async_client.companies.with_streaming_response.charge(
             company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             amount=1,
@@ -629,7 +629,7 @@ class TestAsyncCompanies:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_path_params_charge(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_path_params_charge(self, async_client: AsyncRain) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `company_id` but received ''"):
             await async_client.companies.with_raw_response.charge(
                 company_id="",
@@ -639,7 +639,7 @@ class TestAsyncCompanies:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_create_user(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_method_create_user(self, async_client: AsyncRain) -> None:
         company = await async_client.companies.create_user(
             company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             email="email",
@@ -651,7 +651,7 @@ class TestAsyncCompanies:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_create_user_with_all_params(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_method_create_user_with_all_params(self, async_client: AsyncRain) -> None:
         company = await async_client.companies.create_user(
             company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             email="email",
@@ -676,7 +676,7 @@ class TestAsyncCompanies:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_create_user(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_raw_response_create_user(self, async_client: AsyncRain) -> None:
         response = await async_client.companies.with_raw_response.create_user(
             company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             email="email",
@@ -692,7 +692,7 @@ class TestAsyncCompanies:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_create_user(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_streaming_response_create_user(self, async_client: AsyncRain) -> None:
         async with async_client.companies.with_streaming_response.create_user(
             company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             email="email",
@@ -710,7 +710,7 @@ class TestAsyncCompanies:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_path_params_create_user(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_path_params_create_user(self, async_client: AsyncRain) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `company_id` but received ''"):
             await async_client.companies.with_raw_response.create_user(
                 company_id="",
@@ -722,7 +722,7 @@ class TestAsyncCompanies:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_initiate_payment(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_method_initiate_payment(self, async_client: AsyncRain) -> None:
         company = await async_client.companies.initiate_payment(
             company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             amount=0,
@@ -732,7 +732,7 @@ class TestAsyncCompanies:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_initiate_payment_with_all_params(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_method_initiate_payment_with_all_params(self, async_client: AsyncRain) -> None:
         company = await async_client.companies.initiate_payment(
             company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             amount=0,
@@ -743,7 +743,7 @@ class TestAsyncCompanies:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_initiate_payment(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_raw_response_initiate_payment(self, async_client: AsyncRain) -> None:
         response = await async_client.companies.with_raw_response.initiate_payment(
             company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             amount=0,
@@ -757,7 +757,7 @@ class TestAsyncCompanies:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_initiate_payment(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_streaming_response_initiate_payment(self, async_client: AsyncRain) -> None:
         async with async_client.companies.with_streaming_response.initiate_payment(
             company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             amount=0,
@@ -773,7 +773,7 @@ class TestAsyncCompanies:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_path_params_initiate_payment(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_path_params_initiate_payment(self, async_client: AsyncRain) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `company_id` but received ''"):
             await async_client.companies.with_raw_response.initiate_payment(
                 company_id="",
@@ -783,7 +783,7 @@ class TestAsyncCompanies:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_retrieve_balances(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_method_retrieve_balances(self, async_client: AsyncRain) -> None:
         company = await async_client.companies.retrieve_balances(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
@@ -791,7 +791,7 @@ class TestAsyncCompanies:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_retrieve_balances(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_raw_response_retrieve_balances(self, async_client: AsyncRain) -> None:
         response = await async_client.companies.with_raw_response.retrieve_balances(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
@@ -803,7 +803,7 @@ class TestAsyncCompanies:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_retrieve_balances(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_streaming_response_retrieve_balances(self, async_client: AsyncRain) -> None:
         async with async_client.companies.with_streaming_response.retrieve_balances(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
@@ -817,7 +817,7 @@ class TestAsyncCompanies:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_path_params_retrieve_balances(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_path_params_retrieve_balances(self, async_client: AsyncRain) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `company_id` but received ''"):
             await async_client.companies.with_raw_response.retrieve_balances(
                 "",
@@ -825,7 +825,7 @@ class TestAsyncCompanies:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_retrieve_contracts(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_method_retrieve_contracts(self, async_client: AsyncRain) -> None:
         company = await async_client.companies.retrieve_contracts(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
@@ -833,7 +833,7 @@ class TestAsyncCompanies:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_retrieve_contracts(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_raw_response_retrieve_contracts(self, async_client: AsyncRain) -> None:
         response = await async_client.companies.with_raw_response.retrieve_contracts(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
@@ -845,7 +845,7 @@ class TestAsyncCompanies:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_retrieve_contracts(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_streaming_response_retrieve_contracts(self, async_client: AsyncRain) -> None:
         async with async_client.companies.with_streaming_response.retrieve_contracts(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
@@ -859,7 +859,7 @@ class TestAsyncCompanies:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_path_params_retrieve_contracts(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_path_params_retrieve_contracts(self, async_client: AsyncRain) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `company_id` but received ''"):
             await async_client.companies.with_raw_response.retrieve_contracts(
                 "",

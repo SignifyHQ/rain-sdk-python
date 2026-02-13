@@ -18,11 +18,11 @@ __all__ = [
 ]
 
 
-class RainHelloWorldError(Exception):
+class RainError(Exception):
     pass
 
 
-class APIError(RainHelloWorldError):
+class APIError(RainError):
     message: str
     request: httpx.Request
 

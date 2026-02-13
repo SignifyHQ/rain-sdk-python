@@ -7,10 +7,10 @@ from typing import Any, cast
 
 import pytest
 
+from rain_sdk import Rain, AsyncRain
 from tests.utils import assert_matches_type
-from rain_hello_world import RainHelloWorld, AsyncRainHelloWorld
-from rain_hello_world._utils import parse_date
-from rain_hello_world.types.applications import IssuingCompany
+from rain_sdk._utils import parse_date
+from rain_sdk.types.applications import IssuingCompany
 
 # pyright: reportDeprecated=false
 
@@ -22,7 +22,7 @@ class TestUbo:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_update(self, client: RainHelloWorld) -> None:
+    def test_method_update(self, client: Rain) -> None:
         ubo = client.applications.company.ubo.update(
             ubo_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -31,7 +31,7 @@ class TestUbo:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_update_with_all_params(self, client: RainHelloWorld) -> None:
+    def test_method_update_with_all_params(self, client: Rain) -> None:
         ubo = client.applications.company.ubo.update(
             ubo_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -55,7 +55,7 @@ class TestUbo:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_update(self, client: RainHelloWorld) -> None:
+    def test_raw_response_update(self, client: Rain) -> None:
         response = client.applications.company.ubo.with_raw_response.update(
             ubo_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -68,7 +68,7 @@ class TestUbo:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_update(self, client: RainHelloWorld) -> None:
+    def test_streaming_response_update(self, client: Rain) -> None:
         with client.applications.company.ubo.with_streaming_response.update(
             ubo_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -83,7 +83,7 @@ class TestUbo:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_path_params_update(self, client: RainHelloWorld) -> None:
+    def test_path_params_update(self, client: Rain) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `company_id` but received ''"):
             client.applications.company.ubo.with_raw_response.update(
                 ubo_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -98,7 +98,7 @@ class TestUbo:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_upload_document(self, client: RainHelloWorld) -> None:
+    def test_method_upload_document(self, client: Rain) -> None:
         with pytest.warns(DeprecationWarning):
             ubo = client.applications.company.ubo.upload_document(
                 company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -110,7 +110,7 @@ class TestUbo:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_upload_document_with_all_params(self, client: RainHelloWorld) -> None:
+    def test_method_upload_document_with_all_params(self, client: Rain) -> None:
         with pytest.warns(DeprecationWarning):
             ubo = client.applications.company.ubo.upload_document(
                 company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -125,7 +125,7 @@ class TestUbo:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_upload_document(self, client: RainHelloWorld) -> None:
+    def test_raw_response_upload_document(self, client: Rain) -> None:
         with pytest.warns(DeprecationWarning):
             response = client.applications.company.ubo.with_raw_response.upload_document(
                 company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -140,7 +140,7 @@ class TestUbo:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_upload_document(self, client: RainHelloWorld) -> None:
+    def test_streaming_response_upload_document(self, client: Rain) -> None:
         with pytest.warns(DeprecationWarning):
             with client.applications.company.ubo.with_streaming_response.upload_document(
                 company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -157,7 +157,7 @@ class TestUbo:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_path_params_upload_document(self, client: RainHelloWorld) -> None:
+    def test_path_params_upload_document(self, client: Rain) -> None:
         with pytest.warns(DeprecationWarning):
             with pytest.raises(ValueError, match=r"Expected a non-empty value for `company_id` but received ''"):
                 client.applications.company.ubo.with_raw_response.upload_document(
@@ -174,7 +174,7 @@ class TestAsyncUbo:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_update(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_method_update(self, async_client: AsyncRain) -> None:
         ubo = await async_client.applications.company.ubo.update(
             ubo_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -183,7 +183,7 @@ class TestAsyncUbo:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_update_with_all_params(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_method_update_with_all_params(self, async_client: AsyncRain) -> None:
         ubo = await async_client.applications.company.ubo.update(
             ubo_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -207,7 +207,7 @@ class TestAsyncUbo:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_update(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_raw_response_update(self, async_client: AsyncRain) -> None:
         response = await async_client.applications.company.ubo.with_raw_response.update(
             ubo_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -220,7 +220,7 @@ class TestAsyncUbo:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_update(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_streaming_response_update(self, async_client: AsyncRain) -> None:
         async with async_client.applications.company.ubo.with_streaming_response.update(
             ubo_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -235,7 +235,7 @@ class TestAsyncUbo:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_path_params_update(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_path_params_update(self, async_client: AsyncRain) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `company_id` but received ''"):
             await async_client.applications.company.ubo.with_raw_response.update(
                 ubo_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -250,7 +250,7 @@ class TestAsyncUbo:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_upload_document(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_method_upload_document(self, async_client: AsyncRain) -> None:
         with pytest.warns(DeprecationWarning):
             ubo = await async_client.applications.company.ubo.upload_document(
                 company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -262,7 +262,7 @@ class TestAsyncUbo:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_upload_document_with_all_params(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_method_upload_document_with_all_params(self, async_client: AsyncRain) -> None:
         with pytest.warns(DeprecationWarning):
             ubo = await async_client.applications.company.ubo.upload_document(
                 company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -277,7 +277,7 @@ class TestAsyncUbo:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_upload_document(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_raw_response_upload_document(self, async_client: AsyncRain) -> None:
         with pytest.warns(DeprecationWarning):
             response = await async_client.applications.company.ubo.with_raw_response.upload_document(
                 company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -292,7 +292,7 @@ class TestAsyncUbo:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_upload_document(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_streaming_response_upload_document(self, async_client: AsyncRain) -> None:
         with pytest.warns(DeprecationWarning):
             async with async_client.applications.company.ubo.with_streaming_response.upload_document(
                 company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -309,7 +309,7 @@ class TestAsyncUbo:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_path_params_upload_document(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_path_params_upload_document(self, async_client: AsyncRain) -> None:
         with pytest.warns(DeprecationWarning):
             with pytest.raises(ValueError, match=r"Expected a non-empty value for `company_id` but received ''"):
                 await async_client.applications.company.ubo.with_raw_response.upload_document(

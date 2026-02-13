@@ -9,8 +9,8 @@ import httpx
 import pytest
 from respx import MockRouter
 
-from rain_hello_world import RainHelloWorld, AsyncRainHelloWorld
-from rain_hello_world._response import (
+from rain_sdk import Rain, AsyncRain
+from rain_sdk._response import (
     BinaryAPIResponse,
     AsyncBinaryAPIResponse,
     StreamedBinaryAPIResponse,
@@ -25,7 +25,7 @@ class TestEvidence:
 
     @parametrize
     @pytest.mark.respx(base_url=base_url)
-    def test_method_list(self, client: RainHelloWorld, respx_mock: MockRouter) -> None:
+    def test_method_list(self, client: Rain, respx_mock: MockRouter) -> None:
         respx_mock.get("/disputes/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/evidence").mock(
             return_value=httpx.Response(200, json={"foo": "bar"})
         )
@@ -39,7 +39,7 @@ class TestEvidence:
 
     @parametrize
     @pytest.mark.respx(base_url=base_url)
-    def test_raw_response_list(self, client: RainHelloWorld, respx_mock: MockRouter) -> None:
+    def test_raw_response_list(self, client: Rain, respx_mock: MockRouter) -> None:
         respx_mock.get("/disputes/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/evidence").mock(
             return_value=httpx.Response(200, json={"foo": "bar"})
         )
@@ -55,7 +55,7 @@ class TestEvidence:
 
     @parametrize
     @pytest.mark.respx(base_url=base_url)
-    def test_streaming_response_list(self, client: RainHelloWorld, respx_mock: MockRouter) -> None:
+    def test_streaming_response_list(self, client: Rain, respx_mock: MockRouter) -> None:
         respx_mock.get("/disputes/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/evidence").mock(
             return_value=httpx.Response(200, json={"foo": "bar"})
         )
@@ -73,7 +73,7 @@ class TestEvidence:
 
     @parametrize
     @pytest.mark.respx(base_url=base_url)
-    def test_path_params_list(self, client: RainHelloWorld) -> None:
+    def test_path_params_list(self, client: Rain) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `dispute_id` but received ''"):
             client.disputes.evidence.with_raw_response.list(
                 "",
@@ -81,7 +81,7 @@ class TestEvidence:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_upload(self, client: RainHelloWorld) -> None:
+    def test_method_upload(self, client: Rain) -> None:
         evidence = client.disputes.evidence.upload(
             dispute_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             evidence=b"raw file contents",
@@ -92,7 +92,7 @@ class TestEvidence:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_upload(self, client: RainHelloWorld) -> None:
+    def test_raw_response_upload(self, client: Rain) -> None:
         response = client.disputes.evidence.with_raw_response.upload(
             dispute_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             evidence=b"raw file contents",
@@ -107,7 +107,7 @@ class TestEvidence:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_upload(self, client: RainHelloWorld) -> None:
+    def test_streaming_response_upload(self, client: Rain) -> None:
         with client.disputes.evidence.with_streaming_response.upload(
             dispute_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             evidence=b"raw file contents",
@@ -124,7 +124,7 @@ class TestEvidence:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_path_params_upload(self, client: RainHelloWorld) -> None:
+    def test_path_params_upload(self, client: Rain) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `dispute_id` but received ''"):
             client.disputes.evidence.with_raw_response.upload(
                 dispute_id="",
@@ -141,7 +141,7 @@ class TestAsyncEvidence:
 
     @parametrize
     @pytest.mark.respx(base_url=base_url)
-    async def test_method_list(self, async_client: AsyncRainHelloWorld, respx_mock: MockRouter) -> None:
+    async def test_method_list(self, async_client: AsyncRain, respx_mock: MockRouter) -> None:
         respx_mock.get("/disputes/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/evidence").mock(
             return_value=httpx.Response(200, json={"foo": "bar"})
         )
@@ -155,7 +155,7 @@ class TestAsyncEvidence:
 
     @parametrize
     @pytest.mark.respx(base_url=base_url)
-    async def test_raw_response_list(self, async_client: AsyncRainHelloWorld, respx_mock: MockRouter) -> None:
+    async def test_raw_response_list(self, async_client: AsyncRain, respx_mock: MockRouter) -> None:
         respx_mock.get("/disputes/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/evidence").mock(
             return_value=httpx.Response(200, json={"foo": "bar"})
         )
@@ -171,7 +171,7 @@ class TestAsyncEvidence:
 
     @parametrize
     @pytest.mark.respx(base_url=base_url)
-    async def test_streaming_response_list(self, async_client: AsyncRainHelloWorld, respx_mock: MockRouter) -> None:
+    async def test_streaming_response_list(self, async_client: AsyncRain, respx_mock: MockRouter) -> None:
         respx_mock.get("/disputes/182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e/evidence").mock(
             return_value=httpx.Response(200, json={"foo": "bar"})
         )
@@ -189,7 +189,7 @@ class TestAsyncEvidence:
 
     @parametrize
     @pytest.mark.respx(base_url=base_url)
-    async def test_path_params_list(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_path_params_list(self, async_client: AsyncRain) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `dispute_id` but received ''"):
             await async_client.disputes.evidence.with_raw_response.list(
                 "",
@@ -197,7 +197,7 @@ class TestAsyncEvidence:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_upload(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_method_upload(self, async_client: AsyncRain) -> None:
         evidence = await async_client.disputes.evidence.upload(
             dispute_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             evidence=b"raw file contents",
@@ -208,7 +208,7 @@ class TestAsyncEvidence:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_upload(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_raw_response_upload(self, async_client: AsyncRain) -> None:
         response = await async_client.disputes.evidence.with_raw_response.upload(
             dispute_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             evidence=b"raw file contents",
@@ -223,7 +223,7 @@ class TestAsyncEvidence:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_upload(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_streaming_response_upload(self, async_client: AsyncRain) -> None:
         async with async_client.disputes.evidence.with_streaming_response.upload(
             dispute_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             evidence=b"raw file contents",
@@ -240,7 +240,7 @@ class TestAsyncEvidence:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_path_params_upload(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_path_params_upload(self, async_client: AsyncRain) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `dispute_id` but received ''"):
             await async_client.disputes.evidence.with_raw_response.upload(
                 dispute_id="",

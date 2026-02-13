@@ -6,8 +6,8 @@ import httpx
 import pytest
 import pydantic
 
-from rain_hello_world import BaseModel, RainHelloWorld, AsyncRainHelloWorld
-from rain_hello_world._response import (
+from rain_sdk import Rain, AsyncRain, BaseModel
+from rain_sdk._response import (
     APIResponse,
     BaseAPIResponse,
     AsyncAPIResponse,
@@ -15,8 +15,8 @@ from rain_hello_world._response import (
     AsyncBinaryAPIResponse,
     extract_response_type,
 )
-from rain_hello_world._streaming import Stream
-from rain_hello_world._base_client import FinalRequestOptions
+from rain_sdk._streaming import Stream
+from rain_sdk._base_client import FinalRequestOptions
 
 
 class ConcreteBaseAPIResponse(APIResponse[bytes]): ...
@@ -37,7 +37,7 @@ def test_extract_response_type_direct_classes() -> None:
 def test_extract_response_type_direct_class_missing_type_arg() -> None:
     with pytest.raises(
         RuntimeError,
-        match="Expected type <class 'rain_hello_world._response.AsyncAPIResponse'> to have a type argument at index 0 but it did not",
+        match="Expected type <class 'rain_sdk._response.AsyncAPIResponse'> to have a type argument at index 0 but it did not",
     ):
         extract_response_type(AsyncAPIResponse)
 
@@ -56,7 +56,7 @@ def test_extract_response_type_binary_response() -> None:
 class PydanticModel(pydantic.BaseModel): ...
 
 
-def test_response_parse_mismatched_basemodel(client: RainHelloWorld) -> None:
+def test_response_parse_mismatched_basemodel(client: Rain) -> None:
     response = APIResponse(
         raw=httpx.Response(200, content=b"foo"),
         client=client,
@@ -68,13 +68,13 @@ def test_response_parse_mismatched_basemodel(client: RainHelloWorld) -> None:
 
     with pytest.raises(
         TypeError,
-        match="Pydantic models must subclass our base model type, e.g. `from rain_hello_world import BaseModel`",
+        match="Pydantic models must subclass our base model type, e.g. `from rain_sdk import BaseModel`",
     ):
         response.parse(to=PydanticModel)
 
 
 @pytest.mark.asyncio
-async def test_async_response_parse_mismatched_basemodel(async_client: AsyncRainHelloWorld) -> None:
+async def test_async_response_parse_mismatched_basemodel(async_client: AsyncRain) -> None:
     response = AsyncAPIResponse(
         raw=httpx.Response(200, content=b"foo"),
         client=async_client,
@@ -86,12 +86,12 @@ async def test_async_response_parse_mismatched_basemodel(async_client: AsyncRain
 
     with pytest.raises(
         TypeError,
-        match="Pydantic models must subclass our base model type, e.g. `from rain_hello_world import BaseModel`",
+        match="Pydantic models must subclass our base model type, e.g. `from rain_sdk import BaseModel`",
     ):
         await response.parse(to=PydanticModel)
 
 
-def test_response_parse_custom_stream(client: RainHelloWorld) -> None:
+def test_response_parse_custom_stream(client: Rain) -> None:
     response = APIResponse(
         raw=httpx.Response(200, content=b"foo"),
         client=client,
@@ -106,7 +106,7 @@ def test_response_parse_custom_stream(client: RainHelloWorld) -> None:
 
 
 @pytest.mark.asyncio
-async def test_async_response_parse_custom_stream(async_client: AsyncRainHelloWorld) -> None:
+async def test_async_response_parse_custom_stream(async_client: AsyncRain) -> None:
     response = AsyncAPIResponse(
         raw=httpx.Response(200, content=b"foo"),
         client=async_client,
@@ -125,7 +125,7 @@ class CustomModel(BaseModel):
     bar: int
 
 
-def test_response_parse_custom_model(client: RainHelloWorld) -> None:
+def test_response_parse_custom_model(client: Rain) -> None:
     response = APIResponse(
         raw=httpx.Response(200, content=json.dumps({"foo": "hello!", "bar": 2})),
         client=client,
@@ -141,7 +141,7 @@ def test_response_parse_custom_model(client: RainHelloWorld) -> None:
 
 
 @pytest.mark.asyncio
-async def test_async_response_parse_custom_model(async_client: AsyncRainHelloWorld) -> None:
+async def test_async_response_parse_custom_model(async_client: AsyncRain) -> None:
     response = AsyncAPIResponse(
         raw=httpx.Response(200, content=json.dumps({"foo": "hello!", "bar": 2})),
         client=async_client,
@@ -156,7 +156,7 @@ async def test_async_response_parse_custom_model(async_client: AsyncRainHelloWor
     assert obj.bar == 2
 
 
-def test_response_parse_annotated_type(client: RainHelloWorld) -> None:
+def test_response_parse_annotated_type(client: Rain) -> None:
     response = APIResponse(
         raw=httpx.Response(200, content=json.dumps({"foo": "hello!", "bar": 2})),
         client=client,
@@ -173,7 +173,7 @@ def test_response_parse_annotated_type(client: RainHelloWorld) -> None:
     assert obj.bar == 2
 
 
-async def test_async_response_parse_annotated_type(async_client: AsyncRainHelloWorld) -> None:
+async def test_async_response_parse_annotated_type(async_client: AsyncRain) -> None:
     response = AsyncAPIResponse(
         raw=httpx.Response(200, content=json.dumps({"foo": "hello!", "bar": 2})),
         client=async_client,
@@ -201,7 +201,7 @@ async def test_async_response_parse_annotated_type(async_client: AsyncRainHelloW
         ("FalSe", False),
     ],
 )
-def test_response_parse_bool(client: RainHelloWorld, content: str, expected: bool) -> None:
+def test_response_parse_bool(client: Rain, content: str, expected: bool) -> None:
     response = APIResponse(
         raw=httpx.Response(200, content=content),
         client=client,
@@ -226,7 +226,7 @@ def test_response_parse_bool(client: RainHelloWorld, content: str, expected: boo
         ("FalSe", False),
     ],
 )
-async def test_async_response_parse_bool(client: AsyncRainHelloWorld, content: str, expected: bool) -> None:
+async def test_async_response_parse_bool(client: AsyncRain, content: str, expected: bool) -> None:
     response = AsyncAPIResponse(
         raw=httpx.Response(200, content=content),
         client=client,
@@ -245,7 +245,7 @@ class OtherModel(BaseModel):
 
 
 @pytest.mark.parametrize("client", [False], indirect=True)  # loose validation
-def test_response_parse_expect_model_union_non_json_content(client: RainHelloWorld) -> None:
+def test_response_parse_expect_model_union_non_json_content(client: Rain) -> None:
     response = APIResponse(
         raw=httpx.Response(200, content=b"foo", headers={"Content-Type": "application/text"}),
         client=client,
@@ -262,7 +262,7 @@ def test_response_parse_expect_model_union_non_json_content(client: RainHelloWor
 
 @pytest.mark.asyncio
 @pytest.mark.parametrize("async_client", [False], indirect=True)  # loose validation
-async def test_async_response_parse_expect_model_union_non_json_content(async_client: AsyncRainHelloWorld) -> None:
+async def test_async_response_parse_expect_model_union_non_json_content(async_client: AsyncRain) -> None:
     response = AsyncAPIResponse(
         raw=httpx.Response(200, content=b"foo", headers={"Content-Type": "application/text"}),
         client=async_client,

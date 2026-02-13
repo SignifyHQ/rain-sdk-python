@@ -1,11 +1,11 @@
 [project]
-name = "rain_hello_world"
+name = "rain_sdk"
 version = "0.0.1"
-description = "The official Python library for the rain-hello-world API"
+description = "The official Python library for the rain API"
 dynamic = ["readme"]
 license = "Apache-2.0"
 authors = [
-{ name = "Rain Hello World", email = "support@raincards.xyz" },
+{ name = "Rain", email = "support@raincards.xyz" },
 ]
 
 dependencies = [
@@ -86,7 +86,7 @@ include = [
 ]
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/rain_hello_world"]
+packages = ["src/rain_sdk"]
 
 [tool.hatch.build.targets.sdist]
 # Basically everything except hidden files/directories (such as .github, .devcontainers, .python-version, etc)
@@ -154,7 +154,7 @@ show_error_codes = true
 #
 # We also exclude our `tests` as mypy doesn't always infer
 # types correctly and Pyright will still catch any type errors.
-exclude = ['src/rain_hello_world/_files.py', '_dev/.*.py', 'tests/.*']
+exclude = ['src/rain_sdk/_files.py', '_dev/.*.py', 'tests/.*']
 
 strict_equality = true
 implicit_reexport = true
@@ -246,7 +246,7 @@ length-sort = true
 length-sort-straight = true
 combine-as-imports = true
 extra-standard-library = ["typing_extensions"]
-known-first-party = ["rain_hello_world", "tests"]
+known-first-party = ["rain_sdk", "tests"]
 
 [tool.ruff.lint.per-file-ignores]
 "bin/**.py" = ["T201", "T203"]

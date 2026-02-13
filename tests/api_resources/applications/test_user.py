@@ -7,10 +7,10 @@ from typing import Any, cast
 
 import pytest
 
+from rain_sdk import Rain, AsyncRain
 from tests.utils import assert_matches_type
-from rain_hello_world import RainHelloWorld, AsyncRainHelloWorld
-from rain_hello_world._utils import parse_date
-from rain_hello_world.types.applications import (
+from rain_sdk._utils import parse_date
+from rain_sdk.types.applications import (
     IssuingUser,
     UserRetrieveResponse,
 )
@@ -25,7 +25,7 @@ class TestUser:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_create_overload_1(self, client: RainHelloWorld) -> None:
+    def test_method_create_overload_1(self, client: Rain) -> None:
         user = client.applications.user.create(
             account_purpose="accountPurpose",
             annual_salary="annualSalary",
@@ -39,7 +39,7 @@ class TestUser:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_create_with_all_params_overload_1(self, client: RainHelloWorld) -> None:
+    def test_method_create_with_all_params_overload_1(self, client: Rain) -> None:
         user = client.applications.user.create(
             account_purpose="accountPurpose",
             annual_salary="annualSalary",
@@ -59,7 +59,7 @@ class TestUser:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_create_overload_1(self, client: RainHelloWorld) -> None:
+    def test_raw_response_create_overload_1(self, client: Rain) -> None:
         response = client.applications.user.with_raw_response.create(
             account_purpose="accountPurpose",
             annual_salary="annualSalary",
@@ -77,7 +77,7 @@ class TestUser:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_create_overload_1(self, client: RainHelloWorld) -> None:
+    def test_streaming_response_create_overload_1(self, client: Rain) -> None:
         with client.applications.user.with_streaming_response.create(
             account_purpose="accountPurpose",
             annual_salary="annualSalary",
@@ -97,7 +97,7 @@ class TestUser:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_create_overload_2(self, client: RainHelloWorld) -> None:
+    def test_method_create_overload_2(self, client: Rain) -> None:
         user = client.applications.user.create(
             account_purpose="accountPurpose",
             annual_salary="annualSalary",
@@ -111,7 +111,7 @@ class TestUser:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_create_with_all_params_overload_2(self, client: RainHelloWorld) -> None:
+    def test_method_create_with_all_params_overload_2(self, client: Rain) -> None:
         user = client.applications.user.create(
             account_purpose="accountPurpose",
             annual_salary="annualSalary",
@@ -131,7 +131,7 @@ class TestUser:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_create_overload_2(self, client: RainHelloWorld) -> None:
+    def test_raw_response_create_overload_2(self, client: Rain) -> None:
         response = client.applications.user.with_raw_response.create(
             account_purpose="accountPurpose",
             annual_salary="annualSalary",
@@ -149,7 +149,7 @@ class TestUser:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_create_overload_2(self, client: RainHelloWorld) -> None:
+    def test_streaming_response_create_overload_2(self, client: Rain) -> None:
         with client.applications.user.with_streaming_response.create(
             account_purpose="accountPurpose",
             annual_salary="annualSalary",
@@ -169,7 +169,7 @@ class TestUser:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_create_overload_3(self, client: RainHelloWorld) -> None:
+    def test_method_create_overload_3(self, client: Rain) -> None:
         user = client.applications.user.create(
             account_purpose="accountPurpose",
             address={
@@ -196,7 +196,7 @@ class TestUser:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_create_with_all_params_overload_3(self, client: RainHelloWorld) -> None:
+    def test_method_create_with_all_params_overload_3(self, client: Rain) -> None:
         user = client.applications.user.create(
             account_purpose="accountPurpose",
             address={
@@ -233,7 +233,7 @@ class TestUser:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_create_overload_3(self, client: RainHelloWorld) -> None:
+    def test_raw_response_create_overload_3(self, client: Rain) -> None:
         response = client.applications.user.with_raw_response.create(
             account_purpose="accountPurpose",
             address={
@@ -264,7 +264,7 @@ class TestUser:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_create_overload_3(self, client: RainHelloWorld) -> None:
+    def test_streaming_response_create_overload_3(self, client: Rain) -> None:
         with client.applications.user.with_streaming_response.create(
             account_purpose="accountPurpose",
             address={
@@ -297,7 +297,7 @@ class TestUser:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_retrieve(self, client: RainHelloWorld) -> None:
+    def test_method_retrieve(self, client: Rain) -> None:
         user = client.applications.user.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
@@ -305,7 +305,7 @@ class TestUser:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_retrieve(self, client: RainHelloWorld) -> None:
+    def test_raw_response_retrieve(self, client: Rain) -> None:
         response = client.applications.user.with_raw_response.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
@@ -317,7 +317,7 @@ class TestUser:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_retrieve(self, client: RainHelloWorld) -> None:
+    def test_streaming_response_retrieve(self, client: Rain) -> None:
         with client.applications.user.with_streaming_response.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
@@ -331,7 +331,7 @@ class TestUser:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_path_params_retrieve(self, client: RainHelloWorld) -> None:
+    def test_path_params_retrieve(self, client: Rain) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `user_id` but received ''"):
             client.applications.user.with_raw_response.retrieve(
                 "",
@@ -339,7 +339,7 @@ class TestUser:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_update(self, client: RainHelloWorld) -> None:
+    def test_method_update(self, client: Rain) -> None:
         user = client.applications.user.update(
             user_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
@@ -347,7 +347,7 @@ class TestUser:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_update_with_all_params(self, client: RainHelloWorld) -> None:
+    def test_method_update_with_all_params(self, client: Rain) -> None:
         user = client.applications.user.update(
             user_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             account_purpose="accountPurpose",
@@ -376,7 +376,7 @@ class TestUser:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_update(self, client: RainHelloWorld) -> None:
+    def test_raw_response_update(self, client: Rain) -> None:
         response = client.applications.user.with_raw_response.update(
             user_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
@@ -388,7 +388,7 @@ class TestUser:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_update(self, client: RainHelloWorld) -> None:
+    def test_streaming_response_update(self, client: Rain) -> None:
         with client.applications.user.with_streaming_response.update(
             user_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
@@ -402,7 +402,7 @@ class TestUser:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_path_params_update(self, client: RainHelloWorld) -> None:
+    def test_path_params_update(self, client: Rain) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `user_id` but received ''"):
             client.applications.user.with_raw_response.update(
                 user_id="",
@@ -410,13 +410,13 @@ class TestUser:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_initiate(self, client: RainHelloWorld) -> None:
+    def test_method_initiate(self, client: Rain) -> None:
         user = client.applications.user.initiate()
         assert_matches_type(IssuingUser, user, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_initiate_with_all_params(self, client: RainHelloWorld) -> None:
+    def test_method_initiate_with_all_params(self, client: Rain) -> None:
         user = client.applications.user.initiate(
             email="email",
             first_name="firstName",
@@ -427,7 +427,7 @@ class TestUser:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_initiate(self, client: RainHelloWorld) -> None:
+    def test_raw_response_initiate(self, client: Rain) -> None:
         response = client.applications.user.with_raw_response.initiate()
 
         assert response.is_closed is True
@@ -437,7 +437,7 @@ class TestUser:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_initiate(self, client: RainHelloWorld) -> None:
+    def test_streaming_response_initiate(self, client: Rain) -> None:
         with client.applications.user.with_streaming_response.initiate() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -449,7 +449,7 @@ class TestUser:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_reapply(self, client: RainHelloWorld) -> None:
+    def test_method_reapply(self, client: Rain) -> None:
         with pytest.warns(DeprecationWarning):
             user = client.applications.user.reapply(
                 user_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -476,7 +476,7 @@ class TestUser:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_reapply_with_all_params(self, client: RainHelloWorld) -> None:
+    def test_method_reapply_with_all_params(self, client: Rain) -> None:
         with pytest.warns(DeprecationWarning):
             user = client.applications.user.reapply(
                 user_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -505,7 +505,7 @@ class TestUser:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_reapply(self, client: RainHelloWorld) -> None:
+    def test_raw_response_reapply(self, client: Rain) -> None:
         with pytest.warns(DeprecationWarning):
             response = client.applications.user.with_raw_response.reapply(
                 user_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -535,7 +535,7 @@ class TestUser:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_reapply(self, client: RainHelloWorld) -> None:
+    def test_streaming_response_reapply(self, client: Rain) -> None:
         with pytest.warns(DeprecationWarning):
             with client.applications.user.with_streaming_response.reapply(
                 user_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -567,7 +567,7 @@ class TestUser:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_path_params_reapply(self, client: RainHelloWorld) -> None:
+    def test_path_params_reapply(self, client: Rain) -> None:
         with pytest.warns(DeprecationWarning):
             with pytest.raises(ValueError, match=r"Expected a non-empty value for `user_id` but received ''"):
                 client.applications.user.with_raw_response.reapply(
@@ -593,7 +593,7 @@ class TestUser:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_upload_document(self, client: RainHelloWorld) -> None:
+    def test_method_upload_document(self, client: Rain) -> None:
         user = client.applications.user.upload_document(
             user_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             document=b"raw file contents",
@@ -602,7 +602,7 @@ class TestUser:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_upload_document_with_all_params(self, client: RainHelloWorld) -> None:
+    def test_method_upload_document_with_all_params(self, client: Rain) -> None:
         user = client.applications.user.upload_document(
             user_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             document=b"raw file contents",
@@ -615,7 +615,7 @@ class TestUser:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_upload_document(self, client: RainHelloWorld) -> None:
+    def test_raw_response_upload_document(self, client: Rain) -> None:
         response = client.applications.user.with_raw_response.upload_document(
             user_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             document=b"raw file contents",
@@ -628,7 +628,7 @@ class TestUser:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_upload_document(self, client: RainHelloWorld) -> None:
+    def test_streaming_response_upload_document(self, client: Rain) -> None:
         with client.applications.user.with_streaming_response.upload_document(
             user_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             document=b"raw file contents",
@@ -643,7 +643,7 @@ class TestUser:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_path_params_upload_document(self, client: RainHelloWorld) -> None:
+    def test_path_params_upload_document(self, client: Rain) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `user_id` but received ''"):
             client.applications.user.with_raw_response.upload_document(
                 user_id="",
@@ -658,7 +658,7 @@ class TestAsyncUser:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_create_overload_1(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_method_create_overload_1(self, async_client: AsyncRain) -> None:
         user = await async_client.applications.user.create(
             account_purpose="accountPurpose",
             annual_salary="annualSalary",
@@ -672,7 +672,7 @@ class TestAsyncUser:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_create_with_all_params_overload_1(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_method_create_with_all_params_overload_1(self, async_client: AsyncRain) -> None:
         user = await async_client.applications.user.create(
             account_purpose="accountPurpose",
             annual_salary="annualSalary",
@@ -692,7 +692,7 @@ class TestAsyncUser:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_create_overload_1(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_raw_response_create_overload_1(self, async_client: AsyncRain) -> None:
         response = await async_client.applications.user.with_raw_response.create(
             account_purpose="accountPurpose",
             annual_salary="annualSalary",
@@ -710,7 +710,7 @@ class TestAsyncUser:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_create_overload_1(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_streaming_response_create_overload_1(self, async_client: AsyncRain) -> None:
         async with async_client.applications.user.with_streaming_response.create(
             account_purpose="accountPurpose",
             annual_salary="annualSalary",
@@ -730,7 +730,7 @@ class TestAsyncUser:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_create_overload_2(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_method_create_overload_2(self, async_client: AsyncRain) -> None:
         user = await async_client.applications.user.create(
             account_purpose="accountPurpose",
             annual_salary="annualSalary",
@@ -744,7 +744,7 @@ class TestAsyncUser:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_create_with_all_params_overload_2(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_method_create_with_all_params_overload_2(self, async_client: AsyncRain) -> None:
         user = await async_client.applications.user.create(
             account_purpose="accountPurpose",
             annual_salary="annualSalary",
@@ -764,7 +764,7 @@ class TestAsyncUser:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_create_overload_2(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_raw_response_create_overload_2(self, async_client: AsyncRain) -> None:
         response = await async_client.applications.user.with_raw_response.create(
             account_purpose="accountPurpose",
             annual_salary="annualSalary",
@@ -782,7 +782,7 @@ class TestAsyncUser:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_create_overload_2(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_streaming_response_create_overload_2(self, async_client: AsyncRain) -> None:
         async with async_client.applications.user.with_streaming_response.create(
             account_purpose="accountPurpose",
             annual_salary="annualSalary",
@@ -802,7 +802,7 @@ class TestAsyncUser:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_create_overload_3(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_method_create_overload_3(self, async_client: AsyncRain) -> None:
         user = await async_client.applications.user.create(
             account_purpose="accountPurpose",
             address={
@@ -829,7 +829,7 @@ class TestAsyncUser:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_create_with_all_params_overload_3(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_method_create_with_all_params_overload_3(self, async_client: AsyncRain) -> None:
         user = await async_client.applications.user.create(
             account_purpose="accountPurpose",
             address={
@@ -866,7 +866,7 @@ class TestAsyncUser:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_create_overload_3(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_raw_response_create_overload_3(self, async_client: AsyncRain) -> None:
         response = await async_client.applications.user.with_raw_response.create(
             account_purpose="accountPurpose",
             address={
@@ -897,7 +897,7 @@ class TestAsyncUser:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_create_overload_3(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_streaming_response_create_overload_3(self, async_client: AsyncRain) -> None:
         async with async_client.applications.user.with_streaming_response.create(
             account_purpose="accountPurpose",
             address={
@@ -930,7 +930,7 @@ class TestAsyncUser:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_retrieve(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_method_retrieve(self, async_client: AsyncRain) -> None:
         user = await async_client.applications.user.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
@@ -938,7 +938,7 @@ class TestAsyncUser:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_retrieve(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_raw_response_retrieve(self, async_client: AsyncRain) -> None:
         response = await async_client.applications.user.with_raw_response.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
@@ -950,7 +950,7 @@ class TestAsyncUser:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_retrieve(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_streaming_response_retrieve(self, async_client: AsyncRain) -> None:
         async with async_client.applications.user.with_streaming_response.retrieve(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
@@ -964,7 +964,7 @@ class TestAsyncUser:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_path_params_retrieve(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_path_params_retrieve(self, async_client: AsyncRain) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `user_id` but received ''"):
             await async_client.applications.user.with_raw_response.retrieve(
                 "",
@@ -972,7 +972,7 @@ class TestAsyncUser:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_update(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_method_update(self, async_client: AsyncRain) -> None:
         user = await async_client.applications.user.update(
             user_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
@@ -980,7 +980,7 @@ class TestAsyncUser:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_update_with_all_params(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_method_update_with_all_params(self, async_client: AsyncRain) -> None:
         user = await async_client.applications.user.update(
             user_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             account_purpose="accountPurpose",
@@ -1009,7 +1009,7 @@ class TestAsyncUser:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_update(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_raw_response_update(self, async_client: AsyncRain) -> None:
         response = await async_client.applications.user.with_raw_response.update(
             user_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
@@ -1021,7 +1021,7 @@ class TestAsyncUser:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_update(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_streaming_response_update(self, async_client: AsyncRain) -> None:
         async with async_client.applications.user.with_streaming_response.update(
             user_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
@@ -1035,7 +1035,7 @@ class TestAsyncUser:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_path_params_update(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_path_params_update(self, async_client: AsyncRain) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `user_id` but received ''"):
             await async_client.applications.user.with_raw_response.update(
                 user_id="",
@@ -1043,13 +1043,13 @@ class TestAsyncUser:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_initiate(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_method_initiate(self, async_client: AsyncRain) -> None:
         user = await async_client.applications.user.initiate()
         assert_matches_type(IssuingUser, user, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_initiate_with_all_params(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_method_initiate_with_all_params(self, async_client: AsyncRain) -> None:
         user = await async_client.applications.user.initiate(
             email="email",
             first_name="firstName",
@@ -1060,7 +1060,7 @@ class TestAsyncUser:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_initiate(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_raw_response_initiate(self, async_client: AsyncRain) -> None:
         response = await async_client.applications.user.with_raw_response.initiate()
 
         assert response.is_closed is True
@@ -1070,7 +1070,7 @@ class TestAsyncUser:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_initiate(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_streaming_response_initiate(self, async_client: AsyncRain) -> None:
         async with async_client.applications.user.with_streaming_response.initiate() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -1082,7 +1082,7 @@ class TestAsyncUser:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_reapply(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_method_reapply(self, async_client: AsyncRain) -> None:
         with pytest.warns(DeprecationWarning):
             user = await async_client.applications.user.reapply(
                 user_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -1109,7 +1109,7 @@ class TestAsyncUser:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_reapply_with_all_params(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_method_reapply_with_all_params(self, async_client: AsyncRain) -> None:
         with pytest.warns(DeprecationWarning):
             user = await async_client.applications.user.reapply(
                 user_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -1138,7 +1138,7 @@ class TestAsyncUser:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_reapply(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_raw_response_reapply(self, async_client: AsyncRain) -> None:
         with pytest.warns(DeprecationWarning):
             response = await async_client.applications.user.with_raw_response.reapply(
                 user_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -1168,7 +1168,7 @@ class TestAsyncUser:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_reapply(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_streaming_response_reapply(self, async_client: AsyncRain) -> None:
         with pytest.warns(DeprecationWarning):
             async with async_client.applications.user.with_streaming_response.reapply(
                 user_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -1200,7 +1200,7 @@ class TestAsyncUser:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_path_params_reapply(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_path_params_reapply(self, async_client: AsyncRain) -> None:
         with pytest.warns(DeprecationWarning):
             with pytest.raises(ValueError, match=r"Expected a non-empty value for `user_id` but received ''"):
                 await async_client.applications.user.with_raw_response.reapply(
@@ -1226,7 +1226,7 @@ class TestAsyncUser:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_upload_document(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_method_upload_document(self, async_client: AsyncRain) -> None:
         user = await async_client.applications.user.upload_document(
             user_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             document=b"raw file contents",
@@ -1235,7 +1235,7 @@ class TestAsyncUser:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_upload_document_with_all_params(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_method_upload_document_with_all_params(self, async_client: AsyncRain) -> None:
         user = await async_client.applications.user.upload_document(
             user_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             document=b"raw file contents",
@@ -1248,7 +1248,7 @@ class TestAsyncUser:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_upload_document(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_raw_response_upload_document(self, async_client: AsyncRain) -> None:
         response = await async_client.applications.user.with_raw_response.upload_document(
             user_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             document=b"raw file contents",
@@ -1261,7 +1261,7 @@ class TestAsyncUser:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_upload_document(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_streaming_response_upload_document(self, async_client: AsyncRain) -> None:
         async with async_client.applications.user.with_streaming_response.upload_document(
             user_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             document=b"raw file contents",
@@ -1276,7 +1276,7 @@ class TestAsyncUser:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_path_params_upload_document(self, async_client: AsyncRainHelloWorld) -> None:
+    async def test_path_params_upload_document(self, async_client: AsyncRain) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `user_id` but received ''"):
             await async_client.applications.user.with_raw_response.upload_document(
                 user_id="",

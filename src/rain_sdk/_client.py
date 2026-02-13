@@ -23,7 +23,7 @@ from ._utils import is_given, get_async_library
 from ._compat import cached_property
 from ._version import __version__
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
-from ._exceptions import APIStatusError, RainHelloWorldError
+from ._exceptions import RainError, APIStatusError
 from ._base_client import (
     DEFAULT_MAX_RETRIES,
     SyncAPIClient,
@@ -62,8 +62,8 @@ __all__ = [
     "Transport",
     "ProxiesTypes",
     "RequestOptions",
-    "RainHelloWorld",
-    "AsyncRainHelloWorld",
+    "Rain",
+    "AsyncRain",
     "Client",
     "AsyncClient",
 ]
@@ -74,7 +74,7 @@ ENVIRONMENTS: Dict[str, str] = {
 }
 
 
-class RainHelloWorld(SyncAPIClient):
+class Rain(SyncAPIClient):
     # client options
     api_key: str
 
@@ -104,28 +104,28 @@ class RainHelloWorld(SyncAPIClient):
         # part of our public interface in the future.
         _strict_response_validation: bool = False,
     ) -> None:
-        """Construct a new synchronous RainHelloWorld client instance.
+        """Construct a new synchronous Rain client instance.
 
-        This automatically infers the `api_key` argument from the `RAIN_HELLO_WORLD_API_KEY` environment variable if it is not provided.
+        This automatically infers the `api_key` argument from the `RAIN_API_KEY` environment variable if it is not provided.
         """
         if api_key is None:
-            api_key = os.environ.get("RAIN_HELLO_WORLD_API_KEY")
+            api_key = os.environ.get("RAIN_API_KEY")
         if api_key is None:
-            raise RainHelloWorldError(
-                "The api_key client option must be set either by passing api_key to the client or by setting the RAIN_HELLO_WORLD_API_KEY environment variable"
+            raise RainError(
+                "The api_key client option must be set either by passing api_key to the client or by setting the RAIN_API_KEY environment variable"
             )
         self.api_key = api_key
 
         self._environment = environment
 
-        base_url_env = os.environ.get("RAIN_HELLO_WORLD_BASE_URL")
+        base_url_env = os.environ.get("RAIN_BASE_URL")
         if is_given(base_url) and base_url is not None:
             # cast required because mypy doesn't understand the type narrowing
             base_url = cast("str | httpx.URL", base_url)  # pyright: ignore[reportUnnecessaryCast]
         elif is_given(environment):
             if base_url_env and base_url is not None:
                 raise ValueError(
-                    "Ambiguous URL; The `RAIN_HELLO_WORLD_BASE_URL` env var and the `environment` argument are given. If you want to use the environment, you must pass base_url=None",
+                    "Ambiguous URL; The `RAIN_BASE_URL` env var and the `environment` argument are given. If you want to use the environment, you must pass base_url=None",
                 )
 
             try:
@@ -220,12 +220,12 @@ class RainHelloWorld(SyncAPIClient):
         return UsersResource(self)
 
     @cached_property
-    def with_raw_response(self) -> RainHelloWorldWithRawResponse:
-        return RainHelloWorldWithRawResponse(self)
+    def with_raw_response(self) -> RainWithRawResponse:
+        return RainWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> RainHelloWorldWithStreamedResponse:
-        return RainHelloWorldWithStreamedResponse(self)
+    def with_streaming_response(self) -> RainWithStreamedResponse:
+        return RainWithStreamedResponse(self)
 
     @property
     @override
@@ -334,7 +334,7 @@ class RainHelloWorld(SyncAPIClient):
         return APIStatusError(err_msg, response=response, body=body)
 
 
-class AsyncRainHelloWorld(AsyncAPIClient):
+class AsyncRain(AsyncAPIClient):
     # client options
     api_key: str
 
@@ -364,28 +364,28 @@ class AsyncRainHelloWorld(AsyncAPIClient):
         # part of our public interface in the future.
         _strict_response_validation: bool = False,
     ) -> None:
-        """Construct a new async AsyncRainHelloWorld client instance.
+        """Construct a new async AsyncRain client instance.
 
-        This automatically infers the `api_key` argument from the `RAIN_HELLO_WORLD_API_KEY` environment variable if it is not provided.
+        This automatically infers the `api_key` argument from the `RAIN_API_KEY` environment variable if it is not provided.
         """
         if api_key is None:
-            api_key = os.environ.get("RAIN_HELLO_WORLD_API_KEY")
+            api_key = os.environ.get("RAIN_API_KEY")
         if api_key is None:
-            raise RainHelloWorldError(
-                "The api_key client option must be set either by passing api_key to the client or by setting the RAIN_HELLO_WORLD_API_KEY environment variable"
+            raise RainError(
+                "The api_key client option must be set either by passing api_key to the client or by setting the RAIN_API_KEY environment variable"
             )
         self.api_key = api_key
 
         self._environment = environment
 
-        base_url_env = os.environ.get("RAIN_HELLO_WORLD_BASE_URL")
+        base_url_env = os.environ.get("RAIN_BASE_URL")
         if is_given(base_url) and base_url is not None:
             # cast required because mypy doesn't understand the type narrowing
             base_url = cast("str | httpx.URL", base_url)  # pyright: ignore[reportUnnecessaryCast]
         elif is_given(environment):
             if base_url_env and base_url is not None:
                 raise ValueError(
-                    "Ambiguous URL; The `RAIN_HELLO_WORLD_BASE_URL` env var and the `environment` argument are given. If you want to use the environment, you must pass base_url=None",
+                    "Ambiguous URL; The `RAIN_BASE_URL` env var and the `environment` argument are given. If you want to use the environment, you must pass base_url=None",
                 )
 
             try:
@@ -480,12 +480,12 @@ class AsyncRainHelloWorld(AsyncAPIClient):
         return AsyncUsersResource(self)
 
     @cached_property
-    def with_raw_response(self) -> AsyncRainHelloWorldWithRawResponse:
-        return AsyncRainHelloWorldWithRawResponse(self)
+    def with_raw_response(self) -> AsyncRainWithRawResponse:
+        return AsyncRainWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncRainHelloWorldWithStreamedResponse:
-        return AsyncRainHelloWorldWithStreamedResponse(self)
+    def with_streaming_response(self) -> AsyncRainWithStreamedResponse:
+        return AsyncRainWithStreamedResponse(self)
 
     @property
     @override
@@ -594,10 +594,10 @@ class AsyncRainHelloWorld(AsyncAPIClient):
         return APIStatusError(err_msg, response=response, body=body)
 
 
-class RainHelloWorldWithRawResponse:
-    _client: RainHelloWorld
+class RainWithRawResponse:
+    _client: Rain
 
-    def __init__(self, client: RainHelloWorld) -> None:
+    def __init__(self, client: Rain) -> None:
         self._client = client
 
     @cached_property
@@ -667,10 +667,10 @@ class RainHelloWorldWithRawResponse:
         return UsersResourceWithRawResponse(self._client.users)
 
 
-class AsyncRainHelloWorldWithRawResponse:
-    _client: AsyncRainHelloWorld
+class AsyncRainWithRawResponse:
+    _client: AsyncRain
 
-    def __init__(self, client: AsyncRainHelloWorld) -> None:
+    def __init__(self, client: AsyncRain) -> None:
         self._client = client
 
     @cached_property
@@ -740,10 +740,10 @@ class AsyncRainHelloWorldWithRawResponse:
         return AsyncUsersResourceWithRawResponse(self._client.users)
 
 
-class RainHelloWorldWithStreamedResponse:
-    _client: RainHelloWorld
+class RainWithStreamedResponse:
+    _client: Rain
 
-    def __init__(self, client: RainHelloWorld) -> None:
+    def __init__(self, client: Rain) -> None:
         self._client = client
 
     @cached_property
@@ -813,10 +813,10 @@ class RainHelloWorldWithStreamedResponse:
         return UsersResourceWithStreamingResponse(self._client.users)
 
 
-class AsyncRainHelloWorldWithStreamedResponse:
-    _client: AsyncRainHelloWorld
+class AsyncRainWithStreamedResponse:
+    _client: AsyncRain
 
-    def __init__(self, client: AsyncRainHelloWorld) -> None:
+    def __init__(self, client: AsyncRain) -> None:
         self._client = client
 
     @cached_property
@@ -886,6 +886,6 @@ class AsyncRainHelloWorldWithStreamedResponse:
         return AsyncUsersResourceWithStreamingResponse(self._client.users)
 
 
-Client = RainHelloWorld
+Client = Rain
 
-AsyncClient = AsyncRainHelloWorld
+AsyncClient = AsyncRain
