@@ -23,7 +23,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestCompany:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_create(self, client: Rain) -> None:
         company = client.applications.company.create(
@@ -99,7 +99,7 @@ class TestCompany:
         )
         assert_matches_type(IssuingCompany, company, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_create_with_all_params(self, client: Rain) -> None:
         company = client.applications.company.create(
@@ -197,7 +197,7 @@ class TestCompany:
         )
         assert_matches_type(IssuingCompany, company, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_create(self, client: Rain) -> None:
         response = client.applications.company.with_raw_response.create(
@@ -277,7 +277,7 @@ class TestCompany:
         company = response.parse()
         assert_matches_type(IssuingCompany, company, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_create(self, client: Rain) -> None:
         with client.applications.company.with_streaming_response.create(
@@ -359,7 +359,7 @@ class TestCompany:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_retrieve(self, client: Rain) -> None:
         company = client.applications.company.retrieve(
@@ -367,7 +367,7 @@ class TestCompany:
         )
         assert_matches_type(CompanyRetrieveResponse, company, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_retrieve(self, client: Rain) -> None:
         response = client.applications.company.with_raw_response.retrieve(
@@ -379,7 +379,7 @@ class TestCompany:
         company = response.parse()
         assert_matches_type(CompanyRetrieveResponse, company, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_retrieve(self, client: Rain) -> None:
         with client.applications.company.with_streaming_response.retrieve(
@@ -393,7 +393,7 @@ class TestCompany:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_retrieve(self, client: Rain) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `company_id` but received ''"):
@@ -401,7 +401,7 @@ class TestCompany:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_update(self, client: Rain) -> None:
         company = client.applications.company.update(
@@ -409,7 +409,7 @@ class TestCompany:
         )
         assert_matches_type(IssuingCompany, company, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_update_with_all_params(self, client: Rain) -> None:
         company = client.applications.company.update(
@@ -435,7 +435,7 @@ class TestCompany:
         )
         assert_matches_type(IssuingCompany, company, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_update(self, client: Rain) -> None:
         response = client.applications.company.with_raw_response.update(
@@ -447,7 +447,7 @@ class TestCompany:
         company = response.parse()
         assert_matches_type(IssuingCompany, company, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_update(self, client: Rain) -> None:
         with client.applications.company.with_streaming_response.update(
@@ -461,7 +461,7 @@ class TestCompany:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_update(self, client: Rain) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `company_id` but received ''"):
@@ -469,7 +469,7 @@ class TestCompany:
                 company_id="",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_reapply(self, client: Rain) -> None:
         with pytest.warns(DeprecationWarning):
@@ -540,7 +540,7 @@ class TestCompany:
 
         assert_matches_type(IssuingCompany, company, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_reapply_with_all_params(self, client: Rain) -> None:
         with pytest.warns(DeprecationWarning):
@@ -627,7 +627,7 @@ class TestCompany:
 
         assert_matches_type(IssuingCompany, company, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_reapply(self, client: Rain) -> None:
         with pytest.warns(DeprecationWarning):
@@ -701,7 +701,7 @@ class TestCompany:
         company = response.parse()
         assert_matches_type(IssuingCompany, company, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_reapply(self, client: Rain) -> None:
         with pytest.warns(DeprecationWarning):
@@ -777,7 +777,7 @@ class TestCompany:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_reapply(self, client: Rain) -> None:
         with pytest.warns(DeprecationWarning):
@@ -847,7 +847,7 @@ class TestCompany:
                     ],
                 )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_upload_document(self, client: Rain) -> None:
         company = client.applications.company.upload_document(
@@ -856,7 +856,7 @@ class TestCompany:
         )
         assert company is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_upload_document_with_all_params(self, client: Rain) -> None:
         company = client.applications.company.upload_document(
@@ -869,7 +869,7 @@ class TestCompany:
         )
         assert company is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_upload_document(self, client: Rain) -> None:
         response = client.applications.company.with_raw_response.upload_document(
@@ -882,7 +882,7 @@ class TestCompany:
         company = response.parse()
         assert company is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_upload_document(self, client: Rain) -> None:
         with client.applications.company.with_streaming_response.upload_document(
@@ -897,7 +897,7 @@ class TestCompany:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_upload_document(self, client: Rain) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `company_id` but received ''"):
@@ -912,7 +912,7 @@ class TestAsyncCompany:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_create(self, async_client: AsyncRain) -> None:
         company = await async_client.applications.company.create(
@@ -988,7 +988,7 @@ class TestAsyncCompany:
         )
         assert_matches_type(IssuingCompany, company, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncRain) -> None:
         company = await async_client.applications.company.create(
@@ -1086,7 +1086,7 @@ class TestAsyncCompany:
         )
         assert_matches_type(IssuingCompany, company, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncRain) -> None:
         response = await async_client.applications.company.with_raw_response.create(
@@ -1166,7 +1166,7 @@ class TestAsyncCompany:
         company = await response.parse()
         assert_matches_type(IssuingCompany, company, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncRain) -> None:
         async with async_client.applications.company.with_streaming_response.create(
@@ -1248,7 +1248,7 @@ class TestAsyncCompany:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncRain) -> None:
         company = await async_client.applications.company.retrieve(
@@ -1256,7 +1256,7 @@ class TestAsyncCompany:
         )
         assert_matches_type(CompanyRetrieveResponse, company, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncRain) -> None:
         response = await async_client.applications.company.with_raw_response.retrieve(
@@ -1268,7 +1268,7 @@ class TestAsyncCompany:
         company = await response.parse()
         assert_matches_type(CompanyRetrieveResponse, company, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncRain) -> None:
         async with async_client.applications.company.with_streaming_response.retrieve(
@@ -1282,7 +1282,7 @@ class TestAsyncCompany:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_retrieve(self, async_client: AsyncRain) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `company_id` but received ''"):
@@ -1290,7 +1290,7 @@ class TestAsyncCompany:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_update(self, async_client: AsyncRain) -> None:
         company = await async_client.applications.company.update(
@@ -1298,7 +1298,7 @@ class TestAsyncCompany:
         )
         assert_matches_type(IssuingCompany, company, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_update_with_all_params(self, async_client: AsyncRain) -> None:
         company = await async_client.applications.company.update(
@@ -1324,7 +1324,7 @@ class TestAsyncCompany:
         )
         assert_matches_type(IssuingCompany, company, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_update(self, async_client: AsyncRain) -> None:
         response = await async_client.applications.company.with_raw_response.update(
@@ -1336,7 +1336,7 @@ class TestAsyncCompany:
         company = await response.parse()
         assert_matches_type(IssuingCompany, company, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_update(self, async_client: AsyncRain) -> None:
         async with async_client.applications.company.with_streaming_response.update(
@@ -1350,7 +1350,7 @@ class TestAsyncCompany:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_update(self, async_client: AsyncRain) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `company_id` but received ''"):
@@ -1358,7 +1358,7 @@ class TestAsyncCompany:
                 company_id="",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_reapply(self, async_client: AsyncRain) -> None:
         with pytest.warns(DeprecationWarning):
@@ -1429,7 +1429,7 @@ class TestAsyncCompany:
 
         assert_matches_type(IssuingCompany, company, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_reapply_with_all_params(self, async_client: AsyncRain) -> None:
         with pytest.warns(DeprecationWarning):
@@ -1516,7 +1516,7 @@ class TestAsyncCompany:
 
         assert_matches_type(IssuingCompany, company, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_reapply(self, async_client: AsyncRain) -> None:
         with pytest.warns(DeprecationWarning):
@@ -1590,7 +1590,7 @@ class TestAsyncCompany:
         company = await response.parse()
         assert_matches_type(IssuingCompany, company, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_reapply(self, async_client: AsyncRain) -> None:
         with pytest.warns(DeprecationWarning):
@@ -1666,7 +1666,7 @@ class TestAsyncCompany:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_reapply(self, async_client: AsyncRain) -> None:
         with pytest.warns(DeprecationWarning):
@@ -1736,7 +1736,7 @@ class TestAsyncCompany:
                     ],
                 )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_upload_document(self, async_client: AsyncRain) -> None:
         company = await async_client.applications.company.upload_document(
@@ -1745,7 +1745,7 @@ class TestAsyncCompany:
         )
         assert company is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_upload_document_with_all_params(self, async_client: AsyncRain) -> None:
         company = await async_client.applications.company.upload_document(
@@ -1758,7 +1758,7 @@ class TestAsyncCompany:
         )
         assert company is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_upload_document(self, async_client: AsyncRain) -> None:
         response = await async_client.applications.company.with_raw_response.upload_document(
@@ -1771,7 +1771,7 @@ class TestAsyncCompany:
         company = await response.parse()
         assert company is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_upload_document(self, async_client: AsyncRain) -> None:
         async with async_client.applications.company.with_streaming_response.upload_document(
@@ -1786,7 +1786,7 @@ class TestAsyncCompany:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_upload_document(self, async_client: AsyncRain) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `company_id` but received ''"):

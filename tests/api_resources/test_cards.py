@@ -21,7 +21,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestCards:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_retrieve(self, client: Rain) -> None:
         card = client.cards.retrieve(
@@ -29,7 +29,7 @@ class TestCards:
         )
         assert_matches_type(IssuingCard, card, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_retrieve(self, client: Rain) -> None:
         response = client.cards.with_raw_response.retrieve(
@@ -41,7 +41,7 @@ class TestCards:
         card = response.parse()
         assert_matches_type(IssuingCard, card, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_retrieve(self, client: Rain) -> None:
         with client.cards.with_streaming_response.retrieve(
@@ -55,7 +55,7 @@ class TestCards:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_retrieve(self, client: Rain) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `card_id` but received ''"):
@@ -63,7 +63,7 @@ class TestCards:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_update(self, client: Rain) -> None:
         card = client.cards.update(
@@ -71,7 +71,7 @@ class TestCards:
         )
         assert_matches_type(IssuingCard, card, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_update_with_all_params(self, client: Rain) -> None:
         card = client.cards.update(
@@ -94,7 +94,7 @@ class TestCards:
         )
         assert_matches_type(IssuingCard, card, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_update(self, client: Rain) -> None:
         response = client.cards.with_raw_response.update(
@@ -106,7 +106,7 @@ class TestCards:
         card = response.parse()
         assert_matches_type(IssuingCard, card, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_update(self, client: Rain) -> None:
         with client.cards.with_streaming_response.update(
@@ -120,7 +120,7 @@ class TestCards:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_update(self, client: Rain) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `card_id` but received ''"):
@@ -128,13 +128,13 @@ class TestCards:
                 card_id="",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list(self, client: Rain) -> None:
         card = client.cards.list()
         assert_matches_type(CardListResponse, card, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list_with_all_params(self, client: Rain) -> None:
         card = client.cards.list(
@@ -146,7 +146,7 @@ class TestCards:
         )
         assert_matches_type(CardListResponse, card, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_list(self, client: Rain) -> None:
         response = client.cards.with_raw_response.list()
@@ -156,7 +156,7 @@ class TestCards:
         card = response.parse()
         assert_matches_type(CardListResponse, card, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_list(self, client: Rain) -> None:
         with client.cards.with_streaming_response.list() as response:
@@ -168,7 +168,7 @@ class TestCards:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_retrieve_secrets(self, client: Rain) -> None:
         card = client.cards.retrieve_secrets(
@@ -177,7 +177,7 @@ class TestCards:
         )
         assert_matches_type(CardRetrieveSecretsResponse, card, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_retrieve_secrets(self, client: Rain) -> None:
         response = client.cards.with_raw_response.retrieve_secrets(
@@ -190,7 +190,7 @@ class TestCards:
         card = response.parse()
         assert_matches_type(CardRetrieveSecretsResponse, card, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_retrieve_secrets(self, client: Rain) -> None:
         with client.cards.with_streaming_response.retrieve_secrets(
@@ -205,7 +205,7 @@ class TestCards:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_retrieve_secrets(self, client: Rain) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `card_id` but received ''"):
@@ -220,7 +220,7 @@ class TestAsyncCards:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncRain) -> None:
         card = await async_client.cards.retrieve(
@@ -228,7 +228,7 @@ class TestAsyncCards:
         )
         assert_matches_type(IssuingCard, card, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncRain) -> None:
         response = await async_client.cards.with_raw_response.retrieve(
@@ -240,7 +240,7 @@ class TestAsyncCards:
         card = await response.parse()
         assert_matches_type(IssuingCard, card, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncRain) -> None:
         async with async_client.cards.with_streaming_response.retrieve(
@@ -254,7 +254,7 @@ class TestAsyncCards:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_retrieve(self, async_client: AsyncRain) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `card_id` but received ''"):
@@ -262,7 +262,7 @@ class TestAsyncCards:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_update(self, async_client: AsyncRain) -> None:
         card = await async_client.cards.update(
@@ -270,7 +270,7 @@ class TestAsyncCards:
         )
         assert_matches_type(IssuingCard, card, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_update_with_all_params(self, async_client: AsyncRain) -> None:
         card = await async_client.cards.update(
@@ -293,7 +293,7 @@ class TestAsyncCards:
         )
         assert_matches_type(IssuingCard, card, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_update(self, async_client: AsyncRain) -> None:
         response = await async_client.cards.with_raw_response.update(
@@ -305,7 +305,7 @@ class TestAsyncCards:
         card = await response.parse()
         assert_matches_type(IssuingCard, card, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_update(self, async_client: AsyncRain) -> None:
         async with async_client.cards.with_streaming_response.update(
@@ -319,7 +319,7 @@ class TestAsyncCards:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_update(self, async_client: AsyncRain) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `card_id` but received ''"):
@@ -327,13 +327,13 @@ class TestAsyncCards:
                 card_id="",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list(self, async_client: AsyncRain) -> None:
         card = await async_client.cards.list()
         assert_matches_type(CardListResponse, card, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncRain) -> None:
         card = await async_client.cards.list(
@@ -345,7 +345,7 @@ class TestAsyncCards:
         )
         assert_matches_type(CardListResponse, card, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncRain) -> None:
         response = await async_client.cards.with_raw_response.list()
@@ -355,7 +355,7 @@ class TestAsyncCards:
         card = await response.parse()
         assert_matches_type(CardListResponse, card, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncRain) -> None:
         async with async_client.cards.with_streaming_response.list() as response:
@@ -367,7 +367,7 @@ class TestAsyncCards:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_retrieve_secrets(self, async_client: AsyncRain) -> None:
         card = await async_client.cards.retrieve_secrets(
@@ -376,7 +376,7 @@ class TestAsyncCards:
         )
         assert_matches_type(CardRetrieveSecretsResponse, card, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_retrieve_secrets(self, async_client: AsyncRain) -> None:
         response = await async_client.cards.with_raw_response.retrieve_secrets(
@@ -389,7 +389,7 @@ class TestAsyncCards:
         card = await response.parse()
         assert_matches_type(CardRetrieveSecretsResponse, card, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_retrieve_secrets(self, async_client: AsyncRain) -> None:
         async with async_client.cards.with_streaming_response.retrieve_secrets(
@@ -404,7 +404,7 @@ class TestAsyncCards:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_retrieve_secrets(self, async_client: AsyncRain) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `card_id` but received ''"):

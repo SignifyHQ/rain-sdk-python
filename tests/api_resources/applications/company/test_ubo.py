@@ -20,7 +20,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestUbo:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_update(self, client: Rain) -> None:
         ubo = client.applications.company.ubo.update(
@@ -29,7 +29,7 @@ class TestUbo:
         )
         assert_matches_type(IssuingCompany, ubo, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_update_with_all_params(self, client: Rain) -> None:
         ubo = client.applications.company.ubo.update(
@@ -53,7 +53,7 @@ class TestUbo:
         )
         assert_matches_type(IssuingCompany, ubo, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_update(self, client: Rain) -> None:
         response = client.applications.company.ubo.with_raw_response.update(
@@ -66,7 +66,7 @@ class TestUbo:
         ubo = response.parse()
         assert_matches_type(IssuingCompany, ubo, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_update(self, client: Rain) -> None:
         with client.applications.company.ubo.with_streaming_response.update(
@@ -81,7 +81,7 @@ class TestUbo:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_update(self, client: Rain) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `company_id` but received ''"):
@@ -96,7 +96,7 @@ class TestUbo:
                 company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_upload_document(self, client: Rain) -> None:
         with pytest.warns(DeprecationWarning):
@@ -108,7 +108,7 @@ class TestUbo:
 
         assert ubo is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_upload_document_with_all_params(self, client: Rain) -> None:
         with pytest.warns(DeprecationWarning):
@@ -123,7 +123,7 @@ class TestUbo:
 
         assert ubo is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_upload_document(self, client: Rain) -> None:
         with pytest.warns(DeprecationWarning):
@@ -138,7 +138,7 @@ class TestUbo:
         ubo = response.parse()
         assert ubo is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_upload_document(self, client: Rain) -> None:
         with pytest.warns(DeprecationWarning):
@@ -155,7 +155,7 @@ class TestUbo:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_upload_document(self, client: Rain) -> None:
         with pytest.warns(DeprecationWarning):
@@ -172,7 +172,7 @@ class TestAsyncUbo:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_update(self, async_client: AsyncRain) -> None:
         ubo = await async_client.applications.company.ubo.update(
@@ -181,7 +181,7 @@ class TestAsyncUbo:
         )
         assert_matches_type(IssuingCompany, ubo, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_update_with_all_params(self, async_client: AsyncRain) -> None:
         ubo = await async_client.applications.company.ubo.update(
@@ -205,7 +205,7 @@ class TestAsyncUbo:
         )
         assert_matches_type(IssuingCompany, ubo, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_update(self, async_client: AsyncRain) -> None:
         response = await async_client.applications.company.ubo.with_raw_response.update(
@@ -218,7 +218,7 @@ class TestAsyncUbo:
         ubo = await response.parse()
         assert_matches_type(IssuingCompany, ubo, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_update(self, async_client: AsyncRain) -> None:
         async with async_client.applications.company.ubo.with_streaming_response.update(
@@ -233,7 +233,7 @@ class TestAsyncUbo:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_update(self, async_client: AsyncRain) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `company_id` but received ''"):
@@ -248,7 +248,7 @@ class TestAsyncUbo:
                 company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_upload_document(self, async_client: AsyncRain) -> None:
         with pytest.warns(DeprecationWarning):
@@ -260,7 +260,7 @@ class TestAsyncUbo:
 
         assert ubo is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_upload_document_with_all_params(self, async_client: AsyncRain) -> None:
         with pytest.warns(DeprecationWarning):
@@ -275,7 +275,7 @@ class TestAsyncUbo:
 
         assert ubo is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_upload_document(self, async_client: AsyncRain) -> None:
         with pytest.warns(DeprecationWarning):
@@ -290,7 +290,7 @@ class TestAsyncUbo:
         ubo = await response.parse()
         assert ubo is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_upload_document(self, async_client: AsyncRain) -> None:
         with pytest.warns(DeprecationWarning):
@@ -307,7 +307,7 @@ class TestAsyncUbo:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_upload_document(self, async_client: AsyncRain) -> None:
         with pytest.warns(DeprecationWarning):

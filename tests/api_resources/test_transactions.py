@@ -22,7 +22,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestTransactions:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_retrieve(self, client: Rain) -> None:
         transaction = client.transactions.retrieve(
@@ -30,7 +30,7 @@ class TestTransactions:
         )
         assert_matches_type(IssuingTransaction, transaction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_retrieve(self, client: Rain) -> None:
         response = client.transactions.with_raw_response.retrieve(
@@ -42,7 +42,7 @@ class TestTransactions:
         transaction = response.parse()
         assert_matches_type(IssuingTransaction, transaction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_retrieve(self, client: Rain) -> None:
         with client.transactions.with_streaming_response.retrieve(
@@ -56,7 +56,7 @@ class TestTransactions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_retrieve(self, client: Rain) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `transaction_id` but received ''"):
@@ -64,7 +64,7 @@ class TestTransactions:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_update(self, client: Rain) -> None:
         transaction = client.transactions.update(
@@ -72,7 +72,7 @@ class TestTransactions:
         )
         assert transaction is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_update_with_all_params(self, client: Rain) -> None:
         transaction = client.transactions.update(
@@ -81,7 +81,7 @@ class TestTransactions:
         )
         assert transaction is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_update(self, client: Rain) -> None:
         response = client.transactions.with_raw_response.update(
@@ -93,7 +93,7 @@ class TestTransactions:
         transaction = response.parse()
         assert transaction is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_update(self, client: Rain) -> None:
         with client.transactions.with_streaming_response.update(
@@ -107,7 +107,7 @@ class TestTransactions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_update(self, client: Rain) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `transaction_id` but received ''"):
@@ -115,13 +115,13 @@ class TestTransactions:
                 transaction_id="",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list(self, client: Rain) -> None:
         transaction = client.transactions.list()
         assert_matches_type(TransactionListResponse, transaction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list_with_all_params(self, client: Rain) -> None:
         transaction = client.transactions.list(
@@ -139,7 +139,7 @@ class TestTransactions:
         )
         assert_matches_type(TransactionListResponse, transaction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_list(self, client: Rain) -> None:
         response = client.transactions.with_raw_response.list()
@@ -149,7 +149,7 @@ class TestTransactions:
         transaction = response.parse()
         assert_matches_type(TransactionListResponse, transaction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_list(self, client: Rain) -> None:
         with client.transactions.with_streaming_response.list() as response:
@@ -161,7 +161,7 @@ class TestTransactions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_create_dispute(self, client: Rain) -> None:
         transaction = client.transactions.create_dispute(
@@ -169,7 +169,7 @@ class TestTransactions:
         )
         assert_matches_type(IssuingDispute, transaction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_create_dispute_with_all_params(self, client: Rain) -> None:
         transaction = client.transactions.create_dispute(
@@ -178,7 +178,7 @@ class TestTransactions:
         )
         assert_matches_type(IssuingDispute, transaction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_create_dispute(self, client: Rain) -> None:
         response = client.transactions.with_raw_response.create_dispute(
@@ -190,7 +190,7 @@ class TestTransactions:
         transaction = response.parse()
         assert_matches_type(IssuingDispute, transaction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_create_dispute(self, client: Rain) -> None:
         with client.transactions.with_streaming_response.create_dispute(
@@ -204,7 +204,7 @@ class TestTransactions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_create_dispute(self, client: Rain) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `transaction_id` but received ''"):
@@ -218,7 +218,7 @@ class TestAsyncTransactions:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncRain) -> None:
         transaction = await async_client.transactions.retrieve(
@@ -226,7 +226,7 @@ class TestAsyncTransactions:
         )
         assert_matches_type(IssuingTransaction, transaction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncRain) -> None:
         response = await async_client.transactions.with_raw_response.retrieve(
@@ -238,7 +238,7 @@ class TestAsyncTransactions:
         transaction = await response.parse()
         assert_matches_type(IssuingTransaction, transaction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncRain) -> None:
         async with async_client.transactions.with_streaming_response.retrieve(
@@ -252,7 +252,7 @@ class TestAsyncTransactions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_retrieve(self, async_client: AsyncRain) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `transaction_id` but received ''"):
@@ -260,7 +260,7 @@ class TestAsyncTransactions:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_update(self, async_client: AsyncRain) -> None:
         transaction = await async_client.transactions.update(
@@ -268,7 +268,7 @@ class TestAsyncTransactions:
         )
         assert transaction is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_update_with_all_params(self, async_client: AsyncRain) -> None:
         transaction = await async_client.transactions.update(
@@ -277,7 +277,7 @@ class TestAsyncTransactions:
         )
         assert transaction is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_update(self, async_client: AsyncRain) -> None:
         response = await async_client.transactions.with_raw_response.update(
@@ -289,7 +289,7 @@ class TestAsyncTransactions:
         transaction = await response.parse()
         assert transaction is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_update(self, async_client: AsyncRain) -> None:
         async with async_client.transactions.with_streaming_response.update(
@@ -303,7 +303,7 @@ class TestAsyncTransactions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_update(self, async_client: AsyncRain) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `transaction_id` but received ''"):
@@ -311,13 +311,13 @@ class TestAsyncTransactions:
                 transaction_id="",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list(self, async_client: AsyncRain) -> None:
         transaction = await async_client.transactions.list()
         assert_matches_type(TransactionListResponse, transaction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncRain) -> None:
         transaction = await async_client.transactions.list(
@@ -335,7 +335,7 @@ class TestAsyncTransactions:
         )
         assert_matches_type(TransactionListResponse, transaction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncRain) -> None:
         response = await async_client.transactions.with_raw_response.list()
@@ -345,7 +345,7 @@ class TestAsyncTransactions:
         transaction = await response.parse()
         assert_matches_type(TransactionListResponse, transaction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncRain) -> None:
         async with async_client.transactions.with_streaming_response.list() as response:
@@ -357,7 +357,7 @@ class TestAsyncTransactions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_create_dispute(self, async_client: AsyncRain) -> None:
         transaction = await async_client.transactions.create_dispute(
@@ -365,7 +365,7 @@ class TestAsyncTransactions:
         )
         assert_matches_type(IssuingDispute, transaction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_create_dispute_with_all_params(self, async_client: AsyncRain) -> None:
         transaction = await async_client.transactions.create_dispute(
@@ -374,7 +374,7 @@ class TestAsyncTransactions:
         )
         assert_matches_type(IssuingDispute, transaction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_create_dispute(self, async_client: AsyncRain) -> None:
         response = await async_client.transactions.with_raw_response.create_dispute(
@@ -386,7 +386,7 @@ class TestAsyncTransactions:
         transaction = await response.parse()
         assert_matches_type(IssuingDispute, transaction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_create_dispute(self, async_client: AsyncRain) -> None:
         async with async_client.transactions.with_streaming_response.create_dispute(
@@ -400,7 +400,7 @@ class TestAsyncTransactions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_create_dispute(self, async_client: AsyncRain) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `transaction_id` but received ''"):
