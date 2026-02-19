@@ -79,7 +79,7 @@ class TestEvidence:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_upload(self, client: Rain) -> None:
         evidence = client.disputes.evidence.upload(
@@ -90,7 +90,7 @@ class TestEvidence:
         )
         assert evidence is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_upload(self, client: Rain) -> None:
         response = client.disputes.evidence.with_raw_response.upload(
@@ -105,7 +105,7 @@ class TestEvidence:
         evidence = response.parse()
         assert evidence is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_upload(self, client: Rain) -> None:
         with client.disputes.evidence.with_streaming_response.upload(
@@ -122,7 +122,7 @@ class TestEvidence:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_upload(self, client: Rain) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `dispute_id` but received ''"):
@@ -195,7 +195,7 @@ class TestAsyncEvidence:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_upload(self, async_client: AsyncRain) -> None:
         evidence = await async_client.disputes.evidence.upload(
@@ -206,7 +206,7 @@ class TestAsyncEvidence:
         )
         assert evidence is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_upload(self, async_client: AsyncRain) -> None:
         response = await async_client.disputes.evidence.with_raw_response.upload(
@@ -221,7 +221,7 @@ class TestAsyncEvidence:
         evidence = await response.parse()
         assert evidence is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_upload(self, async_client: AsyncRain) -> None:
         async with async_client.disputes.evidence.with_streaming_response.upload(
@@ -238,7 +238,7 @@ class TestAsyncEvidence:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_upload(self, async_client: AsyncRain) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `dispute_id` but received ''"):

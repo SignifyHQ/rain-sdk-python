@@ -79,7 +79,7 @@ class TestReceipt:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_upload(self, client: Rain) -> None:
         receipt = client.transactions.receipt.upload(
@@ -88,7 +88,7 @@ class TestReceipt:
         )
         assert receipt is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_upload(self, client: Rain) -> None:
         response = client.transactions.receipt.with_raw_response.upload(
@@ -101,7 +101,7 @@ class TestReceipt:
         receipt = response.parse()
         assert receipt is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_upload(self, client: Rain) -> None:
         with client.transactions.receipt.with_streaming_response.upload(
@@ -116,7 +116,7 @@ class TestReceipt:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_upload(self, client: Rain) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `transaction_id` but received ''"):
@@ -187,7 +187,7 @@ class TestAsyncReceipt:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_upload(self, async_client: AsyncRain) -> None:
         receipt = await async_client.transactions.receipt.upload(
@@ -196,7 +196,7 @@ class TestAsyncReceipt:
         )
         assert receipt is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_upload(self, async_client: AsyncRain) -> None:
         response = await async_client.transactions.receipt.with_raw_response.upload(
@@ -209,7 +209,7 @@ class TestAsyncReceipt:
         receipt = await response.parse()
         assert receipt is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_upload(self, async_client: AsyncRain) -> None:
         async with async_client.transactions.receipt.with_streaming_response.upload(
@@ -224,7 +224,7 @@ class TestAsyncReceipt:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_upload(self, async_client: AsyncRain) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `transaction_id` but received ''"):

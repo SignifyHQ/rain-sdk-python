@@ -17,7 +17,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestDisputes:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_retrieve(self, client: Rain) -> None:
         dispute = client.disputes.retrieve(
@@ -25,7 +25,7 @@ class TestDisputes:
         )
         assert_matches_type(IssuingDispute, dispute, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_retrieve(self, client: Rain) -> None:
         response = client.disputes.with_raw_response.retrieve(
@@ -37,7 +37,7 @@ class TestDisputes:
         dispute = response.parse()
         assert_matches_type(IssuingDispute, dispute, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_retrieve(self, client: Rain) -> None:
         with client.disputes.with_streaming_response.retrieve(
@@ -51,7 +51,7 @@ class TestDisputes:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_retrieve(self, client: Rain) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `dispute_id` but received ''"):
@@ -59,7 +59,7 @@ class TestDisputes:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_update(self, client: Rain) -> None:
         dispute = client.disputes.update(
@@ -67,7 +67,7 @@ class TestDisputes:
         )
         assert dispute is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_update_with_all_params(self, client: Rain) -> None:
         dispute = client.disputes.update(
@@ -77,7 +77,7 @@ class TestDisputes:
         )
         assert dispute is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_update(self, client: Rain) -> None:
         response = client.disputes.with_raw_response.update(
@@ -89,7 +89,7 @@ class TestDisputes:
         dispute = response.parse()
         assert dispute is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_update(self, client: Rain) -> None:
         with client.disputes.with_streaming_response.update(
@@ -103,7 +103,7 @@ class TestDisputes:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_update(self, client: Rain) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `dispute_id` but received ''"):
@@ -111,13 +111,13 @@ class TestDisputes:
                 dispute_id="",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list(self, client: Rain) -> None:
         dispute = client.disputes.list()
         assert_matches_type(DisputeListResponse, dispute, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list_with_all_params(self, client: Rain) -> None:
         dispute = client.disputes.list(
@@ -129,7 +129,7 @@ class TestDisputes:
         )
         assert_matches_type(DisputeListResponse, dispute, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_list(self, client: Rain) -> None:
         response = client.disputes.with_raw_response.list()
@@ -139,7 +139,7 @@ class TestDisputes:
         dispute = response.parse()
         assert_matches_type(DisputeListResponse, dispute, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_list(self, client: Rain) -> None:
         with client.disputes.with_streaming_response.list() as response:
@@ -157,7 +157,7 @@ class TestAsyncDisputes:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncRain) -> None:
         dispute = await async_client.disputes.retrieve(
@@ -165,7 +165,7 @@ class TestAsyncDisputes:
         )
         assert_matches_type(IssuingDispute, dispute, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncRain) -> None:
         response = await async_client.disputes.with_raw_response.retrieve(
@@ -177,7 +177,7 @@ class TestAsyncDisputes:
         dispute = await response.parse()
         assert_matches_type(IssuingDispute, dispute, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncRain) -> None:
         async with async_client.disputes.with_streaming_response.retrieve(
@@ -191,7 +191,7 @@ class TestAsyncDisputes:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_retrieve(self, async_client: AsyncRain) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `dispute_id` but received ''"):
@@ -199,7 +199,7 @@ class TestAsyncDisputes:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_update(self, async_client: AsyncRain) -> None:
         dispute = await async_client.disputes.update(
@@ -207,7 +207,7 @@ class TestAsyncDisputes:
         )
         assert dispute is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_update_with_all_params(self, async_client: AsyncRain) -> None:
         dispute = await async_client.disputes.update(
@@ -217,7 +217,7 @@ class TestAsyncDisputes:
         )
         assert dispute is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_update(self, async_client: AsyncRain) -> None:
         response = await async_client.disputes.with_raw_response.update(
@@ -229,7 +229,7 @@ class TestAsyncDisputes:
         dispute = await response.parse()
         assert dispute is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_update(self, async_client: AsyncRain) -> None:
         async with async_client.disputes.with_streaming_response.update(
@@ -243,7 +243,7 @@ class TestAsyncDisputes:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_update(self, async_client: AsyncRain) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `dispute_id` but received ''"):
@@ -251,13 +251,13 @@ class TestAsyncDisputes:
                 dispute_id="",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list(self, async_client: AsyncRain) -> None:
         dispute = await async_client.disputes.list()
         assert_matches_type(DisputeListResponse, dispute, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncRain) -> None:
         dispute = await async_client.disputes.list(
@@ -269,7 +269,7 @@ class TestAsyncDisputes:
         )
         assert_matches_type(DisputeListResponse, dispute, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncRain) -> None:
         response = await async_client.disputes.with_raw_response.list()
@@ -279,7 +279,7 @@ class TestAsyncDisputes:
         dispute = await response.parse()
         assert_matches_type(DisputeListResponse, dispute, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncRain) -> None:
         async with async_client.disputes.with_streaming_response.list() as response:
