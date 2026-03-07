@@ -852,7 +852,7 @@ class TestCompany:
     def test_method_upload_document(self, client: Rain) -> None:
         company = client.applications.company.upload_document(
             company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            document=b"raw file contents",
+            document=b"Example data",
         )
         assert company is None
 
@@ -861,7 +861,7 @@ class TestCompany:
     def test_method_upload_document_with_all_params(self, client: Rain) -> None:
         company = client.applications.company.upload_document(
             company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            document=b"raw file contents",
+            document=b"Example data",
             country="xxx",
             name="name",
             side="front",
@@ -874,7 +874,7 @@ class TestCompany:
     def test_raw_response_upload_document(self, client: Rain) -> None:
         response = client.applications.company.with_raw_response.upload_document(
             company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            document=b"raw file contents",
+            document=b"Example data",
         )
 
         assert response.is_closed is True
@@ -887,7 +887,7 @@ class TestCompany:
     def test_streaming_response_upload_document(self, client: Rain) -> None:
         with client.applications.company.with_streaming_response.upload_document(
             company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            document=b"raw file contents",
+            document=b"Example data",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -903,7 +903,7 @@ class TestCompany:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `company_id` but received ''"):
             client.applications.company.with_raw_response.upload_document(
                 company_id="",
-                document=b"raw file contents",
+                document=b"Example data",
             )
 
 
@@ -1741,7 +1741,7 @@ class TestAsyncCompany:
     async def test_method_upload_document(self, async_client: AsyncRain) -> None:
         company = await async_client.applications.company.upload_document(
             company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            document=b"raw file contents",
+            document=b"Example data",
         )
         assert company is None
 
@@ -1750,7 +1750,7 @@ class TestAsyncCompany:
     async def test_method_upload_document_with_all_params(self, async_client: AsyncRain) -> None:
         company = await async_client.applications.company.upload_document(
             company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            document=b"raw file contents",
+            document=b"Example data",
             country="xxx",
             name="name",
             side="front",
@@ -1763,7 +1763,7 @@ class TestAsyncCompany:
     async def test_raw_response_upload_document(self, async_client: AsyncRain) -> None:
         response = await async_client.applications.company.with_raw_response.upload_document(
             company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            document=b"raw file contents",
+            document=b"Example data",
         )
 
         assert response.is_closed is True
@@ -1776,7 +1776,7 @@ class TestAsyncCompany:
     async def test_streaming_response_upload_document(self, async_client: AsyncRain) -> None:
         async with async_client.applications.company.with_streaming_response.upload_document(
             company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            document=b"raw file contents",
+            document=b"Example data",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -1792,5 +1792,5 @@ class TestAsyncCompany:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `company_id` but received ''"):
             await async_client.applications.company.with_raw_response.upload_document(
                 company_id="",
-                document=b"raw file contents",
+                document=b"Example data",
             )
