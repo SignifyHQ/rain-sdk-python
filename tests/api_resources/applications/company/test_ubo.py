@@ -102,7 +102,7 @@ class TestUbo:
         with pytest.warns(DeprecationWarning):
             ubo = client.applications.company.ubo.upload_document(
                 company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                document=b"raw file contents",
+                document=b"Example data",
                 email="email",
             )
 
@@ -114,7 +114,7 @@ class TestUbo:
         with pytest.warns(DeprecationWarning):
             ubo = client.applications.company.ubo.upload_document(
                 company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                document=b"raw file contents",
+                document=b"Example data",
                 email="email",
                 country="xxx",
                 side="front",
@@ -129,7 +129,7 @@ class TestUbo:
         with pytest.warns(DeprecationWarning):
             response = client.applications.company.ubo.with_raw_response.upload_document(
                 company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                document=b"raw file contents",
+                document=b"Example data",
                 email="email",
             )
 
@@ -144,7 +144,7 @@ class TestUbo:
         with pytest.warns(DeprecationWarning):
             with client.applications.company.ubo.with_streaming_response.upload_document(
                 company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                document=b"raw file contents",
+                document=b"Example data",
                 email="email",
             ) as response:
                 assert not response.is_closed
@@ -162,7 +162,7 @@ class TestUbo:
             with pytest.raises(ValueError, match=r"Expected a non-empty value for `company_id` but received ''"):
                 client.applications.company.ubo.with_raw_response.upload_document(
                     company_id="",
-                    document=b"raw file contents",
+                    document=b"Example data",
                     email="email",
                 )
 
@@ -254,7 +254,7 @@ class TestAsyncUbo:
         with pytest.warns(DeprecationWarning):
             ubo = await async_client.applications.company.ubo.upload_document(
                 company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                document=b"raw file contents",
+                document=b"Example data",
                 email="email",
             )
 
@@ -266,7 +266,7 @@ class TestAsyncUbo:
         with pytest.warns(DeprecationWarning):
             ubo = await async_client.applications.company.ubo.upload_document(
                 company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                document=b"raw file contents",
+                document=b"Example data",
                 email="email",
                 country="xxx",
                 side="front",
@@ -281,7 +281,7 @@ class TestAsyncUbo:
         with pytest.warns(DeprecationWarning):
             response = await async_client.applications.company.ubo.with_raw_response.upload_document(
                 company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                document=b"raw file contents",
+                document=b"Example data",
                 email="email",
             )
 
@@ -296,7 +296,7 @@ class TestAsyncUbo:
         with pytest.warns(DeprecationWarning):
             async with async_client.applications.company.ubo.with_streaming_response.upload_document(
                 company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                document=b"raw file contents",
+                document=b"Example data",
                 email="email",
             ) as response:
                 assert not response.is_closed
@@ -314,6 +314,6 @@ class TestAsyncUbo:
             with pytest.raises(ValueError, match=r"Expected a non-empty value for `company_id` but received ''"):
                 await async_client.applications.company.ubo.with_raw_response.upload_document(
                     company_id="",
-                    document=b"raw file contents",
+                    document=b"Example data",
                     email="email",
                 )

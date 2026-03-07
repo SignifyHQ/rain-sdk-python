@@ -21,7 +21,7 @@ class TestDocument:
         document = client.applications.company.ubo.document.upload(
             ubo_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            document=b"raw file contents",
+            document=b"Example data",
         )
         assert document is None
 
@@ -31,7 +31,7 @@ class TestDocument:
         document = client.applications.company.ubo.document.upload(
             ubo_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            document=b"raw file contents",
+            document=b"Example data",
             country="xxx",
             side="front",
             type="idCard",
@@ -44,7 +44,7 @@ class TestDocument:
         response = client.applications.company.ubo.document.with_raw_response.upload(
             ubo_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            document=b"raw file contents",
+            document=b"Example data",
         )
 
         assert response.is_closed is True
@@ -58,7 +58,7 @@ class TestDocument:
         with client.applications.company.ubo.document.with_streaming_response.upload(
             ubo_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            document=b"raw file contents",
+            document=b"Example data",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -75,14 +75,14 @@ class TestDocument:
             client.applications.company.ubo.document.with_raw_response.upload(
                 ubo_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 company_id="",
-                document=b"raw file contents",
+                document=b"Example data",
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `ubo_id` but received ''"):
             client.applications.company.ubo.document.with_raw_response.upload(
                 ubo_id="",
                 company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                document=b"raw file contents",
+                document=b"Example data",
             )
 
 
@@ -97,7 +97,7 @@ class TestAsyncDocument:
         document = await async_client.applications.company.ubo.document.upload(
             ubo_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            document=b"raw file contents",
+            document=b"Example data",
         )
         assert document is None
 
@@ -107,7 +107,7 @@ class TestAsyncDocument:
         document = await async_client.applications.company.ubo.document.upload(
             ubo_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            document=b"raw file contents",
+            document=b"Example data",
             country="xxx",
             side="front",
             type="idCard",
@@ -120,7 +120,7 @@ class TestAsyncDocument:
         response = await async_client.applications.company.ubo.document.with_raw_response.upload(
             ubo_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            document=b"raw file contents",
+            document=b"Example data",
         )
 
         assert response.is_closed is True
@@ -134,7 +134,7 @@ class TestAsyncDocument:
         async with async_client.applications.company.ubo.document.with_streaming_response.upload(
             ubo_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            document=b"raw file contents",
+            document=b"Example data",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -151,12 +151,12 @@ class TestAsyncDocument:
             await async_client.applications.company.ubo.document.with_raw_response.upload(
                 ubo_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 company_id="",
-                document=b"raw file contents",
+                document=b"Example data",
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `ubo_id` but received ''"):
             await async_client.applications.company.ubo.document.with_raw_response.upload(
                 ubo_id="",
                 company_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                document=b"raw file contents",
+                document=b"Example data",
             )

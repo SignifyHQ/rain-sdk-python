@@ -596,7 +596,7 @@ class TestUser:
     def test_method_upload_document(self, client: Rain) -> None:
         user = client.applications.user.upload_document(
             user_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            document=b"raw file contents",
+            document=b"Example data",
         )
         assert user is None
 
@@ -605,7 +605,7 @@ class TestUser:
     def test_method_upload_document_with_all_params(self, client: Rain) -> None:
         user = client.applications.user.upload_document(
             user_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            document=b"raw file contents",
+            document=b"Example data",
             country="xxx",
             name="name",
             side="front",
@@ -618,7 +618,7 @@ class TestUser:
     def test_raw_response_upload_document(self, client: Rain) -> None:
         response = client.applications.user.with_raw_response.upload_document(
             user_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            document=b"raw file contents",
+            document=b"Example data",
         )
 
         assert response.is_closed is True
@@ -631,7 +631,7 @@ class TestUser:
     def test_streaming_response_upload_document(self, client: Rain) -> None:
         with client.applications.user.with_streaming_response.upload_document(
             user_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            document=b"raw file contents",
+            document=b"Example data",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -647,7 +647,7 @@ class TestUser:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `user_id` but received ''"):
             client.applications.user.with_raw_response.upload_document(
                 user_id="",
-                document=b"raw file contents",
+                document=b"Example data",
             )
 
 
@@ -1229,7 +1229,7 @@ class TestAsyncUser:
     async def test_method_upload_document(self, async_client: AsyncRain) -> None:
         user = await async_client.applications.user.upload_document(
             user_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            document=b"raw file contents",
+            document=b"Example data",
         )
         assert user is None
 
@@ -1238,7 +1238,7 @@ class TestAsyncUser:
     async def test_method_upload_document_with_all_params(self, async_client: AsyncRain) -> None:
         user = await async_client.applications.user.upload_document(
             user_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            document=b"raw file contents",
+            document=b"Example data",
             country="xxx",
             name="name",
             side="front",
@@ -1251,7 +1251,7 @@ class TestAsyncUser:
     async def test_raw_response_upload_document(self, async_client: AsyncRain) -> None:
         response = await async_client.applications.user.with_raw_response.upload_document(
             user_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            document=b"raw file contents",
+            document=b"Example data",
         )
 
         assert response.is_closed is True
@@ -1264,7 +1264,7 @@ class TestAsyncUser:
     async def test_streaming_response_upload_document(self, async_client: AsyncRain) -> None:
         async with async_client.applications.user.with_streaming_response.upload_document(
             user_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            document=b"raw file contents",
+            document=b"Example data",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -1280,5 +1280,5 @@ class TestAsyncUser:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `user_id` but received ''"):
             await async_client.applications.user.with_raw_response.upload_document(
                 user_id="",
-                document=b"raw file contents",
+                document=b"Example data",
             )

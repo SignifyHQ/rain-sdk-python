@@ -84,7 +84,7 @@ class TestEvidence:
     def test_method_upload(self, client: Rain) -> None:
         evidence = client.disputes.evidence.upload(
             dispute_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            evidence=b"raw file contents",
+            evidence=b"Example data",
             name="name",
             type="type",
         )
@@ -95,7 +95,7 @@ class TestEvidence:
     def test_raw_response_upload(self, client: Rain) -> None:
         response = client.disputes.evidence.with_raw_response.upload(
             dispute_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            evidence=b"raw file contents",
+            evidence=b"Example data",
             name="name",
             type="type",
         )
@@ -110,7 +110,7 @@ class TestEvidence:
     def test_streaming_response_upload(self, client: Rain) -> None:
         with client.disputes.evidence.with_streaming_response.upload(
             dispute_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            evidence=b"raw file contents",
+            evidence=b"Example data",
             name="name",
             type="type",
         ) as response:
@@ -128,7 +128,7 @@ class TestEvidence:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `dispute_id` but received ''"):
             client.disputes.evidence.with_raw_response.upload(
                 dispute_id="",
-                evidence=b"raw file contents",
+                evidence=b"Example data",
                 name="name",
                 type="type",
             )
@@ -200,7 +200,7 @@ class TestAsyncEvidence:
     async def test_method_upload(self, async_client: AsyncRain) -> None:
         evidence = await async_client.disputes.evidence.upload(
             dispute_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            evidence=b"raw file contents",
+            evidence=b"Example data",
             name="name",
             type="type",
         )
@@ -211,7 +211,7 @@ class TestAsyncEvidence:
     async def test_raw_response_upload(self, async_client: AsyncRain) -> None:
         response = await async_client.disputes.evidence.with_raw_response.upload(
             dispute_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            evidence=b"raw file contents",
+            evidence=b"Example data",
             name="name",
             type="type",
         )
@@ -226,7 +226,7 @@ class TestAsyncEvidence:
     async def test_streaming_response_upload(self, async_client: AsyncRain) -> None:
         async with async_client.disputes.evidence.with_streaming_response.upload(
             dispute_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            evidence=b"raw file contents",
+            evidence=b"Example data",
             name="name",
             type="type",
         ) as response:
@@ -244,7 +244,7 @@ class TestAsyncEvidence:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `dispute_id` but received ''"):
             await async_client.disputes.evidence.with_raw_response.upload(
                 dispute_id="",
-                evidence=b"raw file contents",
+                evidence=b"Example data",
                 name="name",
                 type="type",
             )
