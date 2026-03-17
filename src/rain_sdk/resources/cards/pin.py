@@ -28,7 +28,7 @@ class PinResource(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/stainless-sdks/rain-hello-world-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/SignifyHQ/rain-sdk-python#accessing-raw-response-data-eg-headers
         """
         return PinResourceWithRawResponse(self)
 
@@ -37,7 +37,7 @@ class PinResource(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/stainless-sdks/rain-hello-world-python#with_streaming_response
+        For more information, see https://www.github.com/SignifyHQ/rain-sdk-python#with_streaming_response
         """
         return PinResourceWithStreamingResponse(self)
 
@@ -124,7 +124,7 @@ class AsyncPinResource(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/stainless-sdks/rain-hello-world-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/SignifyHQ/rain-sdk-python#accessing-raw-response-data-eg-headers
         """
         return AsyncPinResourceWithRawResponse(self)
 
@@ -133,7 +133,7 @@ class AsyncPinResource(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/stainless-sdks/rain-hello-world-python#with_streaming_response
+        For more information, see https://www.github.com/SignifyHQ/rain-sdk-python#with_streaming_response
         """
         return AsyncPinResourceWithStreamingResponse(self)
 
