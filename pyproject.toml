@@ -1,5 +1,5 @@
 [project]
-name = "rain_sdk"
+name = "rain-sdk"
 version = "0.0.1"
 description = "The official Python library for the rain API"
 dynamic = ["readme"]
