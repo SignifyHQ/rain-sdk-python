@@ -5,7 +5,7 @@ from __future__ import annotations
 import httpx
 
 from ..._types import Body, Query, Headers, NoneType, NotGiven, not_given
-from ..._utils import maybe_transform, async_maybe_transform
+from ..._utils import path_template, maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
@@ -69,7 +69,7 @@ class PinResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `card_id` but received {card_id!r}")
         extra_headers = {"SessionId": session_id, **(extra_headers or {})}
         return self._get(
-            f"/cards/{card_id}/pin",
+            path_template("/cards/{card_id}/pin", card_id=card_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -108,7 +108,7 @@ class PinResource(SyncAPIResource):
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         extra_headers.update({"SessionId": session_id})
         return self._put(
-            f"/cards/{card_id}/pin",
+            path_template("/cards/{card_id}/pin", card_id=card_id),
             body=maybe_transform({"encrypted_pin": encrypted_pin}, pin_update_params.PinUpdateParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -165,7 +165,7 @@ class AsyncPinResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `card_id` but received {card_id!r}")
         extra_headers = {"SessionId": session_id, **(extra_headers or {})}
         return await self._get(
-            f"/cards/{card_id}/pin",
+            path_template("/cards/{card_id}/pin", card_id=card_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -204,7 +204,7 @@ class AsyncPinResource(AsyncAPIResource):
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         extra_headers.update({"SessionId": session_id})
         return await self._put(
-            f"/cards/{card_id}/pin",
+            path_template("/cards/{card_id}/pin", card_id=card_id),
             body=await async_maybe_transform({"encrypted_pin": encrypted_pin}, pin_update_params.PinUpdateParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout

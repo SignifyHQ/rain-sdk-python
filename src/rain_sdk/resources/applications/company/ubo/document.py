@@ -8,7 +8,7 @@ from typing_extensions import Literal
 import httpx
 
 from ....._types import Body, Omit, Query, Headers, NoneType, NotGiven, FileTypes, omit, not_given
-from ....._utils import extract_files, maybe_transform, deepcopy_minimal, async_maybe_transform
+from ....._utils import extract_files, path_template, maybe_transform, deepcopy_minimal, async_maybe_transform
 from ....._compat import cached_property
 from ....._resource import SyncAPIResource, AsyncAPIResource
 from ....._response import (
@@ -122,7 +122,9 @@ class DocumentResource(SyncAPIResource):
         # multipart/form-data; boundary=---abc--
         extra_headers["Content-Type"] = "multipart/form-data"
         return self._put(
-            f"/applications/company/{company_id}/ubo/{ubo_id}/document",
+            path_template(
+                "/applications/company/{company_id}/ubo/{ubo_id}/document", company_id=company_id, ubo_id=ubo_id
+            ),
             body=maybe_transform(body, document_upload_params.DocumentUploadParams),
             files=files,
             options=make_request_options(
@@ -231,7 +233,9 @@ class AsyncDocumentResource(AsyncAPIResource):
         # multipart/form-data; boundary=---abc--
         extra_headers["Content-Type"] = "multipart/form-data"
         return await self._put(
-            f"/applications/company/{company_id}/ubo/{ubo_id}/document",
+            path_template(
+                "/applications/company/{company_id}/ubo/{ubo_id}/document", company_id=company_id, ubo_id=ubo_id
+            ),
             body=await async_maybe_transform(body, document_upload_params.DocumentUploadParams),
             files=files,
             options=make_request_options(
