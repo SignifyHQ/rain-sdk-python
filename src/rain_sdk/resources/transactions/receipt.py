@@ -7,7 +7,7 @@ from typing import Mapping, cast
 import httpx
 
 from ..._types import Body, Query, Headers, NoneType, NotGiven, FileTypes, not_given
-from ..._utils import extract_files, maybe_transform, deepcopy_minimal, async_maybe_transform
+from ..._utils import extract_files, path_template, maybe_transform, deepcopy_minimal, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
@@ -79,7 +79,7 @@ class ReceiptResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `transaction_id` but received {transaction_id!r}")
         extra_headers = {"Accept": "application/octet-stream", **(extra_headers or {})}
         return self._get(
-            f"/transactions/{transaction_id}/receipt",
+            path_template("/transactions/{transaction_id}/receipt", transaction_id=transaction_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -124,7 +124,7 @@ class ReceiptResource(SyncAPIResource):
         # multipart/form-data; boundary=---abc--
         extra_headers["Content-Type"] = "multipart/form-data"
         return self._put(
-            f"/transactions/{transaction_id}/receipt",
+            path_template("/transactions/{transaction_id}/receipt", transaction_id=transaction_id),
             body=maybe_transform(body, receipt_upload_params.ReceiptUploadParams),
             files=files,
             options=make_request_options(
@@ -183,7 +183,7 @@ class AsyncReceiptResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `transaction_id` but received {transaction_id!r}")
         extra_headers = {"Accept": "application/octet-stream", **(extra_headers or {})}
         return await self._get(
-            f"/transactions/{transaction_id}/receipt",
+            path_template("/transactions/{transaction_id}/receipt", transaction_id=transaction_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -228,7 +228,7 @@ class AsyncReceiptResource(AsyncAPIResource):
         # multipart/form-data; boundary=---abc--
         extra_headers["Content-Type"] = "multipart/form-data"
         return await self._put(
-            f"/transactions/{transaction_id}/receipt",
+            path_template("/transactions/{transaction_id}/receipt", transaction_id=transaction_id),
             body=await async_maybe_transform(body, receipt_upload_params.ReceiptUploadParams),
             files=files,
             options=make_request_options(

@@ -17,7 +17,7 @@ from .ubo.ubo import (
     AsyncUboResourceWithStreamingResponse,
 )
 from ...._types import Body, Omit, Query, Headers, NoneType, NotGiven, FileTypes, omit, not_given
-from ...._utils import extract_files, maybe_transform, deepcopy_minimal, async_maybe_transform
+from ...._utils import extract_files, path_template, maybe_transform, deepcopy_minimal, async_maybe_transform
 from ...._compat import cached_property
 from ...._resource import SyncAPIResource, AsyncAPIResource
 from ...._response import (
@@ -170,7 +170,7 @@ class CompanyResource(SyncAPIResource):
         if not company_id:
             raise ValueError(f"Expected a non-empty value for `company_id` but received {company_id!r}")
         return self._get(
-            f"/applications/company/{company_id}",
+            path_template("/applications/company/{company_id}", company_id=company_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -215,7 +215,7 @@ class CompanyResource(SyncAPIResource):
         if not company_id:
             raise ValueError(f"Expected a non-empty value for `company_id` but received {company_id!r}")
         return self._patch(
-            f"/applications/company/{company_id}",
+            path_template("/applications/company/{company_id}", company_id=company_id),
             body=maybe_transform(
                 {
                     "address": address,
@@ -278,7 +278,7 @@ class CompanyResource(SyncAPIResource):
         if not company_id:
             raise ValueError(f"Expected a non-empty value for `company_id` but received {company_id!r}")
         return self._put(
-            f"/applications/company/{company_id}/reapply",
+            path_template("/applications/company/{company_id}/reapply", company_id=company_id),
             body=maybe_transform(
                 {
                     "address": address,
@@ -370,7 +370,7 @@ class CompanyResource(SyncAPIResource):
         # multipart/form-data; boundary=---abc--
         extra_headers["Content-Type"] = "multipart/form-data"
         return self._put(
-            f"/applications/company/{company_id}/document",
+            path_template("/applications/company/{company_id}/document", company_id=company_id),
             body=maybe_transform(body, company_upload_document_params.CompanyUploadDocumentParams),
             files=files,
             options=make_request_options(
@@ -509,7 +509,7 @@ class AsyncCompanyResource(AsyncAPIResource):
         if not company_id:
             raise ValueError(f"Expected a non-empty value for `company_id` but received {company_id!r}")
         return await self._get(
-            f"/applications/company/{company_id}",
+            path_template("/applications/company/{company_id}", company_id=company_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -554,7 +554,7 @@ class AsyncCompanyResource(AsyncAPIResource):
         if not company_id:
             raise ValueError(f"Expected a non-empty value for `company_id` but received {company_id!r}")
         return await self._patch(
-            f"/applications/company/{company_id}",
+            path_template("/applications/company/{company_id}", company_id=company_id),
             body=await async_maybe_transform(
                 {
                     "address": address,
@@ -617,7 +617,7 @@ class AsyncCompanyResource(AsyncAPIResource):
         if not company_id:
             raise ValueError(f"Expected a non-empty value for `company_id` but received {company_id!r}")
         return await self._put(
-            f"/applications/company/{company_id}/reapply",
+            path_template("/applications/company/{company_id}/reapply", company_id=company_id),
             body=await async_maybe_transform(
                 {
                     "address": address,
@@ -709,7 +709,7 @@ class AsyncCompanyResource(AsyncAPIResource):
         # multipart/form-data; boundary=---abc--
         extra_headers["Content-Type"] = "multipart/form-data"
         return await self._put(
-            f"/applications/company/{company_id}/document",
+            path_template("/applications/company/{company_id}/document", company_id=company_id),
             body=await async_maybe_transform(body, company_upload_document_params.CompanyUploadDocumentParams),
             files=files,
             options=make_request_options(
