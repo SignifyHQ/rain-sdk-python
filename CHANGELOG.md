@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.2.0 (2026-03-26)
+
+Full Changelog: [v0.1.0...v0.2.0](https://github.com/SignifyHQ/rain-sdk-python/compare/v0.1.0...v0.2.0)
+
+### Features
+
+* **internal:** implement indices array format for query and form serialization ([e034171](https://github.com/SignifyHQ/rain-sdk-python/commit/e034171972d4ec0447cbee8eeeb5e606f848c1c8))
+
+
+### Bug Fixes
+
+* sanitize endpoint path params ([79d1595](https://github.com/SignifyHQ/rain-sdk-python/commit/79d159573dc2afeeb50715a02dc83e27417c7484))
+
+
+### Chores
+
+* **ci:** skip lint on metadata-only changes ([a7f10b7](https://github.com/SignifyHQ/rain-sdk-python/commit/a7f10b7b66b895e5cf0ebfe279b3bd9699b9b4e4))
+* **internal:** update gitignore ([3d160ac](https://github.com/SignifyHQ/rain-sdk-python/commit/3d160acf459108d7b7bb4d3c4e851f801627716b))
+
 ## 0.1.0 (2026-03-17)
 
 Full Changelog: [v0.0.1...v0.1.0](https://github.com/SignifyHQ/rain-sdk-python/compare/v0.0.1...v0.1.0)
