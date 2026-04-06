@@ -18,7 +18,7 @@ from .document import (
     AsyncDocumentResourceWithStreamingResponse,
 )
 from ....._types import Body, Omit, Query, Headers, NoneType, NotGiven, FileTypes, omit, not_given
-from ....._utils import extract_files, maybe_transform, deepcopy_minimal, async_maybe_transform
+from ....._utils import extract_files, path_template, maybe_transform, deepcopy_minimal, async_maybe_transform
 from ....._compat import cached_property
 from ....._resource import SyncAPIResource, AsyncAPIResource
 from ....._response import (
@@ -111,7 +111,7 @@ class UboResource(SyncAPIResource):
         if not ubo_id:
             raise ValueError(f"Expected a non-empty value for `ubo_id` but received {ubo_id!r}")
         return self._patch(
-            f"/applications/company/{company_id}/ubo/{ubo_id}",
+            path_template("/applications/company/{company_id}/ubo/{ubo_id}", company_id=company_id, ubo_id=ubo_id),
             body=maybe_transform(
                 {
                     "address": address,
@@ -211,7 +211,7 @@ class UboResource(SyncAPIResource):
         # multipart/form-data; boundary=---abc--
         extra_headers["Content-Type"] = "multipart/form-data"
         return self._put(
-            f"/applications/company/{company_id}/ubo/document",
+            path_template("/applications/company/{company_id}/ubo/document", company_id=company_id),
             body=maybe_transform(body, ubo_upload_document_params.UboUploadDocumentParams),
             files=files,
             options=make_request_options(
@@ -297,7 +297,7 @@ class AsyncUboResource(AsyncAPIResource):
         if not ubo_id:
             raise ValueError(f"Expected a non-empty value for `ubo_id` but received {ubo_id!r}")
         return await self._patch(
-            f"/applications/company/{company_id}/ubo/{ubo_id}",
+            path_template("/applications/company/{company_id}/ubo/{ubo_id}", company_id=company_id, ubo_id=ubo_id),
             body=await async_maybe_transform(
                 {
                     "address": address,
@@ -397,7 +397,7 @@ class AsyncUboResource(AsyncAPIResource):
         # multipart/form-data; boundary=---abc--
         extra_headers["Content-Type"] = "multipart/form-data"
         return await self._put(
-            f"/applications/company/{company_id}/ubo/document",
+            path_template("/applications/company/{company_id}/ubo/document", company_id=company_id),
             body=await async_maybe_transform(body, ubo_upload_document_params.UboUploadDocumentParams),
             files=files,
             options=make_request_options(

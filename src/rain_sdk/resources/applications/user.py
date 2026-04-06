@@ -10,7 +10,14 @@ from typing_extensions import Literal, overload
 import httpx
 
 from ..._types import Body, Omit, Query, Headers, NoneType, NotGiven, FileTypes, omit, not_given
-from ..._utils import extract_files, required_args, maybe_transform, deepcopy_minimal, async_maybe_transform
+from ..._utils import (
+    extract_files,
+    path_template,
+    required_args,
+    maybe_transform,
+    deepcopy_minimal,
+    async_maybe_transform,
+)
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
@@ -437,7 +444,7 @@ class UserResource(SyncAPIResource):
         if not user_id:
             raise ValueError(f"Expected a non-empty value for `user_id` but received {user_id!r}")
         return self._get(
-            f"/applications/user/{user_id}",
+            path_template("/applications/user/{user_id}", user_id=user_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -511,7 +518,7 @@ class UserResource(SyncAPIResource):
         if not user_id:
             raise ValueError(f"Expected a non-empty value for `user_id` but received {user_id!r}")
         return self._patch(
-            f"/applications/user/{user_id}",
+            path_template("/applications/user/{user_id}", user_id=user_id),
             body=maybe_transform(
                 {
                     "account_purpose": account_purpose,
@@ -655,7 +662,7 @@ class UserResource(SyncAPIResource):
         if not user_id:
             raise ValueError(f"Expected a non-empty value for `user_id` but received {user_id!r}")
         return self._put(
-            f"/applications/user/{user_id}/reapply",
+            path_template("/applications/user/{user_id}/reapply", user_id=user_id),
             body=maybe_transform(
                 {
                     "account_purpose": account_purpose,
@@ -759,7 +766,7 @@ class UserResource(SyncAPIResource):
         # multipart/form-data; boundary=---abc--
         extra_headers["Content-Type"] = "multipart/form-data"
         return self._put(
-            f"/applications/user/{user_id}/document",
+            path_template("/applications/user/{user_id}/document", user_id=user_id),
             body=maybe_transform(body, user_upload_document_params.UserUploadDocumentParams),
             files=files,
             options=make_request_options(
@@ -1172,7 +1179,7 @@ class AsyncUserResource(AsyncAPIResource):
         if not user_id:
             raise ValueError(f"Expected a non-empty value for `user_id` but received {user_id!r}")
         return await self._get(
-            f"/applications/user/{user_id}",
+            path_template("/applications/user/{user_id}", user_id=user_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -1246,7 +1253,7 @@ class AsyncUserResource(AsyncAPIResource):
         if not user_id:
             raise ValueError(f"Expected a non-empty value for `user_id` but received {user_id!r}")
         return await self._patch(
-            f"/applications/user/{user_id}",
+            path_template("/applications/user/{user_id}", user_id=user_id),
             body=await async_maybe_transform(
                 {
                     "account_purpose": account_purpose,
@@ -1390,7 +1397,7 @@ class AsyncUserResource(AsyncAPIResource):
         if not user_id:
             raise ValueError(f"Expected a non-empty value for `user_id` but received {user_id!r}")
         return await self._put(
-            f"/applications/user/{user_id}/reapply",
+            path_template("/applications/user/{user_id}/reapply", user_id=user_id),
             body=await async_maybe_transform(
                 {
                     "account_purpose": account_purpose,
@@ -1494,7 +1501,7 @@ class AsyncUserResource(AsyncAPIResource):
         # multipart/form-data; boundary=---abc--
         extra_headers["Content-Type"] = "multipart/form-data"
         return await self._put(
-            f"/applications/user/{user_id}/document",
+            path_template("/applications/user/{user_id}/document", user_id=user_id),
             body=await async_maybe_transform(body, user_upload_document_params.UserUploadDocumentParams),
             files=files,
             options=make_request_options(

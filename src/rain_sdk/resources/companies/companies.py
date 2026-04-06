@@ -15,7 +15,7 @@ from ...types import (
     company_initiate_payment_params,
 )
 from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
-from ..._utils import maybe_transform, async_maybe_transform
+from ..._utils import path_template, maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from .signatures import (
     SignaturesResource,
@@ -95,7 +95,7 @@ class CompaniesResource(SyncAPIResource):
         if not company_id:
             raise ValueError(f"Expected a non-empty value for `company_id` but received {company_id!r}")
         return self._get(
-            f"/companies/{company_id}",
+            path_template("/companies/{company_id}", company_id=company_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -134,7 +134,7 @@ class CompaniesResource(SyncAPIResource):
         if not company_id:
             raise ValueError(f"Expected a non-empty value for `company_id` but received {company_id!r}")
         return self._patch(
-            f"/companies/{company_id}",
+            path_template("/companies/{company_id}", company_id=company_id),
             body=maybe_transform(
                 {
                     "address": address,
@@ -226,7 +226,7 @@ class CompaniesResource(SyncAPIResource):
         if not company_id:
             raise ValueError(f"Expected a non-empty value for `company_id` but received {company_id!r}")
         return self._post(
-            f"/companies/{company_id}/charges",
+            path_template("/companies/{company_id}/charges", company_id=company_id),
             body=maybe_transform(
                 {
                     "amount": amount,
@@ -295,7 +295,7 @@ class CompaniesResource(SyncAPIResource):
         if not company_id:
             raise ValueError(f"Expected a non-empty value for `company_id` but received {company_id!r}")
         return self._post(
-            f"/companies/{company_id}/users",
+            path_template("/companies/{company_id}/users", company_id=company_id),
             body=maybe_transform(
                 {
                     "email": email,
@@ -352,7 +352,7 @@ class CompaniesResource(SyncAPIResource):
         if not company_id:
             raise ValueError(f"Expected a non-empty value for `company_id` but received {company_id!r}")
         return self._post(
-            f"/companies/{company_id}/payments",
+            path_template("/companies/{company_id}/payments", company_id=company_id),
             body=maybe_transform(
                 {
                     "amount": amount,
@@ -394,7 +394,7 @@ class CompaniesResource(SyncAPIResource):
         if not company_id:
             raise ValueError(f"Expected a non-empty value for `company_id` but received {company_id!r}")
         return self._get(
-            f"/companies/{company_id}/balances",
+            path_template("/companies/{company_id}/balances", company_id=company_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -427,7 +427,7 @@ class CompaniesResource(SyncAPIResource):
         if not company_id:
             raise ValueError(f"Expected a non-empty value for `company_id` but received {company_id!r}")
         return self._get(
-            f"/companies/{company_id}/contracts",
+            path_template("/companies/{company_id}/contracts", company_id=company_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -485,7 +485,7 @@ class AsyncCompaniesResource(AsyncAPIResource):
         if not company_id:
             raise ValueError(f"Expected a non-empty value for `company_id` but received {company_id!r}")
         return await self._get(
-            f"/companies/{company_id}",
+            path_template("/companies/{company_id}", company_id=company_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -524,7 +524,7 @@ class AsyncCompaniesResource(AsyncAPIResource):
         if not company_id:
             raise ValueError(f"Expected a non-empty value for `company_id` but received {company_id!r}")
         return await self._patch(
-            f"/companies/{company_id}",
+            path_template("/companies/{company_id}", company_id=company_id),
             body=await async_maybe_transform(
                 {
                     "address": address,
@@ -616,7 +616,7 @@ class AsyncCompaniesResource(AsyncAPIResource):
         if not company_id:
             raise ValueError(f"Expected a non-empty value for `company_id` but received {company_id!r}")
         return await self._post(
-            f"/companies/{company_id}/charges",
+            path_template("/companies/{company_id}/charges", company_id=company_id),
             body=await async_maybe_transform(
                 {
                     "amount": amount,
@@ -685,7 +685,7 @@ class AsyncCompaniesResource(AsyncAPIResource):
         if not company_id:
             raise ValueError(f"Expected a non-empty value for `company_id` but received {company_id!r}")
         return await self._post(
-            f"/companies/{company_id}/users",
+            path_template("/companies/{company_id}/users", company_id=company_id),
             body=await async_maybe_transform(
                 {
                     "email": email,
@@ -742,7 +742,7 @@ class AsyncCompaniesResource(AsyncAPIResource):
         if not company_id:
             raise ValueError(f"Expected a non-empty value for `company_id` but received {company_id!r}")
         return await self._post(
-            f"/companies/{company_id}/payments",
+            path_template("/companies/{company_id}/payments", company_id=company_id),
             body=await async_maybe_transform(
                 {
                     "amount": amount,
@@ -784,7 +784,7 @@ class AsyncCompaniesResource(AsyncAPIResource):
         if not company_id:
             raise ValueError(f"Expected a non-empty value for `company_id` but received {company_id!r}")
         return await self._get(
-            f"/companies/{company_id}/balances",
+            path_template("/companies/{company_id}/balances", company_id=company_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -817,7 +817,7 @@ class AsyncCompaniesResource(AsyncAPIResource):
         if not company_id:
             raise ValueError(f"Expected a non-empty value for `company_id` but received {company_id!r}")
         return await self._get(
-            f"/companies/{company_id}/contracts",
+            path_template("/companies/{company_id}/contracts", company_id=company_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
