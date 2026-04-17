@@ -16,8 +16,9 @@ from .ubo.ubo import (
     UboResourceWithStreamingResponse,
     AsyncUboResourceWithStreamingResponse,
 )
+from ...._files import deepcopy_with_paths
 from ...._types import Body, Omit, Query, Headers, NoneType, NotGiven, FileTypes, omit, not_given
-from ...._utils import extract_files, path_template, maybe_transform, deepcopy_minimal, async_maybe_transform
+from ...._utils import extract_files, path_template, maybe_transform, async_maybe_transform
 from ...._compat import cached_property
 from ...._resource import SyncAPIResource, AsyncAPIResource
 from ...._response import (
@@ -355,14 +356,15 @@ class CompanyResource(SyncAPIResource):
         if not company_id:
             raise ValueError(f"Expected a non-empty value for `company_id` but received {company_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
-        body = deepcopy_minimal(
+        body = deepcopy_with_paths(
             {
                 "document": document,
                 "country": country,
                 "name": name,
                 "side": side,
                 "type": type,
-            }
+            },
+            [["document"]],
         )
         files = extract_files(cast(Mapping[str, object], body), paths=[["document"]])
         # It should be noted that the actual Content-Type header that will be
@@ -694,14 +696,15 @@ class AsyncCompanyResource(AsyncAPIResource):
         if not company_id:
             raise ValueError(f"Expected a non-empty value for `company_id` but received {company_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
-        body = deepcopy_minimal(
+        body = deepcopy_with_paths(
             {
                 "document": document,
                 "country": country,
                 "name": name,
                 "side": side,
                 "type": type,
-            }
+            },
+            [["document"]],
         )
         files = extract_files(cast(Mapping[str, object], body), paths=[["document"]])
         # It should be noted that the actual Content-Type header that will be
