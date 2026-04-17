@@ -6,8 +6,9 @@ from typing import Mapping, cast
 
 import httpx
 
+from ..._files import deepcopy_with_paths
 from ..._types import Body, Query, Headers, NoneType, NotGiven, FileTypes, not_given
-from ..._utils import extract_files, path_template, maybe_transform, deepcopy_minimal, async_maybe_transform
+from ..._utils import extract_files, path_template, maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
@@ -119,12 +120,13 @@ class EvidenceResource(SyncAPIResource):
         if not dispute_id:
             raise ValueError(f"Expected a non-empty value for `dispute_id` but received {dispute_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
-        body = deepcopy_minimal(
+        body = deepcopy_with_paths(
             {
                 "evidence": evidence,
                 "name": name,
                 "type": type,
-            }
+            },
+            [["evidence"]],
         )
         files = extract_files(cast(Mapping[str, object], body), paths=[["evidence"]])
         # It should be noted that the actual Content-Type header that will be
@@ -231,12 +233,13 @@ class AsyncEvidenceResource(AsyncAPIResource):
         if not dispute_id:
             raise ValueError(f"Expected a non-empty value for `dispute_id` but received {dispute_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
-        body = deepcopy_minimal(
+        body = deepcopy_with_paths(
             {
                 "evidence": evidence,
                 "name": name,
                 "type": type,
-            }
+            },
+            [["evidence"]],
         )
         files = extract_files(cast(Mapping[str, object], body), paths=[["evidence"]])
         # It should be noted that the actual Content-Type header that will be
