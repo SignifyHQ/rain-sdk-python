@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.2.1 (2026-04-17)
+
+Full Changelog: [v0.2.0...v0.2.1](https://github.com/SignifyHQ/rain-sdk-python/compare/v0.2.0...v0.2.1)
+
+### Bug Fixes
+
+* **client:** preserve hardcoded query params when merging with user params ([fb8f3a4](https://github.com/SignifyHQ/rain-sdk-python/commit/fb8f3a454fc65360ab8641d8ac443b394200ba84))
+* ensure file data are only sent as 1 parameter ([ef95658](https://github.com/SignifyHQ/rain-sdk-python/commit/ef95658625f0dc4a4667c4217f77dcc7bab6a3e0))
+
+
+### Performance Improvements
+
+* **client:** optimize file structure copying in multipart requests ([a61965c](https://github.com/SignifyHQ/rain-sdk-python/commit/a61965c9c29e7eb7e27a0950a141bafb29aac09d))
+
 ## 0.2.0 (2026-03-26)
 
 Full Changelog: [v0.1.0...v0.2.0](https://github.com/SignifyHQ/rain-sdk-python/compare/v0.1.0...v0.2.0)
