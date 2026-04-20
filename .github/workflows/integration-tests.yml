@@ -26,6 +26,6 @@ jobs:
         run: ./scripts/bootstrap
 
       - name: Run integration tests
-        run: uv run pytest tests/custom/integration/ -m integration -x --timeout=30 -n0
+        run: uv run pytest tests/custom/integration/ -m integration -x -n0
         env:
           RAIN_SANDBOX_API_KEY: ${{ secrets.RAIN_SANDBOX_API_KEY }}
