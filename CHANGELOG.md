@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.3.0 (2026-05-08)
+
+Full Changelog: [v0.2.1...v0.3.0](https://github.com/SignifyHQ/rain-sdk-python/compare/v0.2.1...v0.3.0)
+
+### Features
+
+* support setting headers via env ([72a05ff](https://github.com/SignifyHQ/rain-sdk-python/commit/72a05ff73b7f4f30fca0b87231a4da7511822e9f))
+
+
+### Bug Fixes
+
+* **client:** add missing f-string prefix in file type error message ([36b3510](https://github.com/SignifyHQ/rain-sdk-python/commit/36b35101913738211551a5b90766033be46f8b6e))
+* use correct field name format for multipart file arrays ([16aa803](https://github.com/SignifyHQ/rain-sdk-python/commit/16aa80366608882a94b76b876fe54da7a8a6b65d))
+
+
+### Chores
+
+* **internal:** more robust bootstrap script ([a1228c6](https://github.com/SignifyHQ/rain-sdk-python/commit/a1228c646e26a2c9df41259f0353819bbce8370b))
+* **internal:** reformat pyproject.toml ([c80736f](https://github.com/SignifyHQ/rain-sdk-python/commit/c80736f2748ff2dbe9c17fb959ef4c4326463e9e))
+
 ## 0.2.1 (2026-04-17)
 
 Full Changelog: [v0.2.0...v0.2.1](https://github.com/SignifyHQ/rain-sdk-python/compare/v0.2.0...v0.2.1)
