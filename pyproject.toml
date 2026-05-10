@@ -1,6 +1,6 @@
 [project]
 name = "rain-sdk"
-version = "0.2.1"
+version = "0.3.0"
 description = "The official Python library for the rain API"
 dynamic = ["readme"]
 license = "Apache-2.0"
@@ -154,7 +154,7 @@ show_error_codes = true
 #
 # We also exclude our `tests` as mypy doesn't always infer
 # types correctly and Pyright will still catch any type errors.
-exclude = ['src/rain_sdk/_files.py', '_dev/.*.py', 'tests/.*']
+exclude = ["src/rain_sdk/_files.py", "_dev/.*.py", "tests/.*"]
 
 strict_equality = true
 implicit_reexport = true
