@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.5.0 (2026-07-17)
+
+Full Changelog: [v0.4.0...v0.5.0](https://github.com/SignifyHQ/rain-sdk-python/compare/v0.4.0...v0.5.0)
+
+### Features
+
+* **stlc:** configurable CI runner and private-production-repo support in workflow templates ([a177b59](https://github.com/SignifyHQ/rain-sdk-python/commit/a177b597132cb80ed13ee5064beef4cec90bec12))
+
+
+### Bug Fixes
+
+* **internal:** resolve build failures ([748e587](https://github.com/SignifyHQ/rain-sdk-python/commit/748e5878bf3deecbd6739fbc645fb1c8c241e400))
+
 ## 0.4.0 (2026-05-12)
 
 Full Changelog: [v0.3.0...v0.4.0](https://github.com/SignifyHQ/rain-sdk-python/compare/v0.3.0...v0.4.0)
