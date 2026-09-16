@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.5.1 (2026-09-16)
+
+Full Changelog: [v0.5.0...v0.5.1](https://github.com/SignifyHQ/rain-sdk-python/compare/v0.5.0...v0.5.1)
+
+### Chores
+
+* update SDK settings ([8f598f3](https://github.com/SignifyHQ/rain-sdk-python/commit/8f598f3c975b50bf322844b05a2a1936b3863725))
+
 ## 0.5.0 (2026-07-17)
 
 Full Changelog: [v0.4.0...v0.5.0](https://github.com/SignifyHQ/rain-sdk-python/compare/v0.4.0...v0.5.0)
