@@ -4,4 +4,10 @@ set -eux
 rm -rf dist
 mkdir -p dist
 uv build
-uv publish --token=$PYPI_TOKEN
+
+# Token is optional: CI authenticates via OIDC trusted publishing.
+if [[ -n "${PYPI_TOKEN:-}" ]]; then
+  uv publish --token="$PYPI_TOKEN"
+else
+  uv publish
+fi

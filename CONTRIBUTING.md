@@ -113,9 +113,9 @@ the changes aren't made through the automated pipeline, you may want to make rel
 
 ### Publish with a GitHub workflow
 
-You can release to package managers by using [the `Publish PyPI` GitHub action](https://www.github.com/SignifyHQ/rain-sdk-python/actions/workflows/publish-pypi.yml). This requires a setup organization or repository secret to be set up.
+You can release to package managers by using [the `Publish PyPI` GitHub action](https://www.github.com/SignifyHQ/rain-sdk-python/actions/workflows/publish-pypi.yml). It authenticates with PyPI via OIDC trusted publishing, so no token or secret is required. The trusted publisher is configured in the project settings on pypi.org for this repository and workflow.
 
 ### Publish manually
 
 If you need to manually release a package, you can run the `bin/publish-pypi` script with a `PYPI_TOKEN` set on
-the environment.
+the environment. The token is only needed for manual publishing; the workflow does not use it.
