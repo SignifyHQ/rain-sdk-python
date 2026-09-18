@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.5.2 (2026-09-17)
+
+Full Changelog: [v0.5.1...v0.5.2](https://github.com/SignifyHQ/rain-sdk-python/compare/v0.5.1...v0.5.2)
+
+### Chores
+
+* **ci:** publish to PyPI via OIDC trusted publishing ([c07eb06](https://github.com/SignifyHQ/rain-sdk-python/commit/c07eb064a2e28b40c64e9e4409e48988e1f5cfa7))
+
 ## 0.5.1 (2026-09-16)
 
 Full Changelog: [v0.5.0...v0.5.1](https://github.com/SignifyHQ/rain-sdk-python/compare/v0.5.0...v0.5.1)
